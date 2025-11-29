@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landry BEFOLO - Ingénieur Géomatique & Data</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Leaflet CSS (Cartes fonctionnelles uniquement) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Swiper CSS (Carrousel) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <style>
+        /* --- ANIMATION CARTE HERO (Remplacement de Leaflet) --- */
+        .hero-bg-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .hero-bg-image {
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop'); 
+            background-size: cover;
+            background-position: center;
+            /* Animation Ken Burns (Zoom lent) */
+            animation: zoomMap 30s infinite alternate ease-in-out;
+            /* MODIFICATION ICI : On augmente la luminosité pour mieux voir la carte (0.65 au lieu de 0.4) */
+            filter: brightness(0.65) contrast(1.1); 
+        }
+
+        @keyframes zoomMap {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.15); 
+            }
+        }
+        
+        /* Overlay dégradé sur le Hero - MODIFIÉ pour être plus transparent */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Dégradé plus subtil pour laisser voir la carte derrière */
+            background: linear-gradient(to bottom, rgba(30, 58, 138, 0.3), rgba(15, 23, 42, 0.85));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Ombre portée sur le texte pour garantir la lisibilité sur fond clair */
+        .text-shadow-lg {
+            text-shadow: 0 4px 6px rgba(0,0,0,0.5);
+        }
+
+        /* Ajustements Swiper */
+        .swiper {
+            width: 100%;
+            height: 250px;
+        }
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Dashboard Card Effect */
+        .dash-card {
+            transition: transform 0.2s;
+        }
+        .dash-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-blue-200 selection:text-blue-900">
+
+    <!-- NAVIGATION -->
+    <nav class="bg-white/90 backdrop-blur-md shadow-sm fixed w-full z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 md:px-8 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl md:text-2xl font-bold text-blue-900 flex items-center gap-2 hover:text-blue-700 transition">
+                <i class="fas fa-layer-group"></i> 
+                <span class="hidden sm:inline">Landry BEFOLO</span>
+                <span class="sm:hidden">LB</span>
+            </a>
+            <!-- Menu Desktop -->
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#about" class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition uppercase tracking-wide">À propos</a>
+                <a href="#projects" class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition uppercase tracking-wide">Projets</a>
+                <a href="#dashboard-demo" class="text-sm font-semibold text-blue-600 hover:text-blue-800 transition uppercase tracking-wide flex items-center gap-1"> 
+                    <i class="fas fa-chart-line"></i> Démo
+                </a>
+                <a href="#contact" class="px-5 py-2.5 bg-blue-900 text-white text-sm font-bold rounded-full hover:bg-blue-800 transition shadow-lg hover:shadow-blue-900/30 transform hover:-translate-y-0.5">Me Contacter</a>
+            </div>
+            <!-- Bouton Mobile (Placeholder pour simplicité, lien direct contact) -->
+            <div class="md:hidden">
+                <a href="#contact" class="text-blue-900 text-2xl"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION DYNAMIQUE (ANIMATION CSS) -->
+    <header class="relative min-h-screen flex items-center justify-center text-white text-center px-4 overflow-hidden pt-20">
+        
+        <!-- Fond animé (Zoom lent) -->
+        <div class="hero-bg-container">
+            <div class="hero-bg-image"></div>
+        </div>
+
+        <!-- Overlay sombre (Plus léger maintenant) -->
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-content max-w-5xl mx-auto w-full px-4 md:px-0">
+            <div class="inline-flex items-center gap-2 px-4 py-2 mb-6 border border-blue-300/30 rounded-full bg-slate-900/40 text-blue-100 text-sm backdrop-blur-md shadow-lg animate-fade-in">
+                <span class="relative flex h-3 w-3">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                </span>
+                Disponible Janvier 2026 • Yaoundé
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-8 tracking-tight leading-tight text-shadow-lg">
+                Ingénieur Géomatique <br/> 
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-white drop-shadow-sm">& Base de Données</span>
+            </h1>
+            
+            <p class="text-xl md:text-2xl mb-12 text-slate-100 font-light max-w-3xl mx-auto leading-relaxed text-shadow-lg">
+                Je transforme la donnée spatiale complexe en <span class="font-semibold text-white border-b-2 border-blue-400 pb-0.5">outils d'aide à la décision</span> clairs et opérationnels pour le développement urbain.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <a href="#dashboard-demo" class="w-full sm:w-auto bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-500 transition shadow-xl hover:shadow-blue-500/40 flex items-center justify-center gap-3 transform hover:scale-105 duration-200">
+                    <i class="fas fa-chart-pie text-lg"></i> Voir la Démo Dashboard
+                </a>
+                <a href="#projects" class="w-full sm:w-auto bg-white/10 backdrop-blur-sm border border-white/30 text-white px-8 py-4 rounded-xl font-bold hover:bg-white hover:text-blue-900 transition flex items-center justify-center gap-3 shadow-lg">
+                    <i class="fas fa-project-diagram text-lg"></i> Explorer mes Projets
+                </a>
+            </div>
+        </div>
+        
+        <!-- Indicateur de scroll -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce text-white/70 hidden md:block">
+            <i class="fas fa-chevron-down text-2xl"></i>
+        </div>
+    </header>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-24 md:py-32 container mx-auto px-4 md:px-8">
+        <div class="flex flex-col lg:flex-row items-start gap-16">
+            <div class="lg:w-1/2 space-y-8">
+                <div>
+                    <span class="text-blue-600 font-bold tracking-wider uppercase text-sm mb-2 block">À propos de moi</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 leading-tight">
+                        Expertise technique au service de l'intelligence territoriale.
+                    </h2>
+                </div>
+                
+                <p class="text-lg leading-relaxed text-slate-600">
+                    Ingénieur SIG passionné, je combine une maîtrise technique avancée (PostGIS, Python) avec une compréhension fine des enjeux urbains. Mon objectif est simple : construire des architectures de données robustes qui permettent de visualiser, comprendre et agir sur le territoire.
+                </p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                    <div class="flex items-center p-4 bg-white shadow-sm hover:shadow-md transition rounded-xl border border-slate-100 group">
+                        <div class="bg-blue-50 p-3 rounded-lg mr-4 group-hover:bg-blue-100 transition">
+                            <i class="fas fa-database text-blue-600 text-xl"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">PostGIS / SQL</span>
+                    </div>
+                    <div class="flex items-center p-4 bg-white shadow-sm hover:shadow-md transition rounded-xl border border-slate-100 group">
+                        <div class="bg-green-50 p-3 rounded-lg mr-4 group-hover:bg-green-100 transition">
+                            <i class="fas fa-map text-green-600 text-xl"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">QGIS / MAGRIT</span>
+                    </div>
+                    <div class="flex items-center p-4 bg-white shadow-sm hover:shadow-md transition rounded-xl border border-slate-100 group">
+                        <div class="bg-yellow-50 p-3 rounded-lg mr-4 group-hover:bg-yellow-100 transition">
+                            <i class="fab fa-python text-yellow-600 text-xl"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Python / Pandas</span>
+                    </div>
+                    <div class="flex items-center p-4 bg-white shadow-sm hover:shadow-md transition rounded-xl border border-slate-100 group">
+                        <div class="bg-indigo-50 p-3 rounded-lg mr-4 group-hover:bg-indigo-100 transition">
+                            <i class="fas fa-server text-indigo-600 text-xl"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">GeoServer</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Carte Interactive Leaflet : Localisation -->
+            <div class="lg:w-1/2 w-full">
+                <div class="bg-white p-2 rounded-2xl shadow-xl border border-slate-200 transform rotate-1 hover:rotate-0 transition duration-500">
+                    <div id="about-map" class="h-80 w-full rounded-xl z-0"></div>
+                    <div class="flex justify-between items-center mt-3 px-3 pb-1">
+                        <p class="text-sm font-medium text-slate-500 flex items-center">
+                            <i class="fas fa-map-marker-alt text-red-500 mr-2 animate-bounce"></i> 
+                            Basé à Yaoundé, Cameroun
+                        </p>
+                        <span class="text-xs font-bold bg-green-100 text-green-800 px-3 py-1 rounded-full uppercase tracking-wide">Zone d'intervention</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DASHBOARD DEMO SECTION -->
+    <section id="dashboard-demo" class="py-24 bg-slate-900 text-white relative overflow-hidden">
+        <!-- Background decoration -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
+            <div class="absolute top-10 left-10 w-64 h-64 bg-blue-500 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-10 right-10 w-96 h-96 bg-purple-500 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="container mx-auto px-4 md:px-8 relative z-10">
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <span class="text-blue-400 font-bold tracking-widest text-sm uppercase mb-2 block">Aide à la Décision</span>
+                <h2 class="text-3xl md:text-5xl font-bold mb-6">Observatoire Urbain (Démo)</h2>
+                <p class="text-slate-300 text-lg">
+                    Voici le type de tableau de bord interactif que je peux déployer. Il permet de suivre en temps réel les indicateurs clés (ex: Recouvrement des recettes, État des drains PLIDY).
+                </p>
+            </div>
+
+            <!-- Grille Dashboard -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                
+                <!-- KPI 1 -->
+                <div class="bg-slate-800/50 backdrop-blur-sm p-6 rounded-2xl border border-slate-700 dash-card hover:border-blue-500/50 transition shadow-lg">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <p class="text-slate-400 text-sm font-medium mb-1">Taux de Recouvrement</p>
+                            <h3 class="text-4xl font-bold text-white tracking-tight">87%</h3>
+                        </div>
+                        <span class="bg-green-500/20 text-green-400 w-10 h-10 flex items-center justify-center rounded-lg"><i class="fas fa-arrow-up"></i></span>
+                    </div>
+                    <div class="w-full bg-slate-700 h-2 rounded-full overflow-hidden">
+                        <div class="bg-gradient-to-r from-green-500 to-emerald-400 h-full rounded-full" style="width: 87%"></div>
+                    </div>
+                </div>
+
+                <!-- KPI 2 -->
+                <div class="bg-slate-800/50 backdrop-blur-sm p-6 rounded-2xl border border-slate-700 dash-card hover:border-blue-500/50 transition shadow-lg">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <p class="text-slate-400 text-sm font-medium mb-1">Objets Mappés</p>
+                            <h3 class="text-4xl font-bold text-white tracking-tight">1,240</h3>
+                        </div>
+                        <span class="bg-blue-500/20 text-blue-400 w-10 h-10 flex items-center justify-center rounded-lg"><i class="fas fa-map-pin"></i></span>
+                    </div>
+                    <p class="text-sm text-slate-400 flex items-center mt-2"><i class="fas fa-plus text-xs mr-1 text-green-400"></i> 120 ce mois-ci</p>
+                </div>
+
+                <!-- KPI 3 -->
+                <div class="bg-slate-800/50 backdrop-blur-sm p-6 rounded-2xl border border-slate-700 dash-card hover:border-blue-500/50 transition shadow-lg">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <p class="text-slate-400 text-sm font-medium mb-1">Anomalies</p>
+                            <h3 class="text-4xl font-bold text-white tracking-tight">12</h3>
+                        </div>
+                        <span class="bg-red-500/20 text-red-400 w-10 h-10 flex items-center justify-center rounded-lg"><i class="fas fa-exclamation-triangle"></i></span>
+                    </div>
+                    <p class="text-sm text-red-300 mt-2 font-medium">Intervention requise</p>
+                </div>
+
+                <!-- KPI 4 -->
+                <div class="bg-slate-800/50 backdrop-blur-sm p-6 rounded-2xl border border-slate-700 dash-card hover:border-blue-500/50 transition shadow-lg">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <p class="text-slate-400 text-sm font-medium mb-1">Budget Engagé</p>
+                            <h3 class="text-4xl font-bold text-white tracking-tight">45M</h3>
+                        </div>
+                        <span class="bg-purple-500/20 text-purple-400 w-10 h-10 flex items-center justify-center rounded-lg"><i class="fas fa-coins"></i></span>
+                    </div>
+                    <p class="text-sm text-slate-400 mt-2">FCFA (Simulé)</p>
+                </div>
+            </div>
+
+            <!-- Charts & Map Row -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Main Chart -->
+                <div class="bg-slate-800/50 backdrop-blur-sm p-6 rounded-2xl border border-slate-700 shadow-xl">
+                    <h3 class="text-lg font-bold mb-6 text-white flex items-center">
+                        <i class="fas fa-chart-bar mr-2 text-blue-400"></i> Évolution des Recettes par Quartier
+                    </h3>
+                    <div class="h-80 w-full">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Mini Map Visualization -->
+                <div class="bg-slate-800/50 backdrop-blur-sm p-6 rounded-2xl border border-slate-700 shadow-xl flex flex-col">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-lg font-bold text-white flex items-center">
+                            <i class="fas fa-globe-africa mr-2 text-green-400"></i> Répartition Spatiale
+                        </h3>
+                        <div class="space-x-3 bg-slate-900/50 px-3 py-1 rounded-lg">
+                            <span class="text-xs text-green-400 font-medium"><i class="fas fa-circle text-[8px] mr-1"></i> Fort</span>
+                            <span class="text-xs text-red-400 font-medium"><i class="fas fa-circle text-[8px] mr-1"></i> Faible</span>
+                        </div>
+                    </div>
+                    <div id="dash-map" class="flex-grow rounded-xl w-full min-h-[300px] z-0 overflow-hidden border border-slate-600/50"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS SECTION (CAROUSEL) -->
+    <section id="projects" class="py-24 bg-slate-100">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold text-blue-900 mb-4">Projets Récents</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto">Sélection de travaux réalisés avec AFREETECH et dans le cadre de mes projets personnels.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+                
+                <!-- PROJET 1 : DOUALA INFRA -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col group">
+                    <!-- Swiper Carousel -->
+                    <div class="swiper mySwiper h-64 bg-slate-200">
+                        <div class="swiper-wrapper">
+                            <!-- Image 1 -->
+                            <div class="swiper-slide">
+                                <div class="bg-gradient-to-br from-blue-100 to-blue-200 h-full flex items-center justify-center text-blue-800 relative">
+                                    <i class="fas fa-city text-6xl opacity-50"></i>
+                                    <div class="absolute inset-0 flex items-center justify-center bg-black/10 opacity-0 group-hover:opacity-100 transition duration-300">
+                                        <span class="bg-white/90 text-blue-900 px-4 py-2 rounded-lg font-bold text-sm shadow">Vue Détaillée</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Image 2 -->
+                            <div class="swiper-slide">
+                                <div class="bg-blue-50 h-full flex items-center justify-center text-blue-900">
+                                    <i class="fas fa-database text-6xl opacity-50"></i> 
+                                    <span class="absolute bottom-4 text-sm font-semibold opacity-70">Modèle de Données</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-button-next text-white drop-shadow-md scale-75"></div>
+                        <div class="swiper-button-prev text-white drop-shadow-md scale-75"></div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                    
+                    <div class="p-8 flex-grow flex flex-col">
+                        <h3 class="font-bold text-xl mb-3 text-slate-800 group-hover:text-blue-600 transition">Infrastructures Douala (IDG)</h3>
+                        <p class="text-slate-600 text-sm mb-6 leading-relaxed flex-grow">
+                            Centralisation des données d'infrastructures. Modélisation PostGIS complexe pour relier voiries, réseaux et équipements urbains.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-4 border-t border-slate-100">
+                            <span class="px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded-full border border-blue-100">PostGIS</span>
+                            <span class="px-3 py-1 bg-green-50 text-green-700 text-xs font-bold rounded-full border border-green-100">QGIS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROJET 2 : YAOUNDE RECETTES -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col group">
+                    <div class="swiper mySwiper h-64 bg-slate-200">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="bg-gradient-to-br from-green-100 to-green-200 h-full flex items-center justify-center text-green-800">
+                                    <i class="fas fa-file-invoice-dollar text-6xl opacity-50"></i>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="bg-green-50 h-full flex items-center justify-center text-green-900">
+                                    <i class="fas fa-map-marked-alt text-6xl opacity-50"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-button-next text-white drop-shadow-md scale-75"></div>
+                        <div class="swiper-button-prev text-white drop-shadow-md scale-75"></div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+
+                    <div class="p-8 flex-grow flex flex-col">
+                        <h3 class="font-bold text-xl mb-3 text-slate-800 group-hover:text-green-600 transition">Optimisation Recettes (CUY)</h3>
+                        <p class="text-slate-600 text-sm mb-6 leading-relaxed flex-grow">
+                            Croisement des données cadastrales et fiscales. Identification spatiale des zones de sous-imposition pour maximiser les revenus.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-4 border-t border-slate-100">
+                            <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded-full border border-slate-200">Audit</span>
+                            <span class="px-3 py-1 bg-green-50 text-green-700 text-xs font-bold rounded-full border border-green-100">Carto Thématique</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROJET 3 : CARTO MAGRIT -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col group">
+                    <div class="swiper mySwiper h-64 bg-slate-200">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="bg-gradient-to-br from-purple-100 to-purple-200 h-full flex items-center justify-center text-purple-800">
+                                    <i class="fas fa-layer-group text-6xl opacity-50"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+
+                    <div class="p-8 flex-grow flex flex-col">
+                        <h3 class="font-bold text-xl mb-3 text-slate-800 group-hover:text-purple-600 transition">Analyse Thématique MAGRIT</h3>
+                        <p class="text-slate-600 text-sm mb-6 leading-relaxed flex-grow">
+                            Exploration sémiologique des données de population. Usage de cartes choroplèthes et cercles proportionnels pour une lisibilité optimale.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-4 border-t border-slate-100">
+                            <span class="px-3 py-1 bg-purple-50 text-purple-700 text-xs font-bold rounded-full border border-purple-100">MAGRIT</span>
+                            <span class="px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded-full border border-blue-100">Visualisation</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT / FOOTER -->
+    <footer id="contact" class="bg-gradient-to-r from-blue-950 to-slate-900 text-white py-20">
+        <div class="container mx-auto px-4 md:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8">Prêt à collaborer sur des projets à fort impact ?</h2>
+            <div class="flex flex-col md:flex-row justify-center gap-6 mb-12">
+                <a href="mailto:fredybefolo@gmail.com" class="bg-white/10 hover:bg-white/20 px-8 py-4 rounded-full transition flex items-center justify-center backdrop-blur-sm border border-white/10 group">
+                    <i class="fas fa-envelope mr-3 text-yellow-400 group-hover:scale-110 transition"></i> 
+                    <span class="font-medium">fredybefolo@gmail.com</span>
+                </a>
+                <a href="tel:+237655776021" class="bg-white/10 hover:bg-white/20 px-8 py-4 rounded-full transition flex items-center justify-center backdrop-blur-sm border border-white/10 group">
+                    <i class="fas fa-phone mr-3 text-green-400 group-hover:scale-110 transition"></i> 
+                    <span class="font-medium">+237 655 776 021</span>
+                </a>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 mt-8">
+                <p class="text-sm text-slate-400">&copy; 2024 Landry BEFOLO. Tous droits réservés.</p>
+                <p class="text-xs text-slate-500 mt-2">Designé avec passion pour l'intelligence territoriale.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        // --- 1. CARTE "À PROPOS" (Interactive simple) ---
+        const aboutMap = L.map('about-map', {
+            zoomControl: false // Plus propre
+        }).setView([3.8480, 11.5021], 12);
+        
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(aboutMap);
+        
+        L.marker([3.8480, 11.5021]).addTo(aboutMap)
+            .bindPopup("<b>Yaoundé, Cameroun</b><br>Base opérationnelle.").openPopup();
+
+
+        // --- 2. DASHBOARD CHARTS (Chart.js) ---
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        
+        // Gradient pour le graph
+        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, 'rgba(59, 130, 246, 0.8)');
+        gradient.addColorStop(1, 'rgba(59, 130, 246, 0.1)');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Bastos', 'Mokolo', 'Biyem-Assi', 'Ngoa-Ekelle', 'Mimboman', 'Omnisports'],
+                datasets: [{
+                    label: 'Recettes (M FCFA)',
+                    data: [12, 19, 8, 15, 10, 14],
+                    backgroundColor: '#3b82f6',
+                    hoverBackgroundColor: '#60a5fa',
+                    borderRadius: 6,
+                    borderSkipped: false
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: { 
+                        beginAtZero: true,
+                        grid: { color: 'rgba(148, 163, 184, 0.1)' },
+                        ticks: { color: '#94a3b8', font: {family: 'sans-serif'} },
+                        border: {display: false}
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#94a3b8', font: {family: 'sans-serif'} },
+                        border: {display: false}
+                    }
+                },
+                animation: {
+                    duration: 2000,
+                    easing: 'easeOutQuart'
+                }
+            }
+        });
+
+
+        // --- 3. DASHBOARD MAP (Simulée) ---
+        const dashMap = L.map('dash-map', {
+            zoomControl: false,
+            attributionControl: false,
+            dragging: false,
+            scrollWheelZoom: false
+        }).setView([3.86, 11.52], 12);
+        
+        // Utilisation de CartoDB Dark Matter pour le style Dashboard
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(dashMap);
+        
+        const points = [
+            {lat: 3.87, lon: 11.53, color: '#4ade80', rad: 600}, // Vert
+            {lat: 3.85, lon: 11.51, color: '#f87171', rad: 800}, // Rouge
+            {lat: 3.88, lon: 11.49, color: '#60a5fa', rad: 500}, // Bleu
+            {lat: 3.83, lon: 11.50, color: '#4ade80', rad: 700}, // Vert
+            {lat: 3.86, lon: 11.54, color: '#f87171', rad: 400}, // Rouge
+        ];
+        
+        points.forEach(pt => {
+            L.circle([pt.lat, pt.lon], {
+                color: pt.color,
+                fillColor: pt.color,
+                fillOpacity: 0.6,
+                radius: pt.rad,
+                weight: 0
+            }).addTo(dashMap);
+        });
+
+
+        // --- 4. INITIALISATION CAROUSELS (Swiper) ---
+        var swiper = new Swiper(".mySwiper", {
+            spaceBetween: 0,
+            centeredSlides: true,
+            loop: true, // Boucle infinie
+            speed: 800,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+    </script>
+</body>
+</html>
