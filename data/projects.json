@@ -1,0 +1,60 @@
+[
+  {
+    "slug": "idg-douala",
+    "title": "Infrastructures Douala (IDG)",
+    "summary": "Centralisation des données d'infrastructures et modèle PostGIS pour relier voiries, réseaux et équipements urbains.",
+    "tags": ["PostGIS", "QGIS", "GeoServer"],
+    "image": "images/project-idg.webp",
+    "carousel": ["images/project-idg.webp", "images/hero.webp"],
+    "details": {
+      "client": "Communauté Urbaine de Douala",
+      "role": "Chef de projet SIG",
+      "period": "2023 - 2025",
+      "bullets": [
+        "Conception du système d'information géographique et cartographie en ligne (GeoServer/Django)",
+        "Recherche et intégration de données d'infrastructures régionales dans PostGIS",
+        "Structuration et modélisation de la base géospatiale pour le recouvrement",
+        "Outils d'analyse spatiale et workflows d'orchestration",
+        "Formation des équipes et suivi opérationnel"
+      ]
+    }
+  },
+  {
+    "slug": "recettes-yaounde",
+    "title": "Optimisation Recettes (CUY)",
+    "summary": "Audit et analyse des systèmes SIG existants, conception de base de données géospatiale dédiée au recouvrement.",
+    "tags": ["Audit", "Base géo", "Carto thématique"],
+    "image": "images/project-recettes.webp",
+    "carousel": ["images/project-recettes.webp"],
+    "details": {
+      "client": "Communauté Urbaine de Yaoundé",
+      "role": "Ingénieur SIG",
+      "period": "2024 - Présent",
+      "bullets": [
+        "Audit et analyse des systèmes d'information géographique existants",
+        "Rédaction des spécifications techniques pour l'infrastructure SIG",
+        "Conception de la base de données géospatiale dédiée au recouvrement",
+        "Analyse, traitement et validation des couches d'informations géographiques"
+      ]
+    }
+  },
+  {
+    "slug": "pagrin-pptic",
+    "title": "Observatoire Régional (PAGRIN - PPTIC)",
+    "summary": "Architecture SIG et diffusion cartographique, intégration de données d'infrastructures régionales et tableaux de bord décisionnels.",
+    "tags": ["GeoServer", "PostGIS", "Dashboard"],
+    "image": "images/project-pagrin.webp",
+    "carousel": ["images/project-pagrin.webp"],
+    "details": {
+      "client": "PAGRIN - PPTIC",
+      "role": "Ingénieur SIG",
+      "period": "2024",
+      "bullets": [
+        "Conception de l'architecture SIG et diffusion cartographique (GeoServer)",
+        "Intégration de données d'infrastructures régionales dans PostGIS",
+        "Développement d'outils d'analyse pour tableaux de bord décisionnels",
+        "Formation des utilisateurs finaux et coordination technique"
+      ]
+    }
+  }
+]

@@ -1,0 +1,131 @@
+{
+  "meta": {
+    "title": "Landry BEFOLO - Ingénieur Géomatique & Data",
+    "description": "Ingénieur SIG spécialisé PostGIS, cartographie thématique et dashboards décisionnels.",
+    "location": "Yaoundé, Cameroun"
+  },
+  "nav": {
+    "brand": "Landry BEFOLO",
+    "brandShort": "LB",
+    "availability": "Disponible • Yaoundé"
+  },
+  "hero": {
+    "title": "Ingénieur Géomatique",
+    "accent": "& Base de Données",
+    "subtitle": "Je transforme la donnée spatiale complexe en outils d'aide à la décision clairs et opérationnels pour le développement urbain.",
+    "primaryCta": "Voir la Démo Dashboard",
+    "secondaryCta": "Explorer mes Projets"
+  },
+  "services": {
+    "heading": "De la donnée brute aux décisions pilotées",
+    "intro": "Je structure des chaînes SIG complètes : collecte, modélisation PostGIS, visualisation et diffusion cartographique pour les équipes terrain et les décideurs.",
+    "items": [
+      {
+        "title": "Observatoires urbains",
+        "description": "Conception de dashboards opérationnels : budgets, réseaux, cadastre, performance des services.",
+        "color": "blue",
+        "badges": ["PostGIS", "KPI métiers"]
+      },
+      {
+        "title": "Cartographie décisionnelle",
+        "description": "Cartes prêtes pour l'action : couverture des services, risques, anomalies à traiter en priorité.",
+        "color": "emerald",
+        "badges": ["QGIS / MAGRIT", "Ciblage terrain"]
+      },
+      {
+        "title": "Diffusion & API",
+        "description": "Publication sécurisée via GeoServer, services WMS/WFS et intégration web légère pour GitHub Pages.",
+        "color": "purple",
+        "badges": ["GeoServer", "Intégration web"]
+      }
+    ]
+  },
+  "about": {
+    "title": "Expertise technique au service de l'intelligence territoriale.",
+    "description": "Ingénieur SIG avec expérience en gestion de bases géospatiales (PostGIS) et production cartographique. Chaîne complète de l'information géographique, de la recherche de données à la visualisation.",
+    "skills": [
+      {"icon": "fa-database", "color": "blue", "label": "PostGIS / SQL"},
+      {"icon": "fa-map", "color": "green", "label": "QGIS / MAGRIT"},
+      {"icon": "fa-python", "color": "yellow", "label": "Python / Workflows"},
+      {"icon": "fa-server", "color": "indigo", "label": "GeoServer"}
+    ],
+    "map": {
+      "lat": 3.848,
+      "lng": 11.5021,
+      "zoom": 12
+    }
+  },
+  "dashboard": {
+    "heading": "Observatoire Urbain (Démo)",
+    "intro": "Exemple de tableau de bord interactif : suivi des recettes, état des réseaux et performance opérationnelle.",
+    "kpis": [
+      {"label": "Taux de Recouvrement", "value": "87%", "trend": "up", "color": "green", "progress": 87},
+      {"label": "Objets Mappés", "value": "1,240", "trend": "plus", "color": "blue", "note": "120 ce mois-ci"},
+      {"label": "Anomalies", "value": "12", "trend": "alert", "color": "red", "note": "Intervention requise"},
+      {"label": "Budget Engagé", "value": "45M", "trend": "coins", "color": "purple", "note": "FCFA (Simulé)"}
+    ],
+    "chart": {
+      "labels": ["Bastos", "Mokolo", "Biyem-Assi", "Ngoa-Ekelle", "Mimboman", "Omnisports"],
+      "data": [12, 19, 8, 15, 10, 14]
+    },
+    "map": {
+      "center": [3.86, 11.52],
+      "points": [
+        {"lat": 3.87, "lon": 11.53, "color": "#4ade80", "rad": 600},
+        {"lat": 3.85, "lon": 11.51, "color": "#f87171", "rad": 800},
+        {"lat": 3.88, "lon": 11.49, "color": "#60a5fa", "rad": 500},
+        {"lat": 3.83, "lon": 11.5, "color": "#4ade80", "rad": 700},
+        {"lat": 3.86, "lon": 11.54, "color": "#f87171", "rad": 400}
+      ]
+    }
+  },
+  "parcours": [
+    {
+      "title": "Chef de projet SIG – CUY",
+      "period": "2023 - 2025",
+      "description": "Refonte du référentiel fiscal : croisement cadastre/terrain, suivi des recettes, indicateurs pour la direction financière.",
+      "badge": "Pilotage"
+    },
+    {
+      "title": "Responsable données – Infrastructures Douala",
+      "period": "2021 - 2023",
+      "description": "Modèle PostGIS interopérable pour routes, réseaux et équipements. Publication GeoServer sécurisée.",
+      "badge": "PostGIS"
+    },
+    {
+      "title": "Cartographie thématique – MAGRIT",
+      "period": "2019 - 2021",
+      "description": "Analyses démographiques, cartes choroplèthes et indicateurs multi-échelles pour la planification.",
+      "badge": "Carto"
+    }
+  ],
+  "cv": {
+    "profile": "Ingénieur SIG avec expérience en bases géospatiales (PostGIS) et production cartographique. Autonome, rigoureux, orienté décision.",
+    "formation": [
+      {"title": "Ingénieur de Conception en Cartographie & Géomatique", "place": "EGEM, Meiganga", "period": "2022–2023", "note": "Spécialisation modélisation & systèmes d'information"},
+      {"title": "Baccalauréat Scientifique (Série D)", "place": "Collège Jean Paul II, Mbalmayo", "period": "2017"}
+    ],
+    "skills": {
+      "sig": "QGIS, ArcGIS, MAGRIT, GeoServer, OpenLayers",
+      "db": "PostgreSQL, PostGIS, Oracle Data Platform",
+      "dev": "Python (workflows), Django, HTML/CSS, JavaScript",
+      "analysis": "Recherche de couches, analyse spatiale, synthèse d'informations, visualisation"
+    },
+    "certifications": [
+      "Oracle Data Platform Associate (2025)",
+      "Scrum Foundation Professional Certificate (SFPC) (2025)",
+      "Google Data Analytics Professional Certificate (en cours)",
+      "Google Project Management Professional Certificate (en cours)"
+    ],
+    "languages": [
+      "Français : langue maternelle, excellente rédaction/synthèse",
+      "Anglais : professionnel, niveau technique avancé"
+    ],
+    "interests": "Veille cartographique, sport collectif"
+  },
+  "contact": {
+    "headline": "Prêt à collaborer sur des projets à fort impact ?",
+    "email": "fredybefolo@gmail.com",
+    "phone": "+237 655 776 021"
+  }
+}
