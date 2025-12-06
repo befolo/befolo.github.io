@@ -3,7 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio de Landry BEFOLO, ingénieur géomatique spécialisé en SIG, PostGIS et data pour l'intelligence territoriale.">
+    <meta property="og:title" content="Landry BEFOLO - Géomatique & Data">
+    <meta property="og:description" content="Conception de données spatiales, dashboards et observatoires urbains prêts pour la décision.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#0f172a">
     <title>Landry BEFOLO - Ingénieur Géomatique & Data</title>
+
+    <!-- Typo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -18,6 +29,103 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <style>
+        :root {
+            --brand-night: #0f172a;
+            --brand-blue: #1d4ed8;
+            --brand-mint: #22d3ee;
+            --nav-height: 76px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: calc(var(--nav-height) + 12px);
+        }
+
+        body {
+            font-family: 'Space Grotesk', 'Inter', system-ui, -apple-system, sans-serif;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.08), transparent 25%),
+                radial-gradient(circle at 80% 0%, rgba(79, 70, 229, 0.06), transparent 35%),
+                #f8fafc;
+        }
+
+        .section-kicker {
+            letter-spacing: 0.28em;
+        }
+
+        .hero-title {
+            font-size: clamp(2.6rem, 5vw, 4.5rem);
+            line-height: 1.05;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.05rem, 2.5vw, 1.4rem);
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.65rem 1rem;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            border-radius: 1rem;
+            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.3rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            background: rgba(37, 99, 235, 0.1);
+            color: #1d4ed8;
+            border: 1px solid rgba(37, 99, 235, 0.15);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 1.75rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.45rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #2563eb, #0ea5e9);
+            opacity: 0.5;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -0.9rem;
+            top: 0.35rem;
+            width: 14px;
+            height: 14px;
+            border-radius: 9999px;
+            background: white;
+            border: 3px solid #2563eb;
+            box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.12);
+        }
+
         /* --- ANIMATION CARTE HERO (Remplacement de Leaflet) --- */
         .hero-bg-container {
             position: absolute;
@@ -77,10 +185,61 @@
             width: 100%;
             height: 250px;
         }
+        @media (max-width: 768px) {
+            .swiper {
+                height: 220px;
+            }
+        }
+
+        /* Tablet-friendly spacing */
+        .nav-links {
+            gap: clamp(1rem, 1.8vw, 2rem);
+        }
+
+        @media (max-width: 1024px) {
+            .nav-inner {
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
+            }
+            .nav-links a {
+                font-size: 0.95rem;
+            }
+            .cta-nav {
+                padding: 0.6rem 1.2rem;
+                border-radius: 9999px;
+            }
+            .services-grid {
+                gap: 1rem;
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            }
+            .glass-card {
+                height: 100%;
+            }
+        }
         .swiper-slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        .cv-card {
+            background: white;
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            border-radius: 1rem;
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.06);
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            background: #f8fafc;
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            color: #0f172a;
         }
         
         /* Dashboard Card Effect */
@@ -90,30 +249,55 @@
         .dash-card:hover {
             transform: translateY(-5px);
         }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-bg-image {
+                animation: none;
+                transform: scale(1.05);
+            }
+            .animate-bounce {
+                animation: none;
+            }
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-blue-200 selection:text-blue-900">
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-blue-200 selection:text-blue-900">
 
     <!-- NAVIGATION -->
     <nav class="bg-white/90 backdrop-blur-md shadow-sm fixed w-full z-50 transition-all duration-300">
-        <div class="container mx-auto px-4 md:px-8 py-4 flex justify-between items-center">
+        <div class="container mx-auto px-4 md:px-8 py-4 flex justify-between items-center nav-inner">
             <a href="#" class="text-xl md:text-2xl font-bold text-blue-900 flex items-center gap-2 hover:text-blue-700 transition">
                 <i class="fas fa-layer-group"></i> 
                 <span class="hidden sm:inline">Landry BEFOLO</span>
                 <span class="sm:hidden">LB</span>
             </a>
             <!-- Menu Desktop -->
-            <div class="hidden md:flex space-x-8 items-center">
+            <div class="hidden md:flex nav-links items-center">
+                <a href="#services" class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition uppercase tracking-wide">Services</a>
                 <a href="#about" class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition uppercase tracking-wide">À propos</a>
                 <a href="#projects" class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition uppercase tracking-wide">Projets</a>
+                <a href="#parcours" class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition uppercase tracking-wide">Parcours</a>
+                <a href="#cv" class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition uppercase tracking-wide">CV</a>
                 <a href="#dashboard-demo" class="text-sm font-semibold text-blue-600 hover:text-blue-800 transition uppercase tracking-wide flex items-center gap-1"> 
                     <i class="fas fa-chart-line"></i> Démo
                 </a>
-                <a href="#contact" class="px-5 py-2.5 bg-blue-900 text-white text-sm font-bold rounded-full hover:bg-blue-800 transition shadow-lg hover:shadow-blue-900/30 transform hover:-translate-y-0.5">Me Contacter</a>
+                <a href="#contact" class="px-5 py-2.5 bg-blue-900 text-white text-sm font-bold rounded-full hover:bg-blue-800 transition shadow-lg hover:shadow-blue-900/30 transform hover:-translate-y-0.5 cta-nav">Me Contacter</a>
             </div>
-            <!-- Bouton Mobile (Placeholder pour simplicité, lien direct contact) -->
-            <div class="md:hidden">
-                <a href="#contact" class="text-blue-900 text-2xl"><i class="fas fa-envelope"></i></a>
+            <!-- Bouton Mobile -->
+            <button id="menu-button" class="md:hidden text-blue-900 text-2xl p-2 rounded-lg border border-blue-100 bg-white/70 shadow-sm hover:bg-blue-50 transition" aria-expanded="false" aria-controls="mobile-menu">
+                <i class="fas fa-bars icon-open"></i>
+                <i class="fas fa-xmark icon-close hidden"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden border-t border-slate-200 bg-white/95 backdrop-blur-md shadow-sm">
+            <div class="px-4 py-3 flex flex-col gap-3 text-sm font-semibold text-slate-700">
+                <a href="#services" class="flex items-center gap-2 hover:text-blue-700"><i class="fas fa-briefcase text-blue-600"></i> Services</a>
+                <a href="#about" class="flex items-center gap-2 hover:text-blue-700"><i class="fas fa-user text-blue-600"></i> À propos</a>
+                <a href="#projects" class="flex items-center gap-2 hover:text-blue-700"><i class="fas fa-diagram-project text-blue-600"></i> Projets</a>
+                <a href="#parcours" class="flex items-center gap-2 hover:text-blue-700"><i class="fas fa-route text-blue-600"></i> Parcours</a>
+                <a href="#cv" class="flex items-center gap-2 hover:text-blue-700"><i class="fas fa-file-alt text-blue-600"></i> CV</a>
+                <a href="#dashboard-demo" class="flex items-center gap-2 hover:text-blue-700"><i class="fas fa-chart-line text-blue-600"></i> Démo</a>
+                <a href="#contact" class="mt-1 inline-flex items-center justify-center gap-2 px-4 py-3 bg-blue-900 text-white rounded-xl font-bold hover:bg-blue-800 shadow-lg"><i class="fas fa-envelope"></i> Contact</a>
             </div>
         </div>
     </nav>
@@ -138,12 +322,12 @@
                 Disponible • Yaoundé
             </div>
             
-            <h1 class="text-5xl md:text-7xl font-extrabold mb-8 tracking-tight leading-tight text-shadow-lg">
+            <h1 class="hero-title font-extrabold mb-8 tracking-tight text-shadow-lg">
                 Ingénieur Géomatique <br/> 
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-white drop-shadow-sm">& Base de Données</span>
             </h1>
             
-            <p class="text-xl md:text-2xl mb-12 text-slate-100 font-light max-w-3xl mx-auto leading-relaxed text-shadow-lg">
+            <p class="hero-subtitle mb-12 text-slate-100 font-light max-w-3xl mx-auto leading-relaxed text-shadow-lg">
                 Je transforme la donnée spatiale complexe en <span class="font-semibold text-white border-b-2 border-blue-400 pb-0.5">outils d'aide à la décision</span> clairs et opérationnels pour le développement urbain.
             </p>
             
@@ -162,6 +346,64 @@
             <i class="fas fa-chevron-down text-2xl"></i>
         </div>
     </header>
+
+    <main>
+    <!-- SERVICES -->
+    <section id="services" class="py-20 md:py-24 relative overflow-hidden bg-white">
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute -left-10 top-10 w-56 h-56 bg-blue-200/40 rounded-full blur-3xl"></div>
+            <div class="absolute right-0 bottom-0 w-64 h-64 bg-cyan-200/40 rounded-full blur-3xl"></div>
+        </div>
+        <div class="container mx-auto px-4 md:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="section-kicker text-blue-700 text-xs font-semibold uppercase">Expertises clés</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-3">De la donnée brute aux décisions pilotées</h2>
+                <p class="text-slate-600 mt-4">Je structure des chaînes SIG complètes : collecte, modélisation PostGIS, visualisation et diffusion cartographique pour les équipes terrain et les décideurs.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 services-grid">
+                <div class="glass-card p-6 flex flex-col gap-4 border-l-4 border-blue-600">
+                    <div class="flex items-start gap-3">
+                        <span class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-700 text-xl"><i class="fas fa-drafting-compass"></i></span>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900">Observatoires urbains</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">Conception de dashboards opérationnels : budgets, réseaux, cadastre, performance des services.</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="badge"><i class="fas fa-database"></i> PostGIS</span>
+                        <span class="badge bg-cyan-100/60 border-cyan-200 text-cyan-700"><i class="fas fa-chart-pie"></i> KPI métiers</span>
+                    </div>
+                </div>
+                <div class="glass-card p-6 flex flex-col gap-4 border-l-4 border-emerald-500">
+                    <div class="flex items-start gap-3">
+                        <span class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-700 text-xl"><i class="fas fa-route"></i></span>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900">Cartographie décisionnelle</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">Cartes prêtes pour l'action : couverture des services, risques, anomalies à traiter en priorité.</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="badge bg-emerald-50 border-emerald-200 text-emerald-700"><i class="fas fa-map"></i> QGIS / MAGRIT</span>
+                        <span class="badge bg-white border-slate-200 text-slate-700"><i class="fas fa-bullseye"></i> Ciblage terrain</span>
+                    </div>
+                </div>
+                <div class="glass-card p-6 flex flex-col gap-4 border-l-4 border-purple-500">
+                    <div class="flex items-start gap-3">
+                        <span class="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center text-purple-700 text-xl"><i class="fas fa-cloud"></i></span>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900">Diffusion & API</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">Publication sécurisée via GeoServer, services WMS/WFS et intégration web légère pour Github Pages.</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="badge bg-purple-50 border-purple-200 text-purple-700"><i class="fas fa-server"></i> GeoServer</span>
+                        <span class="badge bg-blue-50 border-blue-200 text-blue-700"><i class="fas fa-code"></i> Intégration web</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- ABOUT SECTION -->
     <section id="about" class="py-24 md:py-32 container mx-auto px-4 md:px-8">
@@ -209,7 +451,7 @@
             <!-- Carte Interactive Leaflet : Localisation -->
             <div class="lg:w-1/2 w-full">
                 <div class="bg-white p-2 rounded-2xl shadow-xl border border-slate-200 transform rotate-1 hover:rotate-0 transition duration-500">
-                    <div id="about-map" class="h-80 w-full rounded-xl z-0"></div>
+                    <div id="about-map" class="h-64 sm:h-80 w-full rounded-xl z-0"></div>
                     <div class="flex justify-between items-center mt-3 px-3 pb-1">
                         <p class="text-sm font-medium text-slate-500 flex items-center">
                             <i class="fas fa-map-marker-alt text-red-500 mr-2 animate-bounce"></i> 
@@ -432,6 +674,185 @@
         </div>
     </section>
 
+    <!-- PARCOURS -->
+    <section id="parcours" class="py-24 bg-white">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+                <div class="space-y-4">
+                    <span class="section-kicker text-blue-700 text-xs font-semibold uppercase">Parcours</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 leading-tight">Expériences marquantes et livrables concrets</h2>
+                    <p class="text-slate-600 text-lg">Pilotage SIG, modélisation de données, accompagnement des équipes terrain : j'interviens de la stratégie à la mise en production.</p>
+                    <div class="flex flex-wrap gap-3 pt-2">
+                        <span class="pill text-slate-800"><i class="fas fa-user-check text-green-600"></i> Disponible mission / CDI</span>
+                        <span class="pill text-slate-800"><i class="fas fa-clock text-blue-600"></i> Délais courts maîtrisés</span>
+                    </div>
+                </div>
+                <div class="glass-card p-8">
+                    <div class="timeline space-y-8">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-xl font-bold text-slate-900">Chef de projet SIG – CUY</h3>
+                                <span class="badge bg-blue-50 border-blue-200 text-blue-800">2023 - 2025</span>
+                            </div>
+                            <p class="text-slate-600 mt-2 text-sm leading-relaxed">Refonte du référentiel fiscal : croisement cadastre/terrain, suivi des recettes, mise en place d'indicateurs pour la direction financière.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-xl font-bold text-slate-900">Responsable données – Infrastructures Douala</h3>
+                                <span class="badge bg-slate-100 border-slate-200 text-slate-800">2021 - 2023</span>
+                            </div>
+                            <p class="text-slate-600 mt-2 text-sm leading-relaxed">Modèle PostGIS interopérable pour routes, réseaux et équipements. Publication GeoServer sécurisée pour les bureaux d'étude.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-xl font-bold text-slate-900">Cartographie thématique – MAGRIT</h3>
+                                <span class="badge bg-purple-50 border-purple-200 text-purple-800">2019 - 2021</span>
+                            </div>
+                            <p class="text-slate-600 mt-2 text-sm leading-relaxed">Analyses démographiques et socio-économiques, cartes choroplèthes et indicateurs multi-échelles pour la planification.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CV EXPRESS -->
+    <section id="cv" class="py-20 bg-slate-50">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="section-kicker text-blue-700 text-xs font-semibold uppercase">CV Express</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-3">Profil, expériences et certifications</h2>
+                <p class="text-slate-600 mt-4">Synthèse issue de mon parcours : gestion de bases géospatiales, modélisation PostGIS, analyse spatiale et delivery de solutions cartographiques.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Profil & Formation -->
+                <div class="cv-card p-6 lg:col-span-1 space-y-5">
+                    <div class="flex items-start gap-3">
+                        <span class="w-10 h-10 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center"><i class="fas fa-user"></i></span>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900">Profil</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mt-1">Ingénieur SIG spécialisé en gestion de bases géospatiales (PostGIS), production cartographique et analyse/synthèse. Chaîne complète de la donnée terrain à la décision.</p>
+                        </div>
+                    </div>
+                    <div class="border-t border-slate-200 pt-4">
+                        <h4 class="text-sm font-bold text-slate-800 uppercase tracking-wide mb-2">Formation</h4>
+                        <ul class="space-y-3 text-sm text-slate-700">
+                            <li>
+                                <div class="font-semibold text-slate-900">Ingénieur de Conception en Cartographie & Géomatique (2022–2023)</div>
+                                <div>École de Géologie et d'Exploitation Minière (EGEM), Meiganga – Niveau Master 2</div>
+                            </li>
+                            <li>
+                                <div class="font-semibold text-slate-900">Baccalauréat Scientifique (Série D) – 2017</div>
+                                <div>Collège Jean Paul II, Mbalmayo</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Compétences techniques -->
+                <div class="cv-card p-6 lg:col-span-1 space-y-4">
+                    <div class="flex items-start gap-3">
+                        <span class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fas fa-toolbox"></i></span>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900">Compétences techniques</h3>
+                            <p class="text-slate-600 text-sm mt-1">Cartographie, bases de données, automatisation et analyse.</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3 text-sm text-slate-800">
+                        <div>
+                            <div class="font-semibold text-slate-900">SIG & Cartographie</div>
+                            <div>QGIS, ArcGIS, MAGRIT, GeoServer, OpenLayers</div>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-slate-900">Bases de données</div>
+                            <div>PostgreSQL, PostGIS, Oracle Data Platform</div>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-slate-900">Développement</div>
+                            <div>Python (workflows), Django, HTML/CSS, JavaScript</div>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-slate-900">Analyse</div>
+                            <div>Recherche et synthèse d'informations géographiques, analyse spatiale, visualisation.</div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="chip"><i class="fas fa-route text-blue-600"></i> Cartographie thématique</span>
+                            <span class="chip"><i class="fas fa-database text-emerald-600"></i> Modélisation PostGIS</span>
+                            <span class="chip"><i class="fas fa-chart-line text-indigo-600"></i> KPI géo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certifs / Langues / Intérêt -->
+                <div class="cv-card p-6 lg:col-span-1 space-y-5">
+                    <div class="flex items-start gap-3">
+                        <span class="w-10 h-10 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center"><i class="fas fa-certificate"></i></span>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900">Certifications</h3>
+                            <ul class="text-sm text-slate-700 mt-2 space-y-2">
+                                <li><span class="font-semibold text-slate-900">Oracle Data Platform Associate</span>, Oracle University (2025)</li>
+                                <li><span class="font-semibold text-slate-900">Scrum Foundation (SFPC)</span>, ScrumStudy (2025)</li>
+                                <li><span class="font-semibold text-slate-900">Google Data Analytics</span> (en cours), Coursera</li>
+                                <li><span class="font-semibold text-slate-900">Google Project Management</span> (en cours), Coursera</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="border-t border-slate-200 pt-4">
+                        <h4 class="text-sm font-bold text-slate-800 uppercase tracking-wide mb-2">Langues</h4>
+                        <div class="flex flex-col gap-1 text-sm text-slate-700">
+                            <span><span class="font-semibold text-slate-900">Français :</span> langue maternelle, excellente rédaction/synthèse.</span>
+                            <span><span class="font-semibold text-slate-900">Anglais :</span> professionnel, niveau technique avancé.</span>
+                        </div>
+                    </div>
+                    <div class="border-t border-slate-200 pt-4">
+                        <h4 class="text-sm font-bold text-slate-800 uppercase tracking-wide mb-2">Centres d'intérêt</h4>
+                        <p class="text-sm text-slate-700">Veille cartographique, sport collectif.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expériences -->
+            <div class="grid lg:grid-cols-3 gap-8 mt-10">
+                <div class="cv-card p-6 lg:col-span-2 space-y-4">
+                    <div class="flex flex-wrap justify-between gap-3">
+                        <div>
+                            <p class="text-xs uppercase tracking-wide font-semibold text-blue-700">Mai 2024 - Présent</p>
+                            <h3 class="text-xl font-bold text-slate-900">Ingénieur SIG, AFREETECH CAMEROON (Yaoundé)</h3>
+                        </div>
+                        <span class="badge bg-blue-50 border-blue-200 text-blue-800">Projet IDG / CU Douala</span>
+                    </div>
+                    <ul class="list-disc list-inside text-sm text-slate-700 space-y-2">
+                        <li>Conception du SIG et cartographie en ligne (GeoServer/Django).</li>
+                        <li><strong>Recherche et intégration</strong> de données d'infrastructures régionales dans PostGIS.</li>
+                        <li><strong>Développement</strong> de la base de données géospatiale (structuration, modélisation).</li>
+                        <li>Outils d'<strong>analyse spatiale & synthèse</strong> pour l'aide à la décision (workflows).</li>
+                        <li>Formation des équipes à l'autonomie sur les outils SIG.</li>
+                        <li>Suivi opérationnel et coordination technique.</li>
+                    </ul>
+                </div>
+                <div class="cv-card p-6 space-y-4">
+                    <div class="flex flex-wrap justify-between gap-3">
+                        <div>
+                            <p class="text-xs uppercase tracking-wide font-semibold text-blue-700">Fév 2024 - Mai 2024</p>
+                            <h3 class="text-xl font-bold text-slate-900">Stagiaire - Modélisation de Données Géologiques</h3>
+                            <p class="text-sm text-slate-600">Cameroon Mining Company (CMC), Yaoundé</p>
+                        </div>
+                        <span class="badge bg-purple-50 border-purple-200 text-purple-800">Leapfrog</span>
+                    </div>
+                    <ul class="list-disc list-inside text-sm text-slate-700 space-y-2">
+                        <li>Modélisation de données géologiques pour visualisation des ressources.</li>
+                        <li><strong>Analyse de données de forage</strong> pour recommandations stratégiques.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    </main>
+
     <!-- CONTACT / FOOTER -->
     <footer id="contact" class="bg-gradient-to-r from-blue-950 to-slate-900 text-white py-20">
         <div class="container mx-auto px-4 md:px-8 text-center">
@@ -448,7 +869,7 @@
             </div>
             
             <div class="border-t border-white/10 pt-8 mt-8">
-                <p class="text-sm text-slate-400">&copy; 2024 Landry BEFOLO. Tous droits réservés.</p>
+                <p class="text-sm text-slate-400">&copy; 2025 Landry BEFOLO. Tous droits réservés.</p>
                 <p class="text-xs text-slate-500 mt-2">Designé avec passion pour l'intelligence territoriale.</p>
             </div>
         </div>
@@ -460,6 +881,30 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
+        // --- 0. MENU MOBILE ---
+        const menuButton = document.getElementById('menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (menuButton && mobileMenu) {
+            const iconOpen = menuButton.querySelector('.icon-open');
+            const iconClose = menuButton.querySelector('.icon-close');
+
+            menuButton.addEventListener('click', () => {
+                const isHidden = mobileMenu.classList.toggle('hidden');
+                menuButton.setAttribute('aria-expanded', (!isHidden).toString());
+                if (iconOpen) iconOpen.classList.toggle('hidden');
+                if (iconClose) iconClose.classList.toggle('hidden');
+            });
+
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    if (iconOpen) iconOpen.classList.remove('hidden');
+                    if (iconClose) iconClose.classList.add('hidden');
+                    menuButton.setAttribute('aria-expanded', 'false');
+                });
+            });
+        }
+
         // --- 1. CARTE "À PROPOS" (Interactive simple) ---
         const aboutMap = L.map('about-map', {
             zoomControl: false // Plus propre
@@ -504,12 +949,12 @@
                     y: { 
                         beginAtZero: true,
                         grid: { color: 'rgba(148, 163, 184, 0.1)' },
-                        ticks: { color: '#94a3b8', font: {family: 'sans-serif'} },
+                        ticks: { color: '#94a3b8', font: {family: 'Space Grotesk, sans-serif'} },
                         border: {display: false}
                     },
                     x: {
                         grid: { display: false },
-                        ticks: { color: '#94a3b8', font: {family: 'sans-serif'} },
+                        ticks: { color: '#94a3b8', font: {family: 'Space Grotesk, sans-serif'} },
                         border: {display: false}
                     }
                 },
@@ -552,23 +997,25 @@
 
 
         // --- 4. INITIALISATION CAROUSELS (Swiper) ---
-        var swiper = new Swiper(".mySwiper", {
-            spaceBetween: 0,
-            centeredSlides: true,
-            loop: true, // Boucle infinie
-            speed: 800,
-            autoplay: {
-                delay: 4000,
-                disableOnInteraction: false,
-            },
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
+        document.querySelectorAll('.mySwiper').forEach(swiperEl => {
+            new Swiper(swiperEl, {
+                spaceBetween: 0,
+                centeredSlides: true,
+                loop: true, // Boucle infinie
+                speed: 800,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: swiperEl.querySelector(".swiper-pagination"),
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: swiperEl.querySelector(".swiper-button-next"),
+                    prevEl: swiperEl.querySelector(".swiper-button-prev"),
+                },
+            });
         });
     </script>
 </body>
