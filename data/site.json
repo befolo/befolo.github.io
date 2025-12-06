@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Landry BEFOLO - Ingénieur Géomatique & Data",
-    "description": "Ingénieur SIG spécialisé PostGIS, cartographie thématique et dashboards décisionnels.",
+    "description": "Ingénieur SIG au Cameroun (Yaoundé) spécialisé en bases de données PostGIS/SQL, géomatique, cartographie thématique et dashboards décisionnels.",
     "location": "Yaoundé, Cameroun"
   },
   "nav": {
@@ -12,7 +12,7 @@
   "hero": {
     "title": "Ingénieur Géomatique",
     "accent": "& Base de Données",
-    "subtitle": "Je transforme la donnée spatiale complexe en outils d'aide à la décision clairs et opérationnels pour le développement urbain.",
+    "subtitle": "Ingénieur SIG basé à Yaoundé (Cameroun), expert PostGIS/SQL et cartographie. Je transforme la donnée spatiale en outils d'aide à la décision pour les projets urbains.",
     "primaryCta": "Voir la Démo Dashboard",
     "secondaryCta": "Explorer mes Projets"
   },
@@ -34,7 +34,7 @@
       },
       {
         "title": "Diffusion & API",
-        "description": "Publication sécurisée via GeoServer, services WMS/WFS et intégration web légère pour GitHub Pages.",
+        "description": "Publication sécurisée via GeoServer, services WMS/WFS et intégration web légère pour GitHub Pages. Déploiement SIG pour collectivités au Cameroun.",
         "color": "purple",
         "badges": ["GeoServer", "Intégration web"]
       }
@@ -42,7 +42,7 @@
   },
   "about": {
     "title": "Expertise technique au service de l'intelligence territoriale.",
-    "description": "Ingénieur SIG avec expérience en gestion de bases géospatiales (PostGIS) et production cartographique. Chaîne complète de l'information géographique, de la recherche de données à la visualisation.",
+    "description": "Ingénieur SIG au Cameroun avec expérience en bases géospatiales (PostGIS/SQL), production cartographique et géomatique urbaine. Chaîne complète de l'information géographique, de la collecte terrain à la visualisation.",
     "skills": [
       {"icon": "fa-database", "color": "blue", "label": "PostGIS / SQL"},
       {"icon": "fa-map", "color": "green", "label": "QGIS / MAGRIT"},
