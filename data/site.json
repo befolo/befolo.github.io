@@ -24,18 +24,21 @@
         "title": "Observatoires urbains",
         "description": "Conception de dashboards opérationnels : budgets, réseaux, cadastre, performance des services.",
         "color": "blue",
+        "icon": "fa-chart-bar",
         "badges": ["PostGIS", "KPI métiers"]
       },
       {
         "title": "Cartographie décisionnelle",
         "description": "Cartes prêtes pour l'action : couverture des services, risques, anomalies à traiter en priorité.",
         "color": "emerald",
+        "icon": "fa-map-location-dot",
         "badges": ["QGIS / MAGRIT", "Ciblage terrain"]
       },
       {
         "title": "Diffusion & API",
         "description": "Publication sécurisée via GeoServer, services WMS/WFS et intégration web légère pour GitHub Pages. Déploiement SIG pour collectivités au Cameroun.",
         "color": "purple",
+        "icon": "fa-server",
         "badges": ["GeoServer", "Intégration web"]
       }
     ]
@@ -126,6 +129,10 @@
   "contact": {
     "headline": "Prêt à collaborer sur des projets à fort impact ?",
     "email": "fredybefolo@gmail.com",
-    "phone": "+237 655 776 021"
+    "phone": "+237 655 776 021",
+    "social": {
+      "github": "https://github.com/befolo",
+      "linkedin": ""
+    }
   }
 }
