@@ -1,60 +1,106 @@
 [
   {
     "slug": "idg-douala",
-    "title": "Infrastructures Douala (IDG)",
-    "summary": "Centralisation des données d'infrastructures et modèle PostGIS pour relier voiries, réseaux et équipements urbains.",
-    "tags": ["PostGIS", "QGIS", "GeoServer"],
+    "title": { "fr": "Infrastructures Douala", "en": "Douala Infrastructure" },
+    "summary": {
+      "fr": "Centralisation des données d'infrastructures et modèle PostGIS reliant voiries, réseaux et équipements urbains. Diffusion GeoServer / Django et formation des équipes.",
+      "en": "Centralised infrastructure data and a PostGIS model linking roads, networks and urban facilities. GeoServer / Django delivery and team training."
+    },
+    "tags": ["PostGIS", "GeoServer", "Data Engineering"],
     "image": "images/project-idg.webp",
+    "imageAlt": {
+      "fr": "Cartographie des infrastructures de Douala produite sous QGIS et publiée via GeoServer",
+      "en": "Douala infrastructure mapping produced in QGIS and published through GeoServer"
+    },
     "carousel": ["images/project-idg.webp", "images/hero.webp"],
     "details": {
       "client": "Communauté Urbaine de Douala",
-      "role": "Chef de projet SIG",
-      "period": "2023 - 2025",
-      "bullets": [
-        "Conception du système d'information géographique et cartographie en ligne (GeoServer/Django)",
-        "Recherche et intégration de données d'infrastructures régionales dans PostGIS",
-        "Structuration et modélisation de la base géospatiale pour le recouvrement",
-        "Outils d'analyse spatiale et workflows d'orchestration",
-        "Formation des équipes et suivi opérationnel"
-      ]
+      "period": "2023 — 2025",
+      "role": { "fr": "Chef de projet SIG", "en": "GIS project lead" },
+      "bullets": {
+        "fr": [
+          "Conception du système d'information géographique et cartographie en ligne (GeoServer / Django)",
+          "Recherche et intégration de données d'infrastructures régionales dans PostGIS",
+          "Structuration et modélisation de la base géospatiale pour le recouvrement",
+          "Outils d'analyse spatiale et workflows d'orchestration",
+          "Formation des équipes et suivi opérationnel"
+        ],
+        "en": [
+          "Designed the geographic information system and the online mapping stack (GeoServer / Django)",
+          "Sourced and integrated regional infrastructure datasets into PostGIS",
+          "Structured and modelled the geospatial database used for revenue collection",
+          "Built spatial analysis tools and orchestration workflows",
+          "Trained the teams and ran operational follow-up"
+        ]
+      }
     }
   },
   {
     "slug": "recettes-yaounde",
-    "title": "Optimisation Recettes (CUY)",
-    "summary": "Audit et analyse des systèmes SIG existants, conception de base de données géospatiale dédiée au recouvrement.",
-    "tags": ["Audit", "Base géo", "Carto thématique"],
+    "title": { "fr": "Optimisation des recettes", "en": "Revenue optimisation" },
+    "summary": {
+      "fr": "Audit des systèmes existants, rédaction des spécifications techniques et conception de la base géospatiale dédiée au recouvrement fiscal.",
+      "en": "Audit of existing systems, technical specifications and design of the geospatial database dedicated to tax collection."
+    },
+    "tags": ["Audit", "Base géospatiale", "Carto thématique"],
     "image": "images/project-recettes.webp",
+    "imageAlt": {
+      "fr": "Carte thématique du recouvrement fiscal par quartier de Yaoundé",
+      "en": "Thematic map of tax collection by district in Yaoundé"
+    },
     "carousel": ["images/project-recettes.webp"],
     "details": {
       "client": "Communauté Urbaine de Yaoundé",
-      "role": "Ingénieur SIG",
-      "period": "2024 - Présent",
-      "bullets": [
-        "Audit et analyse des systèmes d'information géographique existants",
-        "Rédaction des spécifications techniques pour l'infrastructure SIG",
-        "Conception de la base de données géospatiale dédiée au recouvrement",
-        "Analyse, traitement et validation des couches d'informations géographiques"
-      ]
+      "period": "2024 — présent",
+      "role": { "fr": "Ingénieur SIG", "en": "GIS engineer" },
+      "bullets": {
+        "fr": [
+          "Audit et analyse des systèmes d'information géographique existants",
+          "Rédaction des spécifications techniques pour l'infrastructure SIG",
+          "Conception de la base de données géospatiale dédiée au recouvrement",
+          "Analyse, traitement et validation des couches d'informations géographiques"
+        ],
+        "en": [
+          "Audited and analysed the existing geographic information systems",
+          "Wrote the technical specifications for the GIS infrastructure",
+          "Designed the geospatial database dedicated to revenue collection",
+          "Analysed, processed and validated the geographic data layers"
+        ]
+      }
     }
   },
   {
     "slug": "pagrin-pptic",
-    "title": "Observatoire Régional (PAGRIN - PPTIC)",
-    "summary": "Architecture SIG et diffusion cartographique, intégration de données d'infrastructures régionales et tableaux de bord décisionnels.",
-    "tags": ["GeoServer", "PostGIS", "Dashboard"],
+    "title": { "fr": "Observatoire régional", "en": "Regional observatory" },
+    "summary": {
+      "fr": "Architecture SIG et diffusion cartographique, intégration de données d'infrastructures régionales et tableaux de bord décisionnels.",
+      "en": "GIS architecture and map delivery, integration of regional infrastructure data and decision dashboards."
+    },
+    "tags": ["GeoServer", "PostGIS", "Dashboards"],
     "image": "images/project-pagrin.webp",
+    "imageAlt": {
+      "fr": "Tableau de bord de l'observatoire régional PAGRIN alimenté par PostGIS",
+      "en": "PAGRIN regional observatory dashboard powered by PostGIS"
+    },
     "carousel": ["images/project-pagrin.webp"],
     "details": {
-      "client": "PAGRIN - PPTIC",
-      "role": "Ingénieur SIG",
+      "client": "PAGRIN — PPTIC",
       "period": "2024",
-      "bullets": [
-        "Conception de l'architecture SIG et diffusion cartographique (GeoServer)",
-        "Intégration de données d'infrastructures régionales dans PostGIS",
-        "Développement d'outils d'analyse pour tableaux de bord décisionnels",
-        "Formation des utilisateurs finaux et coordination technique"
-      ]
+      "role": { "fr": "Ingénieur SIG", "en": "GIS engineer" },
+      "bullets": {
+        "fr": [
+          "Conception de l'architecture SIG et diffusion cartographique (GeoServer)",
+          "Intégration de données d'infrastructures régionales dans PostGIS",
+          "Développement d'outils d'analyse pour tableaux de bord décisionnels",
+          "Formation des utilisateurs finaux et coordination technique"
+        ],
+        "en": [
+          "Designed the GIS architecture and the map delivery layer (GeoServer)",
+          "Integrated regional infrastructure datasets into PostGIS",
+          "Developed analysis tools feeding the decision dashboards",
+          "Trained end users and coordinated the technical work"
+        ]
+      }
     }
   }
 ]
