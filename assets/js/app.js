@@ -264,6 +264,61 @@
     }).join('');
   }
 
+  function renderCertifications() {
+    var certs = site.certifications;
+    var head = document.getElementById('certs-head');
+    var list = document.getElementById('certs-list');
+    var profile = document.getElementById('certs-profile');
+    if (!certs || !list) return;
+
+    if (head) {
+      head.innerHTML = '<span class="label">' + esc(t(certs.label)) + '</span>'
+        + '<h2>' + esc(t(certs.heading)) + '</h2>'
+        + '<p>' + esc(t(certs.intro)) + '</p>';
+    }
+
+    var verify = t(certs.verifyLabel) || 'Vérifier';
+
+    list.innerHTML = (certs.items || []).map(function (item) {
+      var name = t(item.name);
+      /* Sans lien de vérification on le dit, plutôt que d'afficher un
+         bouton mort : c'est le sujet même de la section. */
+      var proof = item.url
+        ? '<a class="link" href="' + esc(item.url) + '" target="_blank" rel="noopener noreferrer">'
+          + esc(verify) + externalSVG() + '</a>'
+        : '<span class="cert-unverified">' + (locale === 'en' ? 'Link to add' : 'Lien à ajouter') + '</span>';
+
+      return '<article class="cert">'
+        + '<span class="cert-badge">' + badgeHTML(item, name) + '</span>'
+        + '<h3>' + esc(name) + '</h3>'
+        + '<p class="cert-meta">' + esc(item.issuer) + ' · ' + esc(item.year) + '</p>'
+        + proof
+        + '</article>';
+    }).join('');
+
+    if (profile) {
+      profile.innerHTML = certs.profileUrl
+        ? '<a class="link" href="' + esc(certs.profileUrl) + '" target="_blank" rel="noopener noreferrer">'
+          + esc(t(certs.profileLabel)) + externalSVG() + '</a>'
+        : '';
+    }
+  }
+
+  /* Une vignette absente ou cassée retombe sur les initiales de
+     l'émetteur : la carte reste lisible dans tous les cas. */
+  function badgeHTML(item, name) {
+    var initials = String(item.issuer || name || '?').trim().slice(0, 2).toUpperCase();
+    if (!item.image) return '<span>' + esc(initials) + '</span>';
+    return '<img src="' + esc(item.image) + '" alt="' + esc(name) + ' — ' + esc(item.issuer) + '" '
+      + 'width="86" height="86" loading="lazy" decoding="async" '
+      + 'onerror="this.parentNode.innerHTML=&quot;<span>' + esc(initials) + '</span>&quot;">';
+  }
+
+  function externalSVG() {
+    return '<svg class="ext" viewBox="0 0 24 24" aria-hidden="true">'
+      + '<path d="M14 5h5v5M19 5l-8 8M18 14v4a1.5 1.5 0 01-1.5 1.5h-10A1.5 1.5 0 015 18V8a1.5 1.5 0 011.5-1.5H10"/></svg>';
+  }
+
   function renderDashboard() {
     var dash = site.dashboard;
     if (!dash) return;
@@ -667,6 +722,7 @@
     renderHero();
     renderAbout();
     renderStack();
+    renderCertifications();
     renderDashboard();
     renderProjects();
     renderParcours();
