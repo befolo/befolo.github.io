@@ -95,8 +95,17 @@ de côté.
 
 Deux fichiers, deux cadrages :
 
-- `about.portrait` → `images/profile.webp` (800×1000, ratio 4:5) pour le cadre de « À propos ». Affiché
-  en niveaux de gris, il repasse en couleur au survol.
+- `about.portrait` → `images/profile.webp` (800×1000, ratio 4:5) pour « À propos ». **Image détourée**
+  (PNG/WebP à canal alpha) : elle est posée directement sur le fond de page, sans cadre. Affichée en
+  niveaux de gris, elle repasse en couleur au survol.
+
+  Un halo très diffus est dessiné derrière elle, **uniquement en thème sombre** (token
+  `--portrait-halo`, à `0` en clair et `1` en sombre) : sans lui une chevelure foncée se confond avec
+  le fond. Ce halo déborde volontairement de sa boîte, d'où le `overflow-x: clip` sur `.about` qui
+  l'empêche de provoquer un défilement horizontal de la page.
+
+  Pour remplacer le portrait, fournir une image **déjà détourée**. Une photo avec fond fonctionne
+  aussi, mais elle réaffichera un rectangle.
 - `about.avatar` → `images/profile-avatar.webp` (400×400) pour la pastille ronde du pied de page. Un
   cadrage carré dédié évite que le recadrage automatique du cercle ne rogne le haut du crâne. Si le
   champ est absent, la pastille retombe sur `portrait`.
