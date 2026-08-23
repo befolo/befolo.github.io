@@ -210,7 +210,8 @@
           "en": "Yaoundé · Douala — local authorities and public operators."
         }
       }
-    ]
+    ],
+    "avatar": "images/profile-avatar.webp"
   },
   "stack": {
     "label": {
@@ -270,13 +271,15 @@
           "en": "Cloud"
         },
         "description": {
-          "fr": "Plateformes de données managées, publication de services et intégration applicative.",
-          "en": "Managed data platforms, service publishing and application integration."
+          "fr": "Architecture Google Cloud, conteneurs et services managés : Cloud Run, Kubernetes, répartition de charge, fondamentaux de sécurité.",
+          "en": "Google Cloud architecture, containers and managed services: Cloud Run, Kubernetes, load balancing, security fundamentals."
         },
         "tools": [
-          "Oracle Data Platform",
-          "Django",
-          "API REST"
+          "Google Cloud",
+          "Cloud Run",
+          "Kubernetes",
+          "Compute Engine",
+          "Oracle Data Platform"
         ]
       },
       {
@@ -286,10 +289,11 @@
           "en": "AI"
         },
         "description": {
-          "fr": "Analyse prédictive appliquée au spatial : détection d'anomalies, ciblage et priorisation terrain.",
-          "en": "Predictive analysis applied to spatial data: anomaly detection, targeting and field prioritisation."
+          "fr": "Agents IA construits avec l'Agent Development Kit de Google, et analyse prédictive appliquée au spatial : détection d'anomalies et priorisation terrain.",
+          "en": "AI agents built with Google's Agent Development Kit, and predictive analysis applied to spatial data: anomaly detection and field prioritisation."
         },
         "tools": [
+          "Agent Development Kit",
           "Analyse prédictive",
           "Détection d'anomalies"
         ]
@@ -322,19 +326,89 @@
       "en": "Verifiable credentials"
     },
     "intro": {
-      "fr": "Chaque badge renvoie à sa page de vérification chez l'organisme émetteur. Rien ici n'est déclaratif.",
-      "en": "Every badge links to its verification page at the issuing body. Nothing here is self-declared."
+      "fr": "Neuf titres obtenus, dont sept badges Google Cloud vérifiables en un clic sur Credly.",
+      "en": "Nine credentials earned, seven of them Google Cloud badges verifiable in one click on Credly."
     },
     "verifyLabel": {
       "fr": "Vérifier",
       "en": "Verify"
     },
-    "profileUrl": "",
+    "profileUrl": "https://www.credly.com/users/freidy-landry-befolo-akoumou",
     "profileLabel": {
       "fr": "Voir tous les badges sur Credly",
       "en": "See all badges on Credly"
     },
     "items": [
+      {
+        "name": {
+          "fr": "Develop Serverless Applications on Cloud Run Skill Badge",
+          "en": "Develop Serverless Applications on Cloud Run Skill Badge"
+        },
+        "issuer": "Google Cloud",
+        "year": "2026",
+        "image": "images/badges/develop-serverless-applications-on-cloud-run.png",
+        "url": "https://www.credly.com/badges/b6ee4e87-cd72-4dc1-9161-9a69e44dbf9e/public_url"
+      },
+      {
+        "name": {
+          "fr": "Engineer AI Agents with Agent Development Kit (ADK)",
+          "en": "Engineer AI Agents with Agent Development Kit (ADK)"
+        },
+        "issuer": "Google Cloud",
+        "year": "2026",
+        "image": "images/badges/engineer-ai-agents-with-agent-development-kit-.png",
+        "url": "https://www.credly.com/badges/7a04b8fc-8560-4e18-beec-011d75ba1aaa/public_url"
+      },
+      {
+        "name": {
+          "fr": "Manage Kubernetes in Google Cloud Skill Badge",
+          "en": "Manage Kubernetes in Google Cloud Skill Badge"
+        },
+        "issuer": "Google Cloud",
+        "year": "2026",
+        "image": "images/badges/manage-kubernetes-in-google-cloud.png",
+        "url": "https://www.credly.com/badges/388acea7-0b85-4165-8bd4-96a66e981d7e/public_url"
+      },
+      {
+        "name": {
+          "fr": "Cloud Architecture: Design, Implement, and Manage Skill Badge",
+          "en": "Cloud Architecture: Design, Implement, and Manage Skill Badge"
+        },
+        "issuer": "Google Cloud",
+        "year": "2026",
+        "image": "images/badges/cloud-architecture-design-implement-and-manage.png",
+        "url": "https://www.credly.com/badges/4f4e0c14-4213-436e-82f9-5453732b9a2e/public_url"
+      },
+      {
+        "name": {
+          "fr": "Implement Cloud Security Fundamentals on Google Cloud Skill Badge",
+          "en": "Implement Cloud Security Fundamentals on Google Cloud Skill Badge"
+        },
+        "issuer": "Google Cloud",
+        "year": "2026",
+        "image": "images/badges/implement-cloud-security-fundamentals-on-googl.png",
+        "url": "https://www.credly.com/badges/a57c0ba5-fa4d-4c46-b81c-dd8eda624270/public_url"
+      },
+      {
+        "name": {
+          "fr": "Set Up an App Dev Environment on Google Cloud Skill Badge",
+          "en": "Set Up an App Dev Environment on Google Cloud Skill Badge"
+        },
+        "issuer": "Google Cloud",
+        "year": "2026",
+        "image": "images/badges/set-up-an-app-dev-environment-on-google-cloud.png",
+        "url": "https://www.credly.com/badges/38119b4a-c8f6-400d-a83c-47f7aecc37aa/public_url"
+      },
+      {
+        "name": {
+          "fr": "Implement Load Balancing on Compute Engine Skill Badge",
+          "en": "Implement Load Balancing on Compute Engine Skill Badge"
+        },
+        "issuer": "Google Cloud",
+        "year": "2026",
+        "image": "images/badges/implement-load-balancing-on-compute-engine.png",
+        "url": "https://www.credly.com/badges/3083ef86-1c49-494b-8ffa-020546e79daa/public_url"
+      },
       {
         "name": {
           "fr": "Oracle Data Platform Associate",

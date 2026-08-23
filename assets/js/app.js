@@ -281,12 +281,12 @@
 
     list.innerHTML = (certs.items || []).map(function (item) {
       var name = t(item.name);
-      /* Sans lien de vérification on le dit, plutôt que d'afficher un
-         bouton mort : c'est le sujet même de la section. */
+      /* Un titre absent de Credly n'affiche pas de lien : mieux vaut
+         rien qu'un renvoi vers un profil qui ne le contient pas. */
       var proof = item.url
         ? '<a class="link" href="' + esc(item.url) + '" target="_blank" rel="noopener noreferrer">'
           + esc(verify) + externalSVG() + '</a>'
-        : '<span class="cert-unverified">' + (locale === 'en' ? 'Link to add' : 'Lien à ajouter') + '</span>';
+        : '';
 
       return '<article class="cert">'
         + '<span class="cert-badge">' + badgeHTML(item, name) + '</span>'
@@ -421,8 +421,9 @@
     if (social.linkedin) links.push('<a class="link muted" href="' + esc(social.linkedin) + '" rel="noopener">LinkedIn</a>');
 
     var about = site.about || {};
-    var avatar = about.portrait
-      ? '<img src="' + esc(about.portrait) + '" alt="" width="56" height="56" loading="lazy" decoding="async" '
+    var avatarSrc = about.avatar || about.portrait;
+    var avatar = avatarSrc
+      ? '<img src="' + esc(avatarSrc) + '" alt="" width="56" height="56" loading="lazy" decoding="async" '
         + 'onerror="this.parentNode.textContent=&quot;LB&quot;">'
       : 'LB';
 
