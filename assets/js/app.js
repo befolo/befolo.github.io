@@ -1,451 +1,707 @@
-async function fetchJSON(path) {
-  try {
-    const res = await fetch(path);
-    if (!res.ok) throw new Error('fetch failed');
-    return await res.json();
-  } catch (e) {
-    console.error('Erreur de chargement', path, e);
+/* ═══════════════════════════════════════════════════════════
+   Landry Befolo — portfolio
+   Rendu piloté par data/site.json et data/projects.json.
+   Aucune étape de build : tout se fait côté client.
+   ═══════════════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+
+  var LOCALES = ['fr', 'en'];
+  var DEFAULT_LOCALE = 'fr';
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var site = null;
+  var projects = null;
+  var locale = DEFAULT_LOCALE;
+  var firstRender = true;
+
+  var revealObserver = null;
+  var navObserver = null;
+  var loopTimer = null;
+  var swipers = [];
+  var obsMap = null;
+  var obsTiles = null;
+
+  /* ─────────── Stockage tolérant aux navigateurs verrouillés ─────────── */
+  function remember(key, value) {
+    try {
+      if (value === undefined) return localStorage.getItem(key);
+      localStorage.setItem(key, value);
+    } catch (e) { /* mode privé, cookies bloqués : on continue sans */ }
     return null;
   }
-}
 
-function renderNav(nav) {
-  if (!nav) return;
-  const brandFull = document.getElementById('brand-full');
-  const brandShort = document.getElementById('brand-short');
-  if (brandFull && nav.brand) brandFull.textContent = nav.brand;
-  if (brandShort && nav.brandShort) brandShort.textContent = nav.brandShort;
-}
+  /* ─────────── i18n ─────────── */
+  /* Résout un champ traduit. Un champ non traduit (icône, couleur,
+     coordonnée) traverse tel quel : le schéma reste rétrocompatible. */
+  function t(field) {
+    if (field && typeof field === 'object' && !Array.isArray(field)) {
+      if (field[locale] !== undefined) return field[locale];
+      if (field[DEFAULT_LOCALE] !== undefined) return field[DEFAULT_LOCALE];
+    }
+    return field;
+  }
 
-function renderHero(data, nav) {
-  const hero = document.getElementById('hero');
-  if (!hero || !data) return;
-  hero.innerHTML = `
-    <div class="hero-bg-container"><div class="hero-bg-image"></div></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content max-w-5xl mx-auto w-full px-4 md:px-0 text-center text-white">
-      <div class="inline-flex items-center gap-2 px-4 py-2 mb-7 border border-blue-300/30 rounded-full bg-slate-900/40 text-blue-100 text-sm backdrop-blur-md shadow-lg">
-        <span class="relative flex h-3 w-3">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-        </span>
-        ${nav?.availability || ''}
-      </div>
-      <h1 class="hero-title font-extrabold mb-8 tracking-tight text-shadow-lg">
-        ${data.title}<br/>
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-300 to-indigo-300 drop-shadow-sm">${data.accent}</span>
-      </h1>
-      <p class="hero-subtitle mb-12 text-slate-200 font-light max-w-3xl mx-auto leading-relaxed text-shadow-lg">${data.subtitle}</p>
-      <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-        <a href="#dashboard-demo" class="w-full sm:w-auto bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-500 transition-all shadow-xl hover:shadow-blue-500/40 flex items-center justify-center gap-3 hover:scale-105 duration-200">
-          <i class="fas fa-chart-pie text-lg"></i> ${data.primaryCta}
-        </a>
-        <a href="#projects" class="w-full sm:w-auto bg-white/10 backdrop-blur-sm border border-white/30 text-white px-8 py-4 rounded-xl font-bold hover:bg-white hover:text-blue-900 transition-all flex items-center justify-center gap-3 shadow-lg duration-200">
-          <i class="fas fa-project-diagram text-lg"></i> ${data.secondaryCta}
-        </a>
-      </div>
-    </div>
-    <a href="#services" class="scroll-indicator" aria-label="Défiler vers le bas">
-      <span></span>
-      <i class="fas fa-chevron-down"></i>
-    </a>`;
-}
+  function detectLocale() {
+    var saved = remember('locale');
+    if (LOCALES.indexOf(saved) > -1) return saved;
+    var nav = (navigator.language || navigator.userLanguage || '').slice(0, 2).toLowerCase();
+    return LOCALES.indexOf(nav) > -1 ? nav : DEFAULT_LOCALE;
+  }
 
-function renderServices(data) {
-  const container = document.getElementById('services');
-  if (!container || !data) return;
-  const colorConfig = {
-    blue:    { bg: 'bg-blue-50',    text: 'text-blue-700',    css: 'color-blue' },
-    emerald: { bg: 'bg-emerald-50', text: 'text-emerald-700', css: 'color-emerald' },
-    purple:  { bg: 'bg-purple-50',  text: 'text-purple-700',  css: 'color-purple' }
-  };
-  container.querySelector('.section-header').innerHTML = `
-    <span class="section-kicker text-blue-700 text-xs font-semibold uppercase">Expertises clés</span>
-    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-3">${data.heading}</h2>
-    <p class="text-slate-600 mt-4">${data.intro}</p>`;
-  const grid = container.querySelector('.services-grid');
-  grid.innerHTML = data.items.map((item, i) => {
-    const c = colorConfig[item.color] || colorConfig.blue;
-    const icon = item.icon || 'fa-drafting-compass';
-    return `
-      <div class="service-card ${c.css} reveal reveal-delay-${i + 1}">
-        <div class="flex items-start gap-4">
-          <span class="service-icon ${c.bg} ${c.text}"><i class="fas ${icon}"></i></span>
-          <div>
-            <h3 class="text-lg font-bold text-slate-900 mb-1">${item.title}</h3>
-            <p class="text-slate-600 text-sm leading-relaxed">${item.description}</p>
-          </div>
-        </div>
-        <div class="flex flex-wrap gap-2 pt-1">
-          ${item.badges.map(b => `<span class="badge">${b}</span>`).join('')}
-        </div>
-      </div>`;
-  }).join('');
-}
+  function setLocale(next) {
+    if (LOCALES.indexOf(next) === -1 || next === locale) return;
+    locale = next;
+    remember('locale', next);
+    document.documentElement.lang = next;
+    mount();
+  }
 
-function renderAbout(data) {
-  const title = document.getElementById('about-title');
-  const desc = document.getElementById('about-desc');
-  const skills = document.getElementById('about-skills');
-  if (!data || !title || !desc || !skills) return;
-  title.textContent = data.title;
-  desc.textContent = data.description;
-  skills.innerHTML = data.skills.map((skill, i) => `
-    <div class="flex items-center p-4 bg-white shadow-sm hover:shadow-md transition-all rounded-xl border border-slate-100 group reveal reveal-delay-${i + 1}">
-      <div class="bg-${skill.color}-50 p-3 rounded-lg mr-4 group-hover:bg-${skill.color}-100 transition">
-        <i class="fas ${skill.icon} text-${skill.color}-600 text-xl"></i>
-      </div>
-      <span class="font-bold text-slate-700">${skill.label}</span>
-    </div>`).join('');
-}
+  /* ─────────── Thème ─────────── */
+  function isDark() {
+    var attr = document.documentElement.getAttribute('data-theme');
+    if (attr) return attr === 'dark';
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
 
-function renderDashboard(data) {
-  const heading = document.getElementById('dash-heading');
-  const intro = document.getElementById('dash-intro');
-  const kpis = document.getElementById('dash-kpis');
-  if (!data) return;
-  if (heading) heading.textContent = data.heading;
-  if (intro) intro.textContent = data.intro;
-  if (kpis) {
-    kpis.innerHTML = data.kpis.map((kpi, i) => {
-      const colorMap = { green: 'green', blue: 'blue', red: 'red', purple: 'purple' };
-      const c = colorMap[kpi.color] || 'blue';
-      const icon = kpi.trend === 'up' ? 'fa-arrow-trend-up' : kpi.trend === 'plus' ? 'fa-plus' : kpi.trend === 'alert' ? 'fa-triangle-exclamation' : 'fa-coins';
-      return `
-        <div class="bg-slate-800/50 backdrop-blur-sm p-6 rounded-2xl border border-slate-700/60 dash-card hover:border-${c}-500/40 transition-all shadow-lg reveal reveal-delay-${i + 1}">
-          <div class="flex justify-between items-start mb-4">
-            <div>
-              <p class="text-slate-400 text-xs font-semibold uppercase tracking-widest mb-2">${kpi.label}</p>
-              <h3 class="text-4xl font-extrabold text-white tracking-tight">${kpi.value}</h3>
-            </div>
-            <span class="bg-${c}-500/15 text-${c}-400 w-11 h-11 flex items-center justify-center rounded-xl border border-${c}-500/20">
-              <i class="fas ${icon}"></i>
-            </span>
-          </div>
-          ${kpi.progress ? `<div class="w-full bg-slate-700/80 h-1.5 rounded-full overflow-hidden"><div class="bg-gradient-to-r from-${c}-500 to-${c}-300 h-full rounded-full transition-all duration-1000" style="width:${kpi.progress}%"></div></div>` : ''}
-          ${kpi.note ? `<p class="text-xs text-slate-400 mt-2">${kpi.note}</p>` : ''}
-        </div>`;
+  function syncThemeIcons() {
+    var dark = isDark();
+    document.querySelectorAll('.theme-toggle').forEach(function (btn) {
+      var sun = btn.querySelector('.icon-sun');
+      var moon = btn.querySelector('.icon-moon');
+      if (sun) sun.style.display = dark ? 'none' : '';
+      if (moon) moon.style.display = dark ? '' : 'none';
+      btn.setAttribute('aria-label', dark
+        ? (locale === 'en' ? 'Switch to light theme' : 'Passer au thème clair')
+        : (locale === 'en' ? 'Switch to dark theme' : 'Passer au thème sombre'));
+    });
+  }
+
+  function applyTheme() {
+    syncThemeIcons();
+    if (window.heroViz) window.heroViz.refresh();
+    swapMapTiles();
+  }
+
+  function initTheme() {
+    var saved = remember('theme');
+    if (saved === 'dark' || saved === 'light') document.documentElement.setAttribute('data-theme', saved);
+    syncThemeIcons();
+
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest && e.target.closest('.theme-toggle');
+      if (!btn) return;
+      var next = isDark() ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      remember('theme', next);
+      applyTheme();
+    });
+
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    var onChange = function () {
+      if (!document.documentElement.getAttribute('data-theme')) applyTheme();
+    };
+    if (mq.addEventListener) mq.addEventListener('change', onChange);
+    else if (mq.addListener) mq.addListener(onChange);
+  }
+
+  /* ─────────── Utilitaires ─────────── */
+  function esc(value) {
+    return String(value).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+
+  function toolsHTML(list, extraClass) {
+    if (!list || !list.length) return '';
+    return '<p class="tools' + (extraClass ? ' ' + extraClass : '') + '">'
+      + list.map(function (item) { return '<span>' + esc(t(item)) + '</span>'; }).join('')
+      + '</p>';
+  }
+
+  function arrowSVG() {
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  }
+
+  function setMeta(selector, attr, value) {
+    var el = document.querySelector(selector);
+    if (el) el.setAttribute(attr, value);
+  }
+
+  /* ─────────── Rendu ─────────── */
+  function renderMeta() {
+    var meta = site.meta || {};
+    var title = t(meta.title);
+    var description = t(meta.description);
+    if (title) {
+      document.title = title;
+      setMeta('meta[property="og:title"]', 'content', title);
+      setMeta('meta[name="twitter:title"]', 'content', title);
+    }
+    if (description) {
+      setMeta('meta[name="description"]', 'content', description);
+      setMeta('meta[property="og:description"]', 'content', description);
+      setMeta('meta[name="twitter:description"]', 'content', description);
+    }
+    if (meta.keywords) setMeta('meta[name="keywords"]', 'content', t(meta.keywords));
+    setMeta('meta[property="og:locale"]', 'content', locale === 'en' ? 'en_US' : 'fr_FR');
+    setMeta('meta[property="og:locale:alternate"]', 'content', locale === 'en' ? 'fr_FR' : 'en_US');
+  }
+
+  function renderNav() {
+    var nav = site.nav || {};
+    document.querySelectorAll('[data-brand]').forEach(function (el) { el.textContent = nav.brand || ''; });
+
+    /* Les ancres de section n'existent que sur l'accueil : depuis une
+       page de détail, on les préfixe pour qu'elles restent cliquables. */
+    var onHome = !!document.getElementById('hero');
+    var links = (nav.links || []).map(function (link) {
+      var href = onHome ? link.href : 'index.html' + link.href;
+      return '<a href="' + esc(href) + '">' + esc(t(link.label)) + '</a>';
+    }).join('');
+
+    var desktop = document.getElementById('nav-links');
+    if (desktop) desktop.innerHTML = links;
+
+    var mobile = document.getElementById('mobile-menu');
+    if (mobile) {
+      mobile.innerHTML = links
+        + '<a href="' + (onHome ? '#contact' : 'index.html#contact') + '">' + esc(t(nav.cta)) + '</a>';
+    }
+
+    document.querySelectorAll('[data-nav-cta]').forEach(function (el) {
+      el.textContent = t(nav.cta) || '';
+    });
+
+    document.querySelectorAll('.lang button').forEach(function (btn) {
+      btn.setAttribute('aria-pressed', String(btn.dataset.locale === locale));
+    });
+  }
+
+  function renderHero() {
+    var hero = site.hero;
+    var host = document.getElementById('hero');
+    if (!hero || !host) return;
+
+    host.innerHTML = ''
+      + '<canvas id="hero-viz" aria-hidden="true"></canvas>'
+      + '<div class="hero-fade"></div>'
+      + '<div class="wrap hero-in"><div class="hero-col">'
+      +   '<p class="avail">' + esc(t(hero.availability)) + '</p>'
+      +   '<h1>' + esc(t(hero.titlePrefix)) + '<br>'
+      +     '<span class="loop"><span class="loop-in"></span><span class="loop-ghost" aria-hidden="true"></span></span>'
+      +     '<span class="tagline">' + esc(t(hero.tagline)) + '</span>'
+      +   '</h1>'
+      +   '<p class="lede">' + esc(t(hero.lede)) + '</p>'
+      +   '<div class="ctas">'
+      +     '<a class="link" href="#projets">' + esc(t(hero.ctaPrimary)) + arrowSVG() + '</a>'
+      +     '<a class="link muted" href="#contact">' + esc(t(hero.ctaSecondary)) + '</a>'
+      +   '</div>'
+      +   '<dl class="coords">' + (hero.coords || []).map(function (c) {
+              return '<div><dt>' + esc(t(c.label)) + '</dt><dd>' + esc(t(c.value)) + '</dd></div>';
+            }).join('') + '</dl>'
+      + '</div></div>';
+
+    if (window.heroViz) window.heroViz.init(document.getElementById('hero-viz'));
+    initTextLoop(t(hero.loop) || []);
+  }
+
+  function renderAbout() {
+    var about = site.about;
+    var host = document.getElementById('about-content');
+    if (!about || !host) return;
+
+    var paragraphs = (t(about.paragraphs) || []).map(function (p) {
+      return '<p>' + esc(p) + '</p>';
+    }).join('');
+
+    var facts = (about.facts || []).map(function (f) {
+      return '<div><dt>' + esc(t(f.key)) + '</dt><dd>' + esc(t(f.value)) + '</dd></div>';
+    }).join('');
+
+    host.innerHTML = ''
+      + '<div class="portrait reveal">'
+      +   '<div class="portrait-frame">' + portraitHTML(about) + '</div>'
+      +   '<p class="portrait-cap">' + esc(t(about.caption)) + '</p>'
+      + '</div>'
+      + '<div class="bio reveal">'
+      +   '<span class="label">' + esc(t(about.label)) + '</span>'
+      +   paragraphs
+      +   '<dl class="facts">' + facts + '</dl>'
+      + '</div>';
+  }
+
+  /* Le portrait est optionnel : tant que images/profile.webp n'existe
+     pas, on affiche un emplacement neutre plutôt qu'une image cassée. */
+  function portraitHTML(about) {
+    if (!about.portrait) {
+      return '<div class="portrait-ph"><span>LB</span><small>'
+        + (locale === 'en' ? 'PORTRAIT' : 'PORTRAIT') + '</small></div>';
+    }
+    return '<img src="' + esc(about.portrait) + '" alt="' + esc(t(about.portraitAlt) || '') + '" '
+      + 'width="800" height="1000" loading="lazy" decoding="async" '
+      + 'onerror="this.parentNode.innerHTML=&quot;<div class=\'portrait-ph\'><span>LB</span><small>PORTRAIT</small></div>&quot;">';
+  }
+
+  function renderStack() {
+    var stack = site.stack;
+    var head = document.getElementById('stack-head');
+    var grid = document.getElementById('stack-grid');
+    if (!stack || !grid) return;
+
+    if (head) {
+      head.innerHTML = '<span class="label">' + esc(t(stack.label)) + '</span>'
+        + '<h2>' + esc(t(stack.heading)) + '</h2>'
+        + '<p>' + esc(t(stack.intro)) + '</p>';
+    }
+
+    grid.innerHTML = (stack.items || []).map(function (item) {
+      return '<article class="bento-cell' + (item.wide ? ' wide' : '') + '">'
+        + '<h3>' + esc(t(item.title)) + '</h3>'
+        + '<p>' + esc(t(item.description)) + '</p>'
+        + toolsHTML(item.tools)
+        + '</article>';
     }).join('');
   }
-}
 
-function renderProjects(projects) {
-  const container = document.getElementById('projects-grid');
-  if (!container || !projects) return;
-  container.innerHTML = projects.map((project, i) => `
-    <div class="project-card reveal reveal-delay-${i + 1}">
-      <div class="project-img-wrapper">
-        <img src="${project.image}" alt="${project.title}" loading="lazy" />
-        <div class="project-overlay">
-          <div class="overlay-btn">
-            <i class="fas fa-arrow-right text-xs"></i> Voir le projet
-          </div>
-        </div>
-      </div>
-      <div class="p-6 flex-grow flex flex-col">
-        <h3 class="font-bold text-xl mb-2 text-slate-800 group-hover:text-blue-600 transition">${project.title}</h3>
-        <p class="text-slate-500 text-sm mb-5 leading-relaxed flex-grow">${project.summary}</p>
-        <div class="flex flex-wrap gap-2 pt-4 border-t border-slate-100 mb-4">
-          ${project.tags.map(tag => `<span class="px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded-full border border-blue-100">${tag}</span>`).join('')}
-        </div>
-        <a href="project.html?id=${project.slug}" class="inline-flex items-center gap-2 text-sm font-bold text-blue-700 hover:text-blue-900 transition group/link">
-          Voir le détail
-          <i class="fas fa-arrow-right text-xs transform group-hover/link:translate-x-1 transition-transform"></i>
-        </a>
-      </div>
-    </div>`).join('');
+  function renderDashboard() {
+    var dash = site.dashboard;
+    if (!dash) return;
 
-  // Make project cards clickable
-  container.querySelectorAll('.project-card').forEach((card, i) => {
-    const slug = projects[i]?.slug;
-    if (slug) card.style.cursor = 'pointer';
-    card.addEventListener('click', (e) => {
-      if (!e.target.closest('a')) {
-        window.location.href = `project.html?id=${slug}`;
-      }
-    });
-  });
-}
-
-function renderParcours(items) {
-  const container = document.getElementById('parcours-content');
-  if (!container || !items) return;
-  container.innerHTML = items.map((it, i) => `
-    <div class="timeline-item reveal reveal-delay-${i + 1}">
-      <div class="timeline-dot"></div>
-      <div class="flex items-center justify-between flex-wrap gap-2 mb-1">
-        <h3 class="text-lg font-bold text-slate-900">${it.title}</h3>
-        <span class="badge bg-blue-50 border-blue-200 text-blue-800">${it.period}</span>
-      </div>
-      <p class="text-slate-600 text-sm leading-relaxed">${it.description}</p>
-    </div>`).join('');
-}
-
-function renderCV(cv) {
-  if (!cv) return;
-  const profile   = document.getElementById('cv-profile');
-  const formation = document.getElementById('cv-formation');
-  const skills    = document.getElementById('cv-skills');
-  const certs     = document.getElementById('cv-certs');
-  const langs     = document.getElementById('cv-langs');
-  const interests = document.getElementById('cv-interests');
-  if (profile)   profile.textContent = cv.profile;
-  if (formation) formation.innerHTML = cv.formation.map(f => `
-    <li class="flex gap-3">
-      <span class="mt-1.5 w-2 h-2 rounded-full bg-blue-400 flex-shrink-0"></span>
-      <div>
-        <div class="font-semibold text-slate-900">${f.title}</div>
-        <div class="text-slate-500 text-xs mt-0.5">${f.place} — ${f.period}${f.note ? ` • ${f.note}` : ''}</div>
-      </div>
-    </li>`).join('');
-  if (skills) skills.innerHTML = `
-    <div class="space-y-2">
-      ${[
-        { label: 'SIG & Cartographie', value: cv.skills.sig },
-        { label: 'Bases de données',   value: cv.skills.db },
-        { label: 'Développement',      value: cv.skills.dev },
-        { label: 'Analyse',            value: cv.skills.analysis }
-      ].map(s => `
-        <div class="bg-slate-50 rounded-lg px-4 py-3 border border-slate-100">
-          <div class="font-semibold text-slate-800 text-xs uppercase tracking-wide mb-1">${s.label}</div>
-          <div class="text-slate-600 text-sm">${s.value}</div>
-        </div>`).join('')}
-    </div>
-    <div class="flex flex-wrap gap-2 pt-1">
-      <span class="chip"><i class="fas fa-route text-blue-600"></i> Cartographie thématique</span>
-      <span class="chip"><i class="fas fa-database text-emerald-600"></i> Modélisation PostGIS</span>
-      <span class="chip"><i class="fas fa-chart-line text-indigo-600"></i> KPI géo</span>
-    </div>`;
-  if (certs) certs.innerHTML = cv.certifications.map(c => `
-    <li class="flex gap-3">
-      <span class="mt-1 text-purple-500 text-xs"><i class="fas fa-certificate"></i></span>
-      <span>${c}</span>
-    </li>`).join('');
-  if (langs) langs.innerHTML = cv.languages.map(l => `
-    <li class="flex gap-3">
-      <span class="mt-1 text-blue-500 text-xs"><i class="fas fa-globe"></i></span>
-      <span>${l}</span>
-    </li>`).join('');
-  if (interests) interests.textContent = cv.interests;
-}
-
-function renderContact(contact, meta) {
-  if (!contact) return;
-  const email     = document.getElementById('contact-email');
-  const phone     = document.getElementById('contact-phone');
-  const headline  = document.getElementById('contact-headline');
-  const footerMeta= document.getElementById('footer-meta');
-  const socialDiv = document.getElementById('social-links');
-  if (headline)   headline.textContent = contact.headline;
-  if (email) {
-    email.href = `mailto:${contact.email}`;
-    email.querySelector('span').textContent = contact.email;
-  }
-  if (phone) {
-    phone.href = `tel:${contact.phone.replace(/\s+/g, '')}`;
-    phone.querySelector('span').textContent = contact.phone;
-  }
-  if (footerMeta) footerMeta.textContent = `© ${new Date().getFullYear()} ${meta?.title?.split(' - ')[0] || 'Portfolio'}. Tous droits réservés.`;
-  if (socialDiv && contact.social) {
-    const links = [];
-    if (contact.social.linkedin) links.push(`<a href="${contact.social.linkedin}" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-11 h-11 rounded-full bg-white/10 hover:bg-blue-600 border border-white/15 flex items-center justify-center text-white transition-all hover:scale-110 hover:border-blue-500 duration-200"><i class="fab fa-linkedin-in"></i></a>`);
-    if (contact.social.github)   links.push(`<a href="${contact.social.github}" target="_blank" rel="noopener" aria-label="GitHub" class="w-11 h-11 rounded-full bg-white/10 hover:bg-slate-700 border border-white/15 flex items-center justify-center text-white transition-all hover:scale-110 hover:border-slate-400 duration-200"><i class="fab fa-github"></i></a>`);
-    if (contact.social.twitter)  links.push(`<a href="${contact.social.twitter}" target="_blank" rel="noopener" aria-label="Twitter/X" class="w-11 h-11 rounded-full bg-white/10 hover:bg-sky-600 border border-white/15 flex items-center justify-center text-white transition-all hover:scale-110 hover:border-sky-500 duration-200"><i class="fab fa-x-twitter"></i></a>`);
-    socialDiv.innerHTML = links.join('');
-  }
-}
-
-function initMenu() {
-  const menuButton = document.getElementById('menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
-  if (!menuButton || !mobileMenu) return;
-  const iconOpen  = menuButton.querySelector('.icon-open');
-  const iconClose = menuButton.querySelector('.icon-close');
-  menuButton.addEventListener('click', () => {
-    const isHidden = mobileMenu.classList.toggle('hidden');
-    menuButton.setAttribute('aria-expanded', (!isHidden).toString());
-    iconOpen?.classList.toggle('hidden');
-    iconClose?.classList.toggle('hidden');
-  });
-  mobileMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu.classList.add('hidden');
-      iconOpen?.classList.remove('hidden');
-      iconClose?.classList.add('hidden');
-      menuButton.setAttribute('aria-expanded', 'false');
-    });
-  });
-}
-
-function initMaps(aboutMapCfg, dashMapCfg) {
-  const aboutEl = document.getElementById('about-map');
-  if (aboutMapCfg && aboutEl) {
-    const aboutMap = L.map('about-map', { zoomControl: false }).setView([aboutMapCfg.lat, aboutMapCfg.lng], aboutMapCfg.zoom || 12);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap contributors' }).addTo(aboutMap);
-    L.marker([aboutMapCfg.lat, aboutMapCfg.lng]).addTo(aboutMap).bindPopup(`<b>${aboutMapCfg.label || 'Base opérationnelle'}</b>`).openPopup();
-  }
-  const dashEl = document.getElementById('dash-map');
-  if (dashMapCfg && dashEl) {
-    const dashMap = L.map('dash-map', { zoomControl: false, attributionControl: false, dragging: false, scrollWheelZoom: false }).setView(dashMapCfg.center, 12);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(dashMap);
-    dashMapCfg.points.forEach(pt => {
-      L.circle([pt.lat, pt.lon], { color: pt.color, fillColor: pt.color, fillOpacity: 0.6, radius: pt.rad, weight: 0 }).addTo(dashMap);
-    });
-  }
-}
-
-function initChart(chartCfg) {
-  const canvas = document.getElementById('revenueChart');
-  if (!canvas || !chartCfg) return;
-  const ctx = canvas.getContext('2d');
-  const gradient = ctx.createLinearGradient(0, 0, 0, 320);
-  gradient.addColorStop(0, 'rgba(59, 130, 246, 0.85)');
-  gradient.addColorStop(1, 'rgba(99, 102, 241, 0.25)');
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: chartCfg.labels,
-      datasets: [{
-        label: 'Recettes (M FCFA)',
-        data: chartCfg.data,
-        backgroundColor: gradient,
-        hoverBackgroundColor: 'rgba(96, 165, 250, 0.95)',
-        borderRadius: 8,
-        borderSkipped: false
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: {
-        y: {
-          beginAtZero: true,
-          grid: { color: 'rgba(148, 163, 184, 0.08)' },
-          ticks: { color: '#94a3b8', font: { family: 'Space Grotesk, sans-serif', size: 12 } },
-          border: { display: false }
-        },
-        x: {
-          grid: { display: false },
-          ticks: { color: '#94a3b8', font: { family: 'Space Grotesk, sans-serif', size: 12 } },
-          border: { display: false }
-        }
-      },
-      animation: { duration: 2000, easing: 'easeOutQuart' }
+    var head = document.getElementById('obs-head');
+    if (head) {
+      head.innerHTML = '<span class="label">' + esc(t(dash.label)) + '</span>'
+        + '<h2>' + esc(t(dash.heading)) + '</h2>'
+        + '<p>' + esc(t(dash.intro)) + '</p>';
     }
-  });
-}
 
-function initSwiper() {
-  document.querySelectorAll('.mySwiper').forEach(swiperEl => {
-    new Swiper(swiperEl, {
-      spaceBetween: 0,
-      centeredSlides: true,
-      loop: true,
-      speed: 800,
-      autoplay: { delay: 4000, disableOnInteraction: false },
-      pagination: { el: swiperEl.querySelector('.swiper-pagination'), clickable: true },
-      navigation: {
-        nextEl: swiperEl.querySelector('.swiper-button-next'),
-        prevEl: swiperEl.querySelector('.swiper-button-prev')
-      }
+    var kpis = document.getElementById('obs-kpis');
+    if (kpis) {
+      kpis.innerHTML = (dash.kpis || []).map(function (k) {
+        return '<div><dt>' + esc(t(k.label)) + '</dt>'
+          + '<dd><span class="ticker" data-value="' + k.value + '">0</span>'
+          + (k.unit ? '<span class="ticker-unit">' + esc(k.unit) + '</span>' : '') + '</dd>'
+          + '<small>' + esc(t(k.note)) + '</small></div>';
+      }).join('');
+    }
+
+    var chart = dash.chart || {};
+    var chartTitle = document.getElementById('obs-chart-title');
+    if (chartTitle) chartTitle.textContent = t(chart.title) || '';
+
+    var bars = document.getElementById('obs-bars');
+    if (bars && chart.data) {
+      var max = Math.max.apply(null, chart.data) || 1;
+      bars.innerHTML = chart.data.map(function (value, i) {
+        return '<figure><div class="bar" data-height="' + Math.round(value / max * 100) + '"></div>'
+          + '<figcaption>' + esc(chart.labels[i]) + '</figcaption></figure>';
+      }).join('');
+    }
+
+    var map = dash.map || {};
+    var mapTitle = document.getElementById('obs-map-title');
+    if (mapTitle) mapTitle.textContent = t(map.title) || '';
+    var legend = document.getElementById('obs-legend');
+    if (legend && map.legend) {
+      legend.innerHTML = '<span><i></i>' + esc(t(map.legend.high)) + '</span>'
+        + '<span class="low"><i></i>' + esc(t(map.legend.low)) + '</span>';
+    }
+  }
+
+  function renderProjects() {
+    var section = site.projectsSection || {};
+    var head = document.getElementById('projects-head');
+    var list = document.getElementById('projects-list');
+    if (!list || !projects) return;
+
+    if (head) {
+      head.innerHTML = '<span class="label">' + esc(t(section.label)) + '</span>'
+        + '<h2>' + esc(t(section.heading)) + '</h2>';
+    }
+
+    list.innerHTML = projects.map(function (p) {
+      var d = p.details || {};
+      return '<a class="project-row" href="project.html?id=' + encodeURIComponent(p.slug) + '">'
+        + '<span class="project-meta"><b>' + esc(d.client) + '</b>' + esc(d.period)
+        +   '<br>' + esc(t(d.role)) + '</span>'
+        + '<span class="project-body"><h3>' + esc(t(p.title)) + '</h3>'
+        +   '<p>' + esc(t(p.summary)) + '</p>' + toolsHTML(p.tags) + '</span>'
+        + '<span class="project-arrow">' + arrowSVG() + '</span>'
+        + '</a>';
+    }).join('');
+  }
+
+  function renderParcours() {
+    var parcours = site.parcours;
+    var head = document.getElementById('parcours-head');
+    var list = document.getElementById('parcours-list');
+    if (!parcours || !list) return;
+
+    if (head) {
+      head.innerHTML = '<span class="label">' + esc(t(parcours.label)) + '</span>'
+        + '<h2>' + esc(t(parcours.heading)) + '</h2>';
+    }
+
+    list.innerHTML = (parcours.items || []).map(function (item) {
+      return '<div class="timeline-item">'
+        + '<span class="timeline-period">' + esc(item.period) + '</span>'
+        + '<div><h3>' + esc(t(item.title)) + '</h3>'
+        +   '<p>' + esc(t(item.description)) + '</p></div>'
+        + '</div>';
+    }).join('');
+  }
+
+  function renderContact() {
+    var contact = site.contact;
+    var host = document.getElementById('contact-content');
+    if (!contact || !host) return;
+
+    var links = ['<a class="link" href="mailto:' + esc(contact.email) + '">' + esc(contact.email) + '</a>'];
+    if (contact.phone) {
+      links.push('<a class="link muted" href="tel:' + esc(contact.phone.replace(/\s+/g, '')) + '">'
+        + esc(contact.phone) + '</a>');
+    }
+    var social = contact.social || {};
+    if (social.github) links.push('<a class="link muted" href="' + esc(social.github) + '" rel="noopener">GitHub</a>');
+    if (social.linkedin) links.push('<a class="link muted" href="' + esc(social.linkedin) + '" rel="noopener">LinkedIn</a>');
+
+    var about = site.about || {};
+    var avatar = about.portrait
+      ? '<img src="' + esc(about.portrait) + '" alt="" width="56" height="56" loading="lazy" decoding="async" '
+        + 'onerror="this.parentNode.textContent=&quot;LB&quot;">'
+      : 'LB';
+
+    host.innerHTML = ''
+      + '<div class="foot-grid reveal">'
+      +   '<h2>' + esc(t(contact.headline)) + '</h2>'
+      +   '<div class="foot-links">' + links.join('') + '</div>'
+      + '</div>'
+      + '<div class="foot-card reveal">'
+      +   '<span class="avatar">' + avatar + '</span>'
+      +   '<span class="foot-id"><b>' + esc((site.nav || {}).brand || '') + '</b>'
+      +     '<span>' + esc(t(contact.role)) + '</span></span>'
+      + '</div>'
+      + '<p class="foot-meta">© ' + new Date().getFullYear() + ' — '
+      +   esc(t((site.meta || {}).location) || '') + '</p>';
+  }
+
+  function renderProjectDetail() {
+    var host = document.getElementById('project-detail');
+    if (!host || !projects) return;
+
+    var slug = new URLSearchParams(window.location.search).get('id');
+    var project = projects.filter(function (p) { return p.slug === slug; })[0];
+
+    if (!project) {
+      host.innerHTML = '<div class="wrap"><a class="detail-back" href="index.html#projets">'
+        + backArrow() + esc(t((site.projectsSection || {}).back)) + '</a>'
+        + '<h1>' + (locale === 'en' ? 'Project not found' : 'Projet introuvable') + '</h1></div>';
+      return;
+    }
+
+    var d = project.details || {};
+    var section = site.projectsSection || {};
+    var bullets = (t(d.bullets) || []).map(function (b) { return '<li>' + esc(b) + '</li>'; }).join('');
+
+    host.innerHTML = '<div class="wrap">'
+      + '<a class="detail-back" href="index.html#projets">' + backArrow() + esc(t(section.back)) + '</a>'
+      + '<h1>' + esc(t(project.title)) + '</h1>'
+      + '<p class="detail-lede">' + esc(t(project.summary)) + '</p>'
+      + '<dl class="detail-facts">'
+      +   '<div><dt>' + (locale === 'en' ? 'Client' : 'Client') + '</dt><dd>' + esc(d.client) + '</dd></div>'
+      +   '<div><dt>' + (locale === 'en' ? 'Role' : 'Rôle') + '</dt><dd>' + esc(t(d.role)) + '</dd></div>'
+      +   '<div><dt>' + (locale === 'en' ? 'Period' : 'Période') + '</dt><dd>' + esc(d.period) + '</dd></div>'
+      + '</dl>'
+      + '<div class="detail-body">'
+      +   '<ul class="detail-bullets">' + bullets + '</ul>'
+      +   '<div class="detail-media"><div class="swiper project-swiper"><div class="swiper-wrapper">'
+      +     (project.carousel || []).map(function (src) {
+              return '<div class="swiper-slide"><img src="' + esc(src) + '" alt="'
+                + esc(t(project.imageAlt) || t(project.title)) + '" loading="lazy" decoding="async"></div>';
+            }).join('')
+      +   '</div><div class="swiper-button-next"></div><div class="swiper-button-prev"></div>'
+      +   '<div class="swiper-pagination"></div></div></div>'
+      + '</div>'
+      + toolsHTML(project.tags)
+      + '</div>';
+
+    var brand = (site.nav || {}).brand || '';
+    var base = (site.meta || {}).url || '';
+    var pageUrl = base + 'project.html?id=' + project.slug;
+
+    document.title = t(project.title) + ' — ' + brand;
+    setMeta('meta[name="description"]', 'content', t(project.summary));
+    /* Chaque étude de cas est sa propre URL canonique : sans le
+       paramètre, les trois pages seraient déclarées dupliquées. */
+    setMeta('link[rel="canonical"]', 'href', pageUrl);
+    setMeta('meta[property="og:url"]', 'content', pageUrl);
+    setMeta('meta[property="og:title"]', 'content', t(project.title) + ' — ' + brand);
+    setMeta('meta[property="og:description"]', 'content', t(project.summary));
+    setMeta('meta[property="og:image"]', 'content', base + project.image);
+    setMeta('meta[name="twitter:title"]', 'content', t(project.title) + ' — ' + brand);
+    setMeta('meta[name="twitter:description"]', 'content', t(project.summary));
+    setMeta('meta[name="twitter:image"]', 'content', base + project.image);
+    injectProjectSchema(project);
+    initSwiper();
+  }
+
+  function backArrow() {
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>';
+  }
+
+  function injectProjectSchema(project) {
+    var old = document.getElementById('project-schema');
+    if (old) old.remove();
+    var d = project.details || {};
+    var base = (site.meta || {}).url || '';
+    var script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.id = 'project-schema';
+    script.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'CreativeWork',
+      name: t(project.title),
+      description: t(project.summary),
+      inLanguage: locale,
+      image: base + project.image,
+      dateCreated: d.period,
+      creator: { '@type': 'Person', name: (site.nav || {}).brand },
+      about: (project.tags || []).join(', ')
     });
-  });
-}
+    document.head.appendChild(script);
+  }
 
-function initScrollAnimations() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
+  /* ─────────── Text Loop ─────────── */
+  function initTextLoop(words) {
+    clearInterval(loopTimer);
+    var host = document.querySelector('.loop');
+    if (!host || !words.length) return;
+    var slot = host.querySelector('.loop-in');
+    var ghost = host.querySelector('.loop-ghost');
+    var index = 0;
+
+    function apply(word, animate) {
+      ghost.textContent = word;
+      var width = ghost.offsetWidth;
+      if (!animate) {
+        slot.textContent = word;
+        host.style.width = width + 'px';
+        return;
       }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      slot.classList.add('out');
+      setTimeout(function () {
+        slot.textContent = word;
+        host.style.width = width + 'px';
+        slot.classList.remove('out');
+      }, 300);
+    }
 
-  document.querySelectorAll('.reveal, .reveal-left').forEach(el => observer.observe(el));
-}
+    apply(words[0], false);
+    /* Les largeurs mesurées avant le chargement des polices sont fausses. */
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () { apply(words[index], false); });
+    }
+    if (reduced) return;
+    loopTimer = setInterval(function () {
+      index = (index + 1) % words.length;
+      apply(words[index], true);
+    }, 2600);
+  }
 
-function initActiveNav() {
-  const sections  = document.querySelectorAll('section[id], header[id], footer[id]');
-  const navLinks  = document.querySelectorAll('.nav-links a[href^="#"]');
+  /* ─────────── Compteurs et barres ─────────── */
+  function countUp(el) {
+    var target = parseFloat(el.dataset.value);
+    var format = function (n) { return n.toLocaleString(locale === 'en' ? 'en-US' : 'fr-FR'); };
+    if (reduced || !firstRender) { el.textContent = format(target); return; }
+    var start = null;
+    function step(now) {
+      if (!start) start = now;
+      var k = Math.min((now - start) / 1600, 1);
+      el.textContent = format(Math.round(target * (1 - Math.pow(1 - k, 3))));
+      if (k < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-        navLinks.forEach(link => {
-          link.classList.remove('nav-active');
-          if (link.getAttribute('href') === `#${id}`) link.classList.add('nav-active');
+  function initScrollAnimations() {
+    if (revealObserver) revealObserver.disconnect();
+
+    var elements = document.querySelectorAll('.reveal');
+    if (!firstRender || reduced) {
+      elements.forEach(function (el) {
+        el.classList.add('visible');
+        el.querySelectorAll('.ticker').forEach(countUp);
+        el.querySelectorAll('.bar').forEach(function (bar) { bar.style.height = bar.dataset.height + '%'; });
+      });
+      document.querySelectorAll('.ticker').forEach(countUp);
+      document.querySelectorAll('.bar').forEach(function (bar) { bar.style.height = bar.dataset.height + '%'; });
+      return;
+    }
+
+    revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        el.classList.add('visible');
+        el.querySelectorAll('.ticker').forEach(countUp);
+        el.querySelectorAll('.bar').forEach(function (bar, i) {
+          setTimeout(function () { bar.style.height = bar.dataset.height + '%'; }, i * 90);
         });
-      }
+        revealObserver.unobserve(el);
+      });
+    }, { threshold: 0.14, rootMargin: '0px 0px -60px 0px' });
+
+    elements.forEach(function (el) { revealObserver.observe(el); });
+  }
+
+  /* ─────────── Navigation ─────────── */
+  function initActiveNav() {
+    if (navObserver) navObserver.disconnect();
+    var links = document.querySelectorAll('#nav-links a');
+    if (!links.length) return;
+
+    navObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        links.forEach(function (link) {
+          link.classList.toggle('nav-active', link.getAttribute('href') === '#' + entry.target.id);
+        });
+      });
+    }, { threshold: 0.25 });
+
+    document.querySelectorAll('section[id]').forEach(function (s) { navObserver.observe(s); });
+  }
+
+  function initMenu() {
+    var button = document.getElementById('menu-button');
+    var menu = document.getElementById('mobile-menu');
+    if (!button || !menu) return;
+
+    button.addEventListener('click', function () {
+      var open = menu.classList.toggle('open');
+      button.setAttribute('aria-expanded', String(open));
     });
-  }, { threshold: 0.35 });
+    menu.addEventListener('click', function (e) {
+      if (e.target.tagName !== 'A') return;
+      menu.classList.remove('open');
+      button.setAttribute('aria-expanded', 'false');
+    });
 
-  sections.forEach(s => observer.observe(s));
-}
-
-function renderProjectDetail(projects) {
-  const detailWrapper = document.getElementById('project-detail');
-  if (!detailWrapper || !projects) return;
-  const params  = new URLSearchParams(window.location.search);
-  const slug    = params.get('id');
-  const project = projects.find(p => p.slug === slug) || projects[0];
-  if (!project) return;
-  detailWrapper.innerHTML = `
-    <div class="max-w-5xl mx-auto">
-      <div class="mb-6 flex items-center gap-3 text-sm text-slate-600">
-        <a href="index.html#projects" class="text-blue-700 font-semibold hover:underline flex items-center gap-1"><i class="fas fa-arrow-left text-xs"></i> Retour aux projets</a>
-        <span class="px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded-full border border-blue-100">${project.details.period}</span>
-      </div>
-      <h1 class="text-3xl md:text-4xl font-bold text-slate-900 mb-3">${project.title}</h1>
-      <p class="text-slate-600 mb-6">${project.summary}</p>
-      <div class="flex flex-wrap gap-2 mb-6">${project.tags.map(t => `<span class="badge">${t}</span>`).join('')}</div>
-      <div class="grid md:grid-cols-2 gap-6 mb-6">
-        <img src="${project.image}" alt="${project.title}" class="w-full h-72 object-cover rounded-xl shadow" loading="lazy" />
-        <div class="glass-card p-6 space-y-3">
-          <div><span class="font-semibold">Client :</span> ${project.details.client}</div>
-          <div><span class="font-semibold">Rôle :</span> ${project.details.role}</div>
-          <div><span class="font-semibold">Période :</span> ${project.details.period}</div>
-          <ul class="list-none text-sm text-slate-700 space-y-2 pt-2">
-            ${project.details.bullets.map(b => `<li class="flex gap-2"><span class="text-blue-500 mt-0.5"><i class="fas fa-check-circle text-xs"></i></span><span>${b}</span></li>`).join('')}
-          </ul>
-        </div>
-      </div>
-      <div class="swiper mySwiper h-80 bg-slate-100 rounded-2xl overflow-hidden">
-        <div class="swiper-wrapper">
-          ${project.carousel.map(src => `<div class="swiper-slide"><img src="${src}" alt="${project.title}" class="w-full h-full object-cover" loading="lazy" /></div>`).join('')}
-        </div>
-        <div class="swiper-button-next text-white drop-shadow-md scale-75"></div>
-        <div class="swiper-button-prev text-white drop-shadow-md scale-75"></div>
-        <div class="swiper-pagination"></div>
-      </div>
-    </div>`;
-}
-
-(async function init() {
-  const [site, projects] = await Promise.all([
-    fetchJSON('data/site.json'),
-    fetchJSON('data/projects.json')
-  ]);
-  if (site) {
-    renderNav(site.nav);
-    renderHero(site.hero, site.nav);
-    renderServices(site.services);
-    renderAbout(site.about);
-    renderDashboard(site.dashboard);
-    renderParcours(site.parcours);
-    renderCV(site.cv);
-    renderContact(site.contact, site.meta);
-    initMaps(site.about?.map, site.dashboard?.map);
-    initChart(site.dashboard?.chart);
+    var nav = document.querySelector('.nav');
+    window.addEventListener('scroll', function () {
+      if (nav) nav.classList.toggle('stuck', window.scrollY > 12);
+    }, { passive: true });
   }
-  if (projects) {
-    renderProjects(projects);
-    renderProjectDetail(projects);
+
+  function initLangToggle() {
+    document.querySelectorAll('.lang button').forEach(function (btn) {
+      if (btn.dataset.bound) return;
+      btn.dataset.bound = '1';
+      btn.addEventListener('click', function () { setLocale(btn.dataset.locale); });
+    });
   }
-  initMenu();
-  initSwiper();
-  initScrollAnimations();
-  initActiveNav();
+
+  /* ─────────── Carte de l'observatoire ─────────── */
+  var TILES = {
+    light: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+    dark: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+  };
+
+  function swapMapTiles() {
+    if (!obsMap || !obsTiles) return;
+    obsTiles.setUrl(isDark() ? TILES.dark : TILES.light);
+  }
+
+  function initMap() {
+    var el = document.getElementById('obs-map');
+    var config = (site.dashboard || {}).map;
+    if (!el || !config || obsMap || typeof L === 'undefined') return;
+
+    obsMap = L.map('obs-map', {
+      zoomControl: false,
+      scrollWheelZoom: false,
+      dragging: false,
+      keyboard: false
+    }).setView(config.center, config.zoom || 12);
+
+    obsTiles = L.tileLayer(isDark() ? TILES.dark : TILES.light, {
+      attribution: '&copy; OpenStreetMap, &copy; CARTO'
+    }).addTo(obsMap);
+
+    var accent = getComputedStyle(document.documentElement).getPropertyValue('--ac').trim();
+    (config.points || []).forEach(function (point) {
+      var high = point.level === 'high';
+      L.circle([point.lat, point.lon], {
+        radius: point.radius,
+        weight: high ? 0 : 1,
+        color: accent,
+        fillColor: accent,
+        fillOpacity: high ? 0.55 : 0.14
+      }).addTo(obsMap);
+    });
+  }
+
+  /* ─────────── Carrousels ─────────── */
+  function initSwiper() {
+    swipers.forEach(function (s) { try { s.destroy(true, true); } catch (e) {} });
+    swipers = [];
+    if (typeof Swiper === 'undefined') return;
+    document.querySelectorAll('.project-swiper').forEach(function (el) {
+      swipers.push(new Swiper(el, {
+        loop: el.querySelectorAll('.swiper-slide').length > 1,
+        speed: 700,
+        autoplay: reduced ? false : { delay: 5000, disableOnInteraction: true },
+        pagination: { el: el.querySelector('.swiper-pagination'), clickable: true },
+        navigation: {
+          nextEl: el.querySelector('.swiper-button-next'),
+          prevEl: el.querySelector('.swiper-button-prev')
+        }
+      }));
+    });
+  }
+
+  /* ─────────── Montage ─────────── */
+  function mount() {
+    renderMeta();
+    renderNav();
+    renderHero();
+    renderAbout();
+    renderStack();
+    renderDashboard();
+    renderProjects();
+    renderParcours();
+    renderContact();
+    renderProjectDetail();
+
+    initLangToggle();
+    initScrollAnimations();
+    initActiveNav();
+    initMap();
+    syncThemeIcons();
+    firstRender = false;
+  }
+
+  async function fetchJSON(path) {
+    try {
+      var res = await fetch(path);
+      if (!res.ok) throw new Error(res.status);
+      return await res.json();
+    } catch (e) {
+      console.error('Chargement impossible :', path, e);
+      return null;
+    }
+  }
+
+  (async function start() {
+    initTheme();
+    locale = detectLocale();
+    document.documentElement.lang = locale;
+
+    var loaded = await Promise.all([fetchJSON('data/site.json'), fetchJSON('data/projects.json')]);
+    site = loaded[0] || {};
+    projects = loaded[1] || [];
+
+    mount();
+    initMenu();
+  })();
 })();

@@ -1,247 +1,144 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio de Landry BEFOLO, ingénieur géomatique au Cameroun (Yaoundé) spécialisé en SIG, bases de données PostGIS/SQL et cartographie pour l'aide à la décision.">
-    <meta name="keywords" content="Landry Befolo, géomatique, SIG, base de données, PostGIS, SQL, cartographie, Cameroun, Yaoundé, data, GeoServer, QGIS">
-    <meta property="og:title" content="Landry BEFOLO - Géomatique & Data">
-    <meta property="og:description" content="Conception de données spatiales, bases de données PostGIS/SQL et observatoires urbains prêts pour la décision au Cameroun.">
-    <meta property="og:image" content="images/hero.webp">
-    <meta property="og:type" content="website">
-    <meta name="theme-color" content="#0f172a">
-    <title>Landry BEFOLO - Ingénieur Géomatique & Data</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="assets/css/styles.css">
+<title>Landry Befolo — Ingénieur Géospatial, Data, Cloud &amp; IA</title>
+<meta name="description" content="Ingénieur géospatial basé à Yaoundé. Je conçois la chaîne complète de la donnée spatiale — modélisation PostGIS, pipelines Python, diffusion GeoServer — pour les collectivités du Cameroun.">
+<meta name="keywords" content="Landry Befolo, ingénieur géospatial, SIG, PostGIS, data engineering, cloud, IA, cartographie, Cameroun, Yaoundé, GeoServer, QGIS, Python, SQL">
+<meta name="author" content="Landry Befolo">
+<link rel="canonical" href="https://befolo.github.io/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Landry Befolo">
+<meta property="og:url" content="https://befolo.github.io/">
+<meta property="og:title" content="Landry Befolo — Ingénieur Géospatial, Data, Cloud &amp; IA">
+<meta property="og:description" content="De la donnée spatiale à la décision territoriale. Modélisation PostGIS, pipelines Python, diffusion GeoServer pour les collectivités du Cameroun.">
+<meta property="og:image" content="https://befolo.github.io/images/hero.webp">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:locale:alternate" content="en_US">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Landry Befolo — Ingénieur Géospatial, Data, Cloud &amp; IA">
+<meta name="twitter:description" content="De la donnée spatiale à la décision territoriale. Modélisation PostGIS, pipelines Python, diffusion GeoServer pour les collectivités du Cameroun.">
+<meta name="twitter:image" content="https://befolo.github.io/images/hero.webp">
+
+<meta name="theme-color" content="#EEF0F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B0E11" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='6'%20fill='%233F6379'/%3E%3Ctext%20x='16'%20y='21'%20font-family='monospace'%20font-size='13'%20font-weight='700'%20fill='%23EEF0F2'%20text-anchor='middle'%3ELB%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700&family=Public+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="assets/css/styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Landry Befolo",
+  "url": "https://befolo.github.io/",
+  "image": "https://befolo.github.io/images/profile.webp",
+  "email": "mailto:fredybefolo@gmail.com",
+  "telephone": "+237655776021",
+  "jobTitle": "Ingénieur Géospatial, Data & Cloud",
+  "description": "Ingénieur géospatial spécialisé en modélisation PostGIS, pipelines de données et diffusion cartographique pour les collectivités territoriales du Cameroun.",
+  "address": { "@type": "PostalAddress", "addressLocality": "Yaoundé", "addressCountry": "CM" },
+  "sameAs": ["https://github.com/befolo"],
+  "knowsLanguage": ["fr", "en"],
+  "knowsAbout": ["PostGIS", "QGIS", "GeoServer", "SQL", "Python", "Systèmes d'information géographique", "Data engineering", "Cartographie thématique"],
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "EGEM, Meiganga" }
+}
+</script>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-blue-200 selection:text-blue-900">
 
-    <nav class="bg-white/90 backdrop-blur-md shadow-sm fixed w-full z-50 transition-all duration-300">
-        <div class="container mx-auto px-4 md:px-8 py-4 flex justify-between items-center nav-inner">
-            <a href="#" class="text-xl md:text-2xl font-bold text-blue-900 flex items-center gap-2 hover:text-blue-700 transition">
-                <i class="fas fa-layer-group"></i>
-                <span id="brand-full" class="hidden sm:inline">Landry BEFOLO</span>
-                <span id="brand-short" class="sm:hidden">LB</span>
-            </a>
-            <div class="hidden md:flex nav-links items-center">
-                <a href="#services" class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition uppercase tracking-wide">Services</a>
-                <a href="#about" class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition uppercase tracking-wide">À propos</a>
-                <a href="#projects" class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition uppercase tracking-wide">Projets</a>
-                <a href="#parcours" class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition uppercase tracking-wide">Parcours</a>
-                <a href="#cv" class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition uppercase tracking-wide">CV</a>
-                <a href="#dashboard-demo" class="text-sm font-semibold text-blue-600 hover:text-blue-800 transition uppercase tracking-wide flex items-center gap-1">
-                    <i class="fas fa-chart-line"></i> Démo
-                </a>
-                <a href="#contact" class="px-5 py-2.5 bg-blue-900 text-white text-sm font-bold rounded-full hover:bg-blue-800 transition shadow-lg hover:shadow-blue-900/30 transform hover:-translate-y-0.5 cta-nav">Me Contacter</a>
-            </div>
-            <button id="menu-button" class="md:hidden text-blue-900 text-2xl p-2 rounded-lg border border-blue-100 bg-white/70 shadow-sm hover:bg-blue-50 transition" aria-expanded="false" aria-controls="mobile-menu">
-                <i class="fas fa-bars icon-open"></i>
-                <i class="fas fa-xmark icon-close hidden"></i>
-            </button>
-        </div>
-        <div id="mobile-menu" class="md:hidden hidden border-t border-slate-200 bg-white/95 backdrop-blur-md shadow-sm">
-            <div class="px-4 py-3 flex flex-col gap-3 text-sm font-semibold text-slate-700">
-                <a href="#services" class="flex items-center gap-2 hover:text-blue-700"><i class="fas fa-briefcase text-blue-600"></i> Services</a>
-                <a href="#about" class="flex items-center gap-2 hover:text-blue-700"><i class="fas fa-user text-blue-600"></i> À propos</a>
-                <a href="#projects" class="flex items-center gap-2 hover:text-blue-700"><i class="fas fa-diagram-project text-blue-600"></i> Projets</a>
-                <a href="#parcours" class="flex items-center gap-2 hover:text-blue-700"><i class="fas fa-route text-blue-600"></i> Parcours</a>
-                <a href="#cv" class="flex items-center gap-2 hover:text-blue-700"><i class="fas fa-file-alt text-blue-600"></i> CV</a>
-                <a href="#dashboard-demo" class="flex items-center gap-2 hover:text-blue-700"><i class="fas fa-chart-line text-blue-600"></i> Démo</a>
-                <a href="#contact" class="mt-1 inline-flex items-center justify-center gap-2 px-4 py-3 bg-blue-900 text-white rounded-xl font-bold hover:bg-blue-800 shadow-lg"><i class="fas fa-envelope"></i> Contact</a>
-            </div>
-        </div>
-    </nav>
+<body>
+<a class="skip" href="#apropos">Aller au contenu</a>
 
-    <header id="hero" class="relative min-h-screen flex items-center justify-center text-center px-4 overflow-hidden pt-20"></header>
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="#" data-brand>Landry Befolo</a>
+    <div class="nav-links" id="nav-links"></div>
+    <div class="nav-right">
+      <span class="lang">
+        <button type="button" data-locale="fr" aria-pressed="true">FR</button><i aria-hidden="true">/</i><button type="button" data-locale="en" aria-pressed="false">EN</button>
+      </span>
+      <button type="button" class="theme-toggle" aria-label="Basculer le thème">
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M4.4 4.4l1.6 1.6M18 18l1.6 1.6M2.6 12h2.2M19.2 12h2.2M4.4 19.6L6 18M18 6l1.6-1.6"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" style="display:none"><path d="M20 14.2A8.2 8.2 0 019.8 4a8.2 8.2 0 1010.2 10.2z"/></svg>
+      </button>
+      <a class="nav-cta" href="#contact" data-nav-cta>Contact</a>
+      <button type="button" class="burger" id="menu-button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu"></div>
+</nav>
 
-    <main>
-    <section id="services" class="py-20 md:py-24 relative overflow-hidden bg-white">
-        <div class="absolute inset-0 pointer-events-none">
-            <div class="absolute -left-10 top-10 w-56 h-56 bg-blue-200/40 rounded-full blur-3xl"></div>
-            <div class="absolute right-0 bottom-0 w-64 h-64 bg-cyan-200/40 rounded-full blur-3xl"></div>
-        </div>
-        <div class="container mx-auto px-4 md:px-8 relative z-10">
-            <div class="text-center max-w-3xl mx-auto mb-14 section-header"></div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 services-grid"></div>
-        </div>
-    </section>
+<header class="hero" id="hero"></header>
 
-    <section id="about" class="py-24 md:py-32 container mx-auto px-4 md:px-8">
-        <div class="flex flex-col lg:flex-row items-start gap-16">
-            <div class="lg:w-1/2 space-y-8">
-                <div>
-                    <span class="text-blue-600 font-bold tracking-wider uppercase text-sm mb-2 block">À propos de moi</span>
-                    <h2 id="about-title" class="text-3xl md:text-4xl font-bold text-slate-900 leading-tight"></h2>
-                </div>
-                <p id="about-desc" class="text-lg leading-relaxed text-slate-600"></p>
-                <div id="about-skills" class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4"></div>
-            </div>
-            <div class="lg:w-1/2 w-full">
-                <div class="bg-white p-2 rounded-2xl shadow-xl border border-slate-200 transform rotate-1 hover:rotate-0 transition duration-500">
-                    <div id="about-map" class="h-64 sm:h-80 w-full rounded-xl z-0"></div>
-                    <div class="flex justify-between items-center mt-3 px-3 pb-1">
-                        <p class="text-sm font-medium text-slate-500 flex items-center">
-                            <i class="fas fa-map-marker-alt text-red-500 mr-2 animate-bounce"></i>
-                            Basé à Yaoundé, Cameroun
-                        </p>
-                        <span class="text-xs font-bold bg-green-100 text-green-800 px-3 py-1 rounded-full uppercase tracking-wide">Zone d'intervention</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="sheet">
+<main>
 
-    <section id="dashboard-demo" class="py-24 bg-slate-900 text-white relative overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
-            <div class="absolute top-10 left-10 w-64 h-64 bg-blue-500 rounded-full blur-3xl"></div>
-            <div class="absolute bottom-10 right-10 w-96 h-96 bg-purple-500 rounded-full blur-3xl"></div>
-        </div>
-        <div class="container mx-auto px-4 md:px-8 relative z-10">
-            <div class="text-center mb-16 max-w-3xl mx-auto">
-                <span class="text-blue-400 font-bold tracking-widest text-sm uppercase mb-2 block">Aide à la Décision</span>
-                <h2 id="dash-heading" class="text-3xl md:text-5xl font-bold mb-6">Observatoire Urbain</h2>
-                <p id="dash-intro" class="text-slate-300 text-lg"></p>
-            </div>
-            <div id="dash-kpis" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"></div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div class="bg-slate-800/50 backdrop-blur-sm p-6 rounded-2xl border border-slate-700 shadow-xl">
-                    <h3 class="text-lg font-bold mb-6 text-white flex items-center">
-                        <i class="fas fa-chart-bar mr-2 text-blue-400"></i> Évolution des Recettes par Quartier
-                    </h3>
-                    <div class="h-80 w-full">
-                        <canvas id="revenueChart"></canvas>
-                    </div>
-                </div>
-                <div class="bg-slate-800/50 backdrop-blur-sm p-6 rounded-2xl border border-slate-700 shadow-xl flex flex-col">
-                    <div class="flex justify-between items-center mb-6">
-                        <h3 class="text-lg font-bold text-white flex items-center">
-                            <i class="fas fa-globe-africa mr-2 text-green-400"></i> Répartition Spatiale
-                        </h3>
-                        <div class="space-x-3 bg-slate-900/50 px-3 py-1 rounded-lg">
-                            <span class="text-xs text-green-400 font-medium"><i class="fas fa-circle text-[8px] mr-1"></i> Fort</span>
-                            <span class="text-xs text-red-400 font-medium"><i class="fas fa-circle text-[8px] mr-1"></i> Faible</span>
-                        </div>
-                    </div>
-                    <div id="dash-map" class="flex-grow rounded-xl w-full min-h-[300px] z-0 overflow-hidden border border-slate-600/50"></div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <section class="sec" id="apropos">
+    <div class="wrap">
+      <div class="about" id="about-content"></div>
+    </div>
+  </section>
 
-    <section id="projects" class="py-24 bg-slate-100">
-        <div class="container mx-auto px-4 md:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-bold text-blue-900 mb-4">Projets Récents</h2>
-                <p class="text-slate-600 max-w-2xl mx-auto">Sélection de travaux avec AFREETECH et missions personnelles.</p>
-            </div>
-            <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10"></div>
-        </div>
-    </section>
+  <section class="sec" id="stack">
+    <div class="wrap">
+      <div class="sec-head reveal" id="stack-head"></div>
+      <div class="bento reveal" id="stack-grid"></div>
+    </div>
+  </section>
 
-    <section id="parcours" class="py-24 bg-white">
-        <div class="container mx-auto px-4 md:px-8">
-            <div class="grid lg:grid-cols-2 gap-12 items-start">
-                <div class="space-y-4">
-                    <span class="section-kicker text-blue-700 text-xs font-semibold uppercase">Parcours</span>
-                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 leading-tight">Expériences marquantes et livrables concrets</h2>
-                    <p class="text-slate-600 text-lg">Pilotage SIG, modélisation de données, accompagnement terrain : de la stratégie à la mise en production.</p>
-                    <div class="flex flex-wrap gap-3 pt-2">
-                        <span class="pill text-slate-800"><i class="fas fa-user-check text-green-600"></i> Disponible mission / CDI</span>
-                        <span class="pill text-slate-800"><i class="fas fa-clock text-blue-600"></i> Délais courts maîtrisés</span>
-                    </div>
-                </div>
-                <div class="glass-card p-8">
-                    <div id="parcours-content" class="timeline space-y-8"></div>
-                </div>
-            </div>
+  <section class="sec" id="observatoire">
+    <div class="wrap">
+      <div class="sec-head reveal" id="obs-head"></div>
+      <dl class="kpis reveal" id="obs-kpis"></dl>
+      <div class="obs-grid">
+        <div class="panel reveal">
+          <h3 id="obs-chart-title"></h3>
+          <div class="bars" id="obs-bars"></div>
         </div>
-    </section>
-
-    <section id="cv" class="py-20 bg-slate-50">
-        <div class="container mx-auto px-4 md:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-14">
-                <span class="section-kicker text-blue-700 text-xs font-semibold uppercase">CV Express</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-3">Profil, expériences et certifications</h2>
-                <p class="text-slate-600 mt-4">Synthèse issue de mon parcours : gestion de bases géospatiales, modélisation PostGIS, analyse spatiale et delivery de solutions cartographiques.</p>
-            </div>
-            <div class="grid lg:grid-cols-3 gap-8">
-                <div class="cv-card p-6 lg:col-span-1 space-y-5">
-                    <div class="flex items-start gap-3">
-                        <span class="w-10 h-10 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center"><i class="fas fa-user"></i></span>
-                        <div>
-                            <h3 class="text-xl font-bold text-slate-900">Profil</h3>
-                            <p id="cv-profile" class="text-slate-600 text-sm leading-relaxed mt-1"></p>
-                        </div>
-                    </div>
-                    <div class="border-t border-slate-200 pt-4">
-                        <h4 class="text-sm font-bold text-slate-800 uppercase tracking-wide mb-2">Formation</h4>
-                        <ul id="cv-formation" class="space-y-3 text-sm text-slate-700"></ul>
-                    </div>
-                </div>
-                <div class="cv-card p-6 lg:col-span-1 space-y-4">
-                    <div class="flex items-start gap-3">
-                        <span class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fas fa-toolbox"></i></span>
-                        <div>
-                            <h3 class="text-xl font-bold text-slate-900">Compétences techniques</h3>
-                            <p class="text-slate-600 text-sm mt-1">Cartographie, bases de données, automatisation et analyse.</p>
-                        </div>
-                    </div>
-                    <div id="cv-skills" class="space-y-3 text-sm text-slate-800"></div>
-                </div>
-                <div class="cv-card p-6 lg:col-span-1 space-y-5">
-                    <div class="flex items-start gap-3">
-                        <span class="w-10 h-10 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center"><i class="fas fa-certificate"></i></span>
-                        <div>
-                            <h3 class="text-xl font-bold text-slate-900">Certifications</h3>
-                            <ul id="cv-certs" class="text-sm text-slate-700 mt-2 space-y-2"></ul>
-                        </div>
-                    </div>
-                    <div class="border-t border-slate-200 pt-4">
-                        <h4 class="text-sm font-bold text-slate-800 uppercase tracking-wide mb-2">Langues</h4>
-                        <ul id="cv-langs" class="flex flex-col gap-1 text-sm text-slate-700"></ul>
-                    </div>
-                    <div class="border-t border-slate-200 pt-4">
-                        <h4 class="text-sm font-bold text-slate-800 uppercase tracking-wide mb-2">Centres d'intérêt</h4>
-                        <p id="cv-interests" class="text-sm text-slate-700"></p>
-                    </div>
-                </div>
-            </div>
+        <div class="panel reveal">
+          <div class="panel-head">
+            <h3 id="obs-map-title"></h3>
+          </div>
+          <div class="legend" id="obs-legend"></div>
+          <div id="obs-map"></div>
         </div>
-    </section>
-    </main>
+      </div>
+    </div>
+  </section>
 
-    <footer id="contact" class="bg-gradient-to-br from-blue-950 via-slate-900 to-slate-900 text-white py-20">
-        <div class="container mx-auto px-4 md:px-8 text-center">
-            <h2 id="contact-headline" class="text-3xl md:text-4xl font-bold mb-4">Prêt à collaborer sur des projets à fort impact ?</h2>
-            <p class="text-slate-400 mb-10 max-w-xl mx-auto">Discutons de votre projet SIG, cartographie ou base de données géospatiale.</p>
-            <div class="flex flex-col md:flex-row justify-center gap-5 mb-10">
-                <a id="contact-email" href="#" class="bg-white/10 hover:bg-white/20 px-8 py-4 rounded-full transition-all flex items-center justify-center backdrop-blur-sm border border-white/10 group hover:border-yellow-400/30">
-                    <i class="fas fa-envelope mr-3 text-yellow-400 group-hover:scale-110 transition"></i>
-                    <span class="font-medium">fredybefolo@gmail.com</span>
-                </a>
-                <a id="contact-phone" href="#" class="bg-white/10 hover:bg-white/20 px-8 py-4 rounded-full transition-all flex items-center justify-center backdrop-blur-sm border border-white/10 group hover:border-green-400/30">
-                    <i class="fas fa-phone mr-3 text-green-400 group-hover:scale-110 transition"></i>
-                    <span class="font-medium">+237 655 776 021</span>
-                </a>
-            </div>
-            <div id="social-links" class="flex justify-center gap-3 mb-10"></div>
-            <div class="border-t border-white/10 pt-8">
-                <p id="footer-meta" class="text-sm text-slate-400">© 2025 Landry BEFOLO. Tous droits réservés.</p>
-                <p class="text-xs text-slate-500 mt-2">Conçu avec passion pour l'intelligence territoriale.</p>
-            </div>
-        </div>
-    </footer>
+  <section class="sec" id="projets">
+    <div class="wrap">
+      <div class="sec-head reveal" id="projects-head"></div>
+      <div class="projects reveal" id="projects-list"></div>
+    </div>
+  </section>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="assets/js/app.js"></script>
+  <section class="sec" id="parcours">
+    <div class="wrap">
+      <div class="sec-head reveal" id="parcours-head"></div>
+      <div class="timeline reveal" id="parcours-list"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot" id="contact">
+  <div class="wrap" id="contact-content"></div>
+</footer>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="assets/js/hero-viz.js"></script>
+<script src="assets/js/app.js"></script>
 </body>
 </html>
