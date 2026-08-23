@@ -82,16 +82,26 @@ dans les faits de « À propos ».
 - **`certifications.profileUrl`** — profil Credly public. S'il est renseigné, un lien
   « Voir tous les badges sur Credly » s'affiche sous la liste ; sinon rien ne s'affiche.
 
-Les vignettes sont **désaturées par défaut et repassent en couleur au survol**. Le filtre est un token
-CSS (`--badge-filter`) : en thème sombre il applique en plus un gain de luminosité, sans quoi un badge
-à encre foncée disparaîtrait sur le fond noir. Au-delà de quatre badges, la rangée défile
-horizontalement dans son propre conteneur — la page, elle, ne défile jamais de côté.
+Les vignettes s'affichent **en couleur**. Les badges Google Cloud sont des cartes-certificats dont le
+texte est le seul contenu : désaturés, ils deviennent illisibles, et la lisibilité prime ici sur
+l'homogénéité chromatique. Le traitement reste piloté par deux tokens CSS, `--badge-filter` et
+`--badge-hover`, aujourd'hui à `none` — y remettre `grayscale(1)` suffit à rétablir la désaturation.
+
+La vignette occupe toute la largeur de la carte, dans un cadre au filet d'un cheveu. Au-delà de quatre
+badges, la rangée défile horizontalement dans son propre conteneur — la page, elle, ne défile jamais
+de côté.
 
 ## Photo de profil
 
-`data/site.json` → `about.portrait` pointe vers `images/profile.webp` (portrait, ~800×1000).
-**Tant que le fichier n'existe pas**, un emplacement neutre s'affiche à sa place, dans la section À propos
-comme dans le pied de page — la page ne casse pas.
+Deux fichiers, deux cadrages :
+
+- `about.portrait` → `images/profile.webp` (800×1000, ratio 4:5) pour le cadre de « À propos ». Affiché
+  en niveaux de gris, il repasse en couleur au survol.
+- `about.avatar` → `images/profile-avatar.webp` (400×400) pour la pastille ronde du pied de page. Un
+  cadrage carré dédié évite que le recadrage automatique du cercle ne rogne le haut du crâne. Si le
+  champ est absent, la pastille retombe sur `portrait`.
+
+**Si un fichier manque**, un emplacement neutre s'affiche à sa place — la page ne casse pas.
 
 ## Thème et langue
 
