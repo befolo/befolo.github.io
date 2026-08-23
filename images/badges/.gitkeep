@@ -1,0 +1,2 @@
+Déposer ici les images de badges (PNG transparent, ~200×200) puis
+renseigner le chemin dans data/site.json → certifications.items[].image

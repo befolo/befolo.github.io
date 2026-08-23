@@ -23,6 +23,7 @@ data/
   site.json           # tous les contenus hors projets
   projects.json       # études de cas
 images/               # visuels en .webp
+  badges/             # vignettes de certifications (PNG transparent)
 index.html
 project.html
 sitemap.xml           # à mettre à jour à l'ajout d'un projet
@@ -57,6 +58,34 @@ il s'affiche tel quel dans les deux langues.
 3. Ajouter l'URL correspondante dans `sitemap.xml` :
    `https://befolo.github.io/project.html?id=<slug>`.
 4. Vérifier la page : `project.html?id=<slug>`.
+
+## Certifications et badges
+
+Section « Certifications » (`data/site.json` → `certifications`). Elle n'accueille que des titres
+**obtenus** : une certification en cours n'a ni badge ni page de vérification, elle reste mentionnée
+dans les faits de « À propos ».
+
+```json
+{
+  "name":   { "fr": "…", "en": "…" },
+  "issuer": "Google Cloud",
+  "year":   "2026",
+  "image":  "images/badges/mon-badge.png",
+  "url":    "https://www.credly.com/badges/<identifiant>/public_url"
+}
+```
+
+- **`url`** — le lien de preuve. Sur Credly : ouvrir le badge → *Share* → *Link*.
+  Tant qu'il est vide, la carte affiche « Lien à ajouter » plutôt qu'un bouton mort.
+- **`image`** — optionnelle. Déposer le fichier dans `images/badges/` (PNG **transparent**, ~200×200).
+  Sans image, la carte se replie sur les initiales de l'émetteur.
+- **`certifications.profileUrl`** — profil Credly public. S'il est renseigné, un lien
+  « Voir tous les badges sur Credly » s'affiche sous la liste ; sinon rien ne s'affiche.
+
+Les vignettes sont **désaturées par défaut et repassent en couleur au survol**. Le filtre est un token
+CSS (`--badge-filter`) : en thème sombre il applique en plus un gain de luminosité, sans quoi un badge
+à encre foncée disparaîtrait sur le fond noir. Au-delà de quatre badges, la rangée défile
+horizontalement dans son propre conteneur — la page, elle, ne défile jamais de côté.
 
 ## Photo de profil
 

@@ -20,25 +20,79 @@
       "en": "Geospatial, Data & Cloud Engineer"
     }
   },
-
   "nav": {
     "brand": "Landry Befolo",
     "links": [
-      { "href": "#apropos",      "label": { "fr": "À propos",     "en": "About" } },
-      { "href": "#stack",        "label": { "fr": "Stack",        "en": "Stack" } },
-      { "href": "#observatoire", "label": { "fr": "Observatoire", "en": "Observatory" } },
-      { "href": "#projets",      "label": { "fr": "Projets",      "en": "Work" } },
-      { "href": "#parcours",     "label": { "fr": "Parcours",     "en": "Path" } }
+      {
+        "href": "#apropos",
+        "label": {
+          "fr": "À propos",
+          "en": "About"
+        }
+      },
+      {
+        "href": "#stack",
+        "label": {
+          "fr": "Stack",
+          "en": "Stack"
+        }
+      },
+      {
+        "href": "#certifications",
+        "label": {
+          "fr": "Certifications",
+          "en": "Certifications"
+        }
+      },
+      {
+        "href": "#observatoire",
+        "label": {
+          "fr": "Observatoire",
+          "en": "Observatory"
+        }
+      },
+      {
+        "href": "#projets",
+        "label": {
+          "fr": "Projets",
+          "en": "Work"
+        }
+      },
+      {
+        "href": "#parcours",
+        "label": {
+          "fr": "Parcours",
+          "en": "Path"
+        }
+      }
     ],
-    "cta": { "fr": "Contact", "en": "Contact" }
+    "cta": {
+      "fr": "Contact",
+      "en": "Contact"
+    }
   },
-
   "hero": {
-    "availability": { "fr": "Disponible — Yaoundé, Cameroun", "en": "Available — Yaoundé, Cameroon" },
-    "titlePrefix":  { "fr": "Ingénieur", "en": "Engineer" },
+    "availability": {
+      "fr": "Disponible — Yaoundé, Cameroun",
+      "en": "Available — Yaoundé, Cameroon"
+    },
+    "titlePrefix": {
+      "fr": "Ingénieur",
+      "en": "Engineer"
+    },
     "loop": {
-      "fr": ["Géospatial", "Data", "Cloud", "IA"],
-      "en": ["Geospatial", "Data", "Cloud", "AI"]
+      "fr": [
+        "Géospatial",
+        "Data",
+        "Cloud",
+        "IA"
+      ],
+      "en": [
+        "Geospatial",
+        "Data",
+        "Cloud",
+        "AI"
+      ]
     },
     "tagline": {
       "fr": "De la donnée spatiale à la décision territoriale.",
@@ -48,23 +102,61 @@
       "fr": "Je conçois la chaîne complète de la donnée spatiale — modélisation, pipelines, diffusion — pour les collectivités du Cameroun.",
       "en": "I build the full spatial data chain — modelling, pipelines, delivery — for Cameroonian local authorities."
     },
-    "ctaPrimary":   { "fr": "Voir les projets", "en": "See the work" },
-    "ctaSecondary": { "fr": "Me contacter",     "en": "Get in touch" },
+    "ctaPrimary": {
+      "fr": "Voir les projets",
+      "en": "See the work"
+    },
+    "ctaSecondary": {
+      "fr": "Me contacter",
+      "en": "Get in touch"
+    },
     "coords": [
-      { "label": { "fr": "Base",          "en": "Based" },         "value": { "fr": "3.848°N 11.502°E", "en": "3.848°N 11.502°E" } },
-      { "label": { "fr": "Expérience",    "en": "Experience" },    "value": { "fr": "6 ans",            "en": "6 years" } },
-      { "label": { "fr": "Collectivités", "en": "Public clients" }, "value": { "fr": "03",              "en": "03" } }
+      {
+        "label": {
+          "fr": "Base",
+          "en": "Based"
+        },
+        "value": {
+          "fr": "3.848°N 11.502°E",
+          "en": "3.848°N 11.502°E"
+        }
+      },
+      {
+        "label": {
+          "fr": "Expérience",
+          "en": "Experience"
+        },
+        "value": {
+          "fr": "6 ans",
+          "en": "6 years"
+        }
+      },
+      {
+        "label": {
+          "fr": "Collectivités",
+          "en": "Public clients"
+        },
+        "value": {
+          "fr": "03",
+          "en": "03"
+        }
+      }
     ]
   },
-
   "about": {
-    "label":   { "fr": "À propos", "en": "About" },
+    "label": {
+      "fr": "À propos",
+      "en": "About"
+    },
     "portrait": "images/profile.webp",
     "portraitAlt": {
       "fr": "Portrait de Landry Befolo, ingénieur géospatial à Yaoundé",
       "en": "Portrait of Landry Befolo, geospatial engineer in Yaoundé"
     },
-    "caption": { "fr": "Landry Befolo — Yaoundé", "en": "Landry Befolo — Yaoundé" },
+    "caption": {
+      "fr": "Landry Befolo — Yaoundé",
+      "en": "Landry Befolo — Yaoundé"
+    },
     "paragraphs": {
       "fr": [
         "Ingénieur de conception en cartographie et géomatique, je travaille depuis six ans sur la donnée territoriale des collectivités camerounaises.",
@@ -79,28 +171,40 @@
     },
     "facts": [
       {
-        "key":   { "fr": "Formation", "en": "Education" },
+        "key": {
+          "fr": "Formation",
+          "en": "Education"
+        },
         "value": {
           "fr": "Ingénieur de conception en cartographie & géomatique — EGEM, Meiganga (2022–2023). Baccalauréat scientifique série D — Collège Jean Paul II, Mbalmayo (2017).",
           "en": "Design engineer in cartography & geomatics — EGEM, Meiganga (2022–2023). Science baccalaureate, series D — Collège Jean Paul II, Mbalmayo (2017)."
         }
       },
       {
-        "key":   { "fr": "Certifications", "en": "Certifications" },
+        "key": {
+          "fr": "Certifications",
+          "en": "Certifications"
+        },
         "value": {
           "fr": "Oracle Data Platform Associate (2025) · Scrum Foundation Professional Certificate (2025) · Google Data Analytics et Google Project Management, en cours.",
           "en": "Oracle Data Platform Associate (2025) · Scrum Foundation Professional Certificate (2025) · Google Data Analytics and Google Project Management, ongoing."
         }
       },
       {
-        "key":   { "fr": "Langues", "en": "Languages" },
+        "key": {
+          "fr": "Langues",
+          "en": "Languages"
+        },
         "value": {
           "fr": "Français — langue maternelle, rédaction et synthèse. Anglais — professionnel, niveau technique avancé.",
           "en": "French — native, writing and synthesis. English — professional, advanced technical level."
         }
       },
       {
-        "key":   { "fr": "Terrain", "en": "Field" },
+        "key": {
+          "fr": "Terrain",
+          "en": "Field"
+        },
         "value": {
           "fr": "Yaoundé · Douala — collectivités territoriales et opérateurs publics.",
           "en": "Yaoundé · Douala — local authorities and public operators."
@@ -108,10 +212,15 @@
       }
     ]
   },
-
   "stack": {
-    "label":   { "fr": "Stack", "en": "Stack" },
-    "heading": { "fr": "Quatre domaines, une seule chaîne", "en": "Four domains, one single chain" },
+    "label": {
+      "fr": "Stack",
+      "en": "Stack"
+    },
+    "heading": {
+      "fr": "Quatre domaines, une seule chaîne",
+      "en": "Four domains, one single chain"
+    },
     "intro": {
       "fr": "La donnée spatiale ne s'arrête pas à la carte : elle se modélise, se transporte, se stocke et s'analyse.",
       "en": "Spatial data does not stop at the map: it gets modelled, moved, stored and analysed."
@@ -119,102 +228,308 @@
     "items": [
       {
         "wide": true,
-        "title": { "fr": "Géospatial", "en": "Geospatial" },
+        "title": {
+          "fr": "Géospatial",
+          "en": "Geospatial"
+        },
         "description": {
           "fr": "Modélisation et exploitation de bases spatiales à l'échelle municipale : cadastre, réseaux, équipements urbains.",
           "en": "Modelling and running spatial databases at municipal scale: cadastre, networks, urban facilities."
         },
-        "tools": ["PostGIS", "QGIS", "ArcGIS", "GeoServer", "MAGRIT", "WMS / WFS"]
+        "tools": [
+          "PostGIS",
+          "QGIS",
+          "ArcGIS",
+          "GeoServer",
+          "MAGRIT",
+          "WMS / WFS"
+        ]
       },
       {
         "wide": true,
-        "title": { "fr": "Data", "en": "Data" },
+        "title": {
+          "fr": "Data",
+          "en": "Data"
+        },
         "description": {
           "fr": "SQL avancé, workflows Python, structuration de référentiels et construction d'indicateurs pour la décision.",
           "en": "Advanced SQL, Python workflows, reference-data structuring and building decision indicators."
         },
-        "tools": ["SQL", "PostgreSQL", "Python", "Pipelines", "Modélisation"]
+        "tools": [
+          "SQL",
+          "PostgreSQL",
+          "Python",
+          "Pipelines",
+          "Modélisation"
+        ]
       },
       {
         "wide": false,
-        "title": { "fr": "Cloud", "en": "Cloud" },
+        "title": {
+          "fr": "Cloud",
+          "en": "Cloud"
+        },
         "description": {
           "fr": "Plateformes de données managées, publication de services et intégration applicative.",
           "en": "Managed data platforms, service publishing and application integration."
         },
-        "tools": ["Oracle Data Platform", "Django", "API REST"]
+        "tools": [
+          "Oracle Data Platform",
+          "Django",
+          "API REST"
+        ]
       },
       {
         "wide": false,
-        "title": { "fr": "IA", "en": "AI" },
+        "title": {
+          "fr": "IA",
+          "en": "AI"
+        },
         "description": {
           "fr": "Analyse prédictive appliquée au spatial : détection d'anomalies, ciblage et priorisation terrain.",
           "en": "Predictive analysis applied to spatial data: anomaly detection, targeting and field prioritisation."
         },
-        "tools": ["Analyse prédictive", "Détection d'anomalies"]
+        "tools": [
+          "Analyse prédictive",
+          "Détection d'anomalies"
+        ]
       },
       {
         "wide": false,
-        "title": { "fr": "Diffusion", "en": "Delivery" },
+        "title": {
+          "fr": "Diffusion",
+          "en": "Delivery"
+        },
         "description": {
           "fr": "Publication sécurisée, tableaux de bord décisionnels et formation des équipes utilisatrices.",
           "en": "Secured publishing, decision dashboards and training for the teams who use them."
         },
-        "tools": ["GeoServer", "OpenLayers", "Dashboards"]
+        "tools": [
+          "GeoServer",
+          "OpenLayers",
+          "Dashboards"
+        ]
       }
     ]
   },
-
+  "certifications": {
+    "label": {
+      "fr": "Certifications",
+      "en": "Certifications"
+    },
+    "heading": {
+      "fr": "Des compétences vérifiables",
+      "en": "Verifiable credentials"
+    },
+    "intro": {
+      "fr": "Chaque badge renvoie à sa page de vérification chez l'organisme émetteur. Rien ici n'est déclaratif.",
+      "en": "Every badge links to its verification page at the issuing body. Nothing here is self-declared."
+    },
+    "verifyLabel": {
+      "fr": "Vérifier",
+      "en": "Verify"
+    },
+    "profileUrl": "",
+    "profileLabel": {
+      "fr": "Voir tous les badges sur Credly",
+      "en": "See all badges on Credly"
+    },
+    "items": [
+      {
+        "name": {
+          "fr": "Oracle Data Platform Associate",
+          "en": "Oracle Data Platform Associate"
+        },
+        "issuer": "Oracle",
+        "year": "2025",
+        "image": "",
+        "url": ""
+      },
+      {
+        "name": {
+          "fr": "Scrum Foundation Professional Certificate",
+          "en": "Scrum Foundation Professional Certificate"
+        },
+        "issuer": "CertiProf",
+        "year": "2025",
+        "image": "",
+        "url": ""
+      }
+    ]
+  },
   "dashboard": {
-    "label":   { "fr": "Observatoire", "en": "Observatory" },
-    "heading": { "fr": "Un tableau de bord urbain, en démonstration", "en": "An urban dashboard, live demo" },
+    "label": {
+      "fr": "Observatoire",
+      "en": "Observatory"
+    },
+    "heading": {
+      "fr": "Un tableau de bord urbain, en démonstration",
+      "en": "An urban dashboard, live demo"
+    },
     "intro": {
       "fr": "Suivi du recouvrement, état des réseaux, performance opérationnelle — le type de livrable que je remets aux directions financières.",
       "en": "Collection tracking, network status, operational performance — the kind of deliverable I hand to finance departments."
     },
     "kpis": [
-      { "value": 87,   "unit": "%", "label": { "fr": "Taux de recouvrement", "en": "Collection rate" },  "note": { "fr": "+12 points sur 12 mois", "en": "+12 points over 12 months" } },
-      { "value": 1240, "unit": "",  "label": { "fr": "Objets mappés",        "en": "Features mapped" },  "note": { "fr": "120 ce mois-ci",         "en": "120 this month" } },
-      { "value": 12,   "unit": "",  "label": { "fr": "Anomalies",            "en": "Anomalies" },        "note": { "fr": "Intervention requise",   "en": "Action required" } },
-      { "value": 45,   "unit": "M", "label": { "fr": "Budget engagé",        "en": "Budget committed" }, "note": { "fr": "FCFA — simulé",          "en": "FCFA — simulated" } }
+      {
+        "value": 87,
+        "unit": "%",
+        "label": {
+          "fr": "Taux de recouvrement",
+          "en": "Collection rate"
+        },
+        "note": {
+          "fr": "+12 points sur 12 mois",
+          "en": "+12 points over 12 months"
+        }
+      },
+      {
+        "value": 1240,
+        "unit": "",
+        "label": {
+          "fr": "Objets mappés",
+          "en": "Features mapped"
+        },
+        "note": {
+          "fr": "120 ce mois-ci",
+          "en": "120 this month"
+        }
+      },
+      {
+        "value": 12,
+        "unit": "",
+        "label": {
+          "fr": "Anomalies",
+          "en": "Anomalies"
+        },
+        "note": {
+          "fr": "Intervention requise",
+          "en": "Action required"
+        }
+      },
+      {
+        "value": 45,
+        "unit": "M",
+        "label": {
+          "fr": "Budget engagé",
+          "en": "Budget committed"
+        },
+        "note": {
+          "fr": "FCFA — simulé",
+          "en": "FCFA — simulated"
+        }
+      }
     ],
     "chart": {
-      "title":  { "fr": "Recettes par quartier — Yaoundé (M FCFA)", "en": "Revenue by district — Yaoundé (M FCFA)" },
-      "labels": ["Bastos", "Mokolo", "Biyem-Assi", "Ngoa-Ekellé", "Mimboman", "Omnisports"],
-      "data":   [12, 19, 8, 15, 10, 14]
+      "title": {
+        "fr": "Recettes par quartier — Yaoundé (M FCFA)",
+        "en": "Revenue by district — Yaoundé (M FCFA)"
+      },
+      "labels": [
+        "Bastos",
+        "Mokolo",
+        "Biyem-Assi",
+        "Ngoa-Ekellé",
+        "Mimboman",
+        "Omnisports"
+      ],
+      "data": [
+        12,
+        19,
+        8,
+        15,
+        10,
+        14
+      ]
     },
     "map": {
-      "title":  { "fr": "Répartition spatiale du recouvrement", "en": "Spatial distribution of collection" },
-      "legend": {
-        "high": { "fr": "Recouvrement fort",  "en": "High collection" },
-        "low":  { "fr": "Recouvrement faible", "en": "Low collection" }
+      "title": {
+        "fr": "Répartition spatiale du recouvrement",
+        "en": "Spatial distribution of collection"
       },
-      "center": [3.86, 11.52],
+      "legend": {
+        "high": {
+          "fr": "Recouvrement fort",
+          "en": "High collection"
+        },
+        "low": {
+          "fr": "Recouvrement faible",
+          "en": "Low collection"
+        }
+      },
+      "center": [
+        3.86,
+        11.52
+      ],
       "zoom": 12,
       "points": [
-        { "lat": 3.87, "lon": 11.53, "level": "high", "radius": 600 },
-        { "lat": 3.85, "lon": 11.51, "level": "low",  "radius": 800 },
-        { "lat": 3.88, "lon": 11.49, "level": "high", "radius": 500 },
-        { "lat": 3.83, "lon": 11.50, "level": "high", "radius": 700 },
-        { "lat": 3.86, "lon": 11.54, "level": "low",  "radius": 400 }
+        {
+          "lat": 3.87,
+          "lon": 11.53,
+          "level": "high",
+          "radius": 600
+        },
+        {
+          "lat": 3.85,
+          "lon": 11.51,
+          "level": "low",
+          "radius": 800
+        },
+        {
+          "lat": 3.88,
+          "lon": 11.49,
+          "level": "high",
+          "radius": 500
+        },
+        {
+          "lat": 3.83,
+          "lon": 11.5,
+          "level": "high",
+          "radius": 700
+        },
+        {
+          "lat": 3.86,
+          "lon": 11.54,
+          "level": "low",
+          "radius": 400
+        }
       ]
     }
   },
-
   "projectsSection": {
-    "label":   { "fr": "Projets", "en": "Work" },
-    "heading": { "fr": "Trois systèmes en production", "en": "Three systems in production" },
-    "readMore": { "fr": "Lire l'étude de cas", "en": "Read the case study" },
-    "back":     { "fr": "Retour aux projets",  "en": "Back to work" }
+    "label": {
+      "fr": "Projets",
+      "en": "Work"
+    },
+    "heading": {
+      "fr": "Trois systèmes en production",
+      "en": "Three systems in production"
+    },
+    "readMore": {
+      "fr": "Lire l'étude de cas",
+      "en": "Read the case study"
+    },
+    "back": {
+      "fr": "Retour aux projets",
+      "en": "Back to work"
+    }
   },
-
   "parcours": {
-    "label":   { "fr": "Parcours", "en": "Path" },
-    "heading": { "fr": "Six ans sur la donnée territoriale", "en": "Six years on territorial data" },
+    "label": {
+      "fr": "Parcours",
+      "en": "Path"
+    },
+    "heading": {
+      "fr": "Six ans sur la donnée territoriale",
+      "en": "Six years on territorial data"
+    },
     "items": [
       {
         "period": "2023 — 2025",
-        "title": { "fr": "Chef de projet SIG — CUY", "en": "GIS project lead — CUY" },
+        "title": {
+          "fr": "Chef de projet SIG — CUY",
+          "en": "GIS project lead — CUY"
+        },
         "description": {
           "fr": "Refonte du référentiel fiscal : croisement cadastre/terrain, suivi des recettes, indicateurs pour la direction financière.",
           "en": "Rebuilt the fiscal reference layer: cadastre/field cross-checks, revenue tracking, indicators for the finance department."
@@ -222,7 +537,10 @@
       },
       {
         "period": "2021 — 2023",
-        "title": { "fr": "Responsable données — Infrastructures Douala", "en": "Data lead — Douala Infrastructure" },
+        "title": {
+          "fr": "Responsable données — Infrastructures Douala",
+          "en": "Data lead — Douala Infrastructure"
+        },
         "description": {
           "fr": "Modèle PostGIS interopérable pour routes, réseaux et équipements. Publication GeoServer sécurisée.",
           "en": "Interoperable PostGIS model for roads, networks and facilities. Secured GeoServer publishing."
@@ -230,7 +548,10 @@
       },
       {
         "period": "2019 — 2021",
-        "title": { "fr": "Cartographie thématique — MAGRIT", "en": "Thematic mapping — MAGRIT" },
+        "title": {
+          "fr": "Cartographie thématique — MAGRIT",
+          "en": "Thematic mapping — MAGRIT"
+        },
         "description": {
           "fr": "Analyses démographiques, cartes choroplèthes et indicateurs multi-échelles pour la planification urbaine.",
           "en": "Demographic analysis, choropleth maps and multi-scale indicators for urban planning."
@@ -238,10 +559,15 @@
       }
     ]
   },
-
   "contact": {
-    "headline": { "fr": "Un projet géospatial, data ou cloud ?", "en": "A geospatial, data or cloud project?" },
-    "role":     { "fr": "Ingénieur Géospatial · Data · Cloud · IA", "en": "Geospatial · Data · Cloud · AI Engineer" },
+    "headline": {
+      "fr": "Un projet géospatial, data ou cloud ?",
+      "en": "A geospatial, data or cloud project?"
+    },
+    "role": {
+      "fr": "Ingénieur Géospatial · Data · Cloud · IA",
+      "en": "Geospatial · Data · Cloud · AI Engineer"
+    },
     "email": "fredybefolo@gmail.com",
     "phone": "+237 655 776 021",
     "social": {
