@@ -14,9 +14,13 @@
     },
     "carousel": ["images/project-idg.webp", "images/hero.webp"],
     "details": {
-      "client": "Communauté Urbaine de Douala",
-      "period": "2023 — 2025",
-      "role": { "fr": "Chef de projet SIG", "en": "GIS project lead" },
+      "client": "Communauté Urbaine de Douala (CUD), AFREETECH",
+      "period": { "fr": "2024 – présent", "en": "2024 – present" },
+      "role": { "fr": "Ingénieur Data et Architecte SIG", "en": "Data and GIS Architect Engineer" },
+      "note": {
+        "fr": "Projet mené au sein d'AFREETECH, suite à l'étude stratégique de 2010 de l'Eurométropole de Strasbourg ayant recommandé la refonte du SIG communal.",
+        "en": "Delivered at AFREETECH, following the 2010 strategic review by the Eurométropole de Strasbourg that recommended overhauling the municipal GIS."
+      },
       "bullets": {
         "fr": [
           "Conception du système d'information géographique et cartographie en ligne (GeoServer / Django)",
@@ -32,7 +36,49 @@
           "Built spatial analysis tools and orchestration workflows",
           "Trained the teams and ran operational follow-up"
         ]
-      }
+      },
+      "objectives": {
+        "fr": [
+          "Déployer un SIG communal transversal et une infrastructure de données géographiques (IDG) partagée entre la CUD, ses directions techniques et ses partenaires institutionnels",
+          "Unifier aménagement du territoire, domaine public, cadastre, voiries et réseaux divers (VRD) et fiscalité locale dans un référentiel géospatial unique",
+          "Renforcer la cohérence, la transparence et l'efficacité de l'action publique à l'échelle de la métropole"
+        ],
+        "en": [
+          "Deploy a cross-departmental municipal GIS and a shared spatial data infrastructure (SDI) between CUD, its technical directorates and institutional partners",
+          "Unify urban planning, public domain management, cadastre, roads and utility networks and local taxation in a single geospatial reference",
+          "Strengthen the coherence, transparency and efficiency of public action across the metropolitan area"
+        ]
+      },
+      "methodology": {
+        "fr": [
+          "Modélisation PostgreSQL / PostGIS des couches d'aménagement métropolitain avec indexation spatiale",
+          "Diffusion des flux WMS / WFS via GeoServer selon les standards OGC",
+          "Catalogage et recherche normalisée des métadonnées avec GeoNetwork",
+          "Développement d'un portail cartographique interactif (React, Leaflet, OpenLayers) sécurisé par contrôle d'accès"
+        ],
+        "en": [
+          "PostgreSQL / PostGIS modelling of the metropolitan planning layers with spatial indexing",
+          "WMS / WFS delivery through GeoServer following OGC standards",
+          "Metadata cataloguing and standardised search with GeoNetwork",
+          "Built an interactive mapping portal (React, Leaflet, OpenLayers) secured by access control"
+        ]
+      },
+      "techStack": [
+        { "name": "PostgreSQL", "slug": "postgresql" },
+        { "name": "PostGIS" },
+        { "name": "GeoServer" },
+        { "name": "GeoNetwork" },
+        { "name": "React", "slug": "react" },
+        { "name": "Leaflet", "slug": "leaflet" },
+        { "name": "OpenLayers", "slug": "openlayers" },
+        { "name": "Django", "slug": "django" }
+      ],
+      "skills": [
+        { "fr": "Architecture SIG", "en": "GIS architecture" },
+        { "fr": "Infrastructure de données géographiques (IDG)", "en": "Spatial data infrastructure (SDI)" },
+        { "fr": "Webmapping OGC (WMS/WFS)", "en": "OGC webmapping (WMS/WFS)" },
+        { "fr": "Sécurité et habilitations (RBAC/ACL)", "en": "Security and access control (RBAC/ACL)" }
+      ]
     }
   },
   {
@@ -42,7 +88,7 @@
       "fr": "Audit des systèmes existants, rédaction des spécifications techniques et conception de la base géospatiale dédiée au recouvrement fiscal.",
       "en": "Audit of existing systems, technical specifications and design of the geospatial database dedicated to tax collection."
     },
-    "tags": ["Audit", "Base géospatiale", "Carto thématique"],
+    "tags": ["PostgreSQL", "PostGIS", "Data QA"],
     "image": "images/project-recettes.webp",
     "imageAlt": {
       "fr": "Carte thématique du recouvrement fiscal par quartier de Yaoundé",
@@ -50,9 +96,9 @@
     },
     "carousel": ["images/project-recettes.webp"],
     "details": {
-      "client": "Communauté Urbaine de Yaoundé",
-      "period": "2024 — présent",
-      "role": { "fr": "Ingénieur SIG", "en": "GIS engineer" },
+      "client": "Communauté Urbaine de Yaoundé (CUY), AFREETECH",
+      "period": { "fr": "2024 – présent", "en": "2024 – present" },
+      "role": { "fr": "Ingénieur Data et Analyste SIG", "en": "Data and GIS Analyst Engineer" },
       "bullets": {
         "fr": [
           "Audit et analyse des systèmes d'information géographique existants",
@@ -66,7 +112,45 @@
           "Designed the geospatial database dedicated to revenue collection",
           "Analysed, processed and validated the geographic data layers"
         ]
-      }
+      },
+      "objectives": {
+        "fr": [
+          "Gérer de manière entièrement dématérialisée et décentralisée l'ensemble des recettes fiscales et non fiscales de la CUY (SYSREC)",
+          "Constituer un fichier unique des contribuables et sécuriser la chaîne de collecte",
+          "Réduire les déperditions financières et outiller le pilotage du recouvrement"
+        ],
+        "en": [
+          "Manage the CUY's fiscal and non-fiscal revenue entirely digitally and in a decentralised way (SYSREC)",
+          "Build a single taxpayer register and secure the collection chain",
+          "Reduce financial leakage and equip revenue-collection oversight"
+        ]
+      },
+      "methodology": {
+        "fr": [
+          "Géoréférencement et adressage des espaces marchands, boutiques et supports publicitaires de la ville",
+          "Structuration du fichier unique des contribuables et des activités économiques taxables",
+          "Modélisation PostgreSQL / PostGIS du schéma relationnel et spatial, avec contrôles qualité (Data QA) automatisés",
+          "Cartographie interactive des points de collecte et indicateurs spatiaux de recouvrement"
+        ],
+        "en": [
+          "Geo-referenced and addressed market spaces, shops and advertising media across the city",
+          "Structured the single taxpayer register and the taxable economic activities",
+          "PostgreSQL / PostGIS modelling of the relational and spatial schema, with automated data-quality (QA) checks",
+          "Interactive mapping of collection points and spatial revenue indicators"
+        ]
+      },
+      "techStack": [
+        { "name": "PostgreSQL", "slug": "postgresql" },
+        { "name": "PostGIS" },
+        { "name": "Python", "slug": "python" },
+        { "name": "QGIS", "slug": "qgis" }
+      ],
+      "skills": [
+        { "fr": "Fiscalité municipale dématérialisée", "en": "Digital municipal taxation" },
+        { "fr": "Data Quality Assurance (QA)", "en": "Data quality assurance (QA)" },
+        { "fr": "Cartographie interactive", "en": "Interactive mapping" },
+        { "fr": "Modélisation géospatiale", "en": "Spatial data modelling" }
+      ]
     }
   },
   {
@@ -79,14 +163,14 @@
     "tags": ["GeoServer", "PostGIS", "Dashboards"],
     "image": "images/project-pagrin.webp",
     "imageAlt": {
-      "fr": "Tableau de bord de l'observatoire régional PAGRIN alimenté par PostGIS",
-      "en": "PAGRIN regional observatory dashboard powered by PostGIS"
+      "fr": "Tableau de bord de l'observatoire régional PAGIRN-PPTIC alimenté par PostGIS",
+      "en": "PAGIRN-PPTIC regional observatory dashboard powered by PostGIS"
     },
     "carousel": ["images/project-pagrin.webp"],
     "details": {
-      "client": "PAGRIN — PPTIC",
+      "client": "PAGIRN-PPTIC, Observatoire TIC Afrique Centrale (AFREETECH)",
       "period": "2024",
-      "role": { "fr": "Ingénieur SIG", "en": "GIS engineer" },
+      "role": { "fr": "Ingénieur Data et Développeur SIG Fullstack", "en": "Data and Full-Stack GIS Developer" },
       "bullets": {
         "fr": [
           "Conception de l'architecture SIG et diffusion cartographique (GeoServer)",
@@ -100,6 +184,231 @@
           "Developed analysis tools feeding the decision dashboards",
           "Trained end users and coordinated the technical work"
         ]
+      },
+      "objectives": {
+        "fr": [
+          "Fournir des données statistiques fiables et uniformisées sur les infrastructures et compétences TIC des pays de la CEEAC/CEMAC",
+          "Centraliser les évaluations statistiques nationales dans un référentiel commun comparable",
+          "Mettre en production une plateforme régionale accessible aux équipes utilisatrices"
+        ],
+        "en": [
+          "Provide reliable, standardised statistics on ICT infrastructure and skills across CEEAC/CEMAC member countries",
+          "Centralise national statistical assessments in a common, comparable reference",
+          "Ship a regional platform accessible to the operating teams"
+        ]
+      },
+      "methodology": {
+        "fr": [
+          "Harmonisation, nettoyage et consolidation des évaluations statistiques fournies par les différents pays",
+          "Backend de distribution des indicateurs sous Django REST Framework",
+          "Diffusion cartographique WMS / WFS via GeoServer",
+          "Interface cartographique réactive sous React et Leaflet, mise en production sur observatoire-tic-ac.org/web"
+        ],
+        "en": [
+          "Harmonised, cleaned and consolidated the statistical assessments supplied by each country",
+          "Built the indicator-distribution backend on Django REST Framework",
+          "WMS / WFS map delivery through GeoServer",
+          "Responsive mapping interface in React and Leaflet, shipped to observatoire-tic-ac.org/web"
+        ]
+      },
+      "techStack": [
+        { "name": "Django REST Framework", "slug": "django" },
+        { "name": "GeoServer" },
+        { "name": "PostGIS" },
+        { "name": "React", "slug": "react" },
+        { "name": "Leaflet", "slug": "leaflet" }
+      ],
+      "skills": [
+        { "fr": "Consolidation de données multi-pays", "en": "Multi-country data consolidation" },
+        { "fr": "API REST géospatiale", "en": "Geospatial REST APIs" },
+        { "fr": "Cartographie interactive", "en": "Interactive mapping" },
+        { "fr": "Formation des utilisateurs", "en": "User training" }
+      ],
+      "demo": {
+        "url": "https://observatoire-tic-ac.org/web",
+        "tall": true,
+        "label": { "fr": "Observatoire régional des TIC, plateforme en production", "en": "Regional ICT observatory, live platform" }
+      }
+    }
+  },
+  {
+    "slug": "financialguard",
+    "title": { "fr": "FinancialGuard, détection de fraude mobile money", "en": "FinancialGuard, Mobile Money Fraud Detection" },
+    "summary": {
+      "fr": "Pipeline Bronze/Silver/Gold, moteur de règles Polars et modèle XGBoost pour détecter la fraude sur des transactions mobile money : démonstrateur technique indépendant, avec démo interactive.",
+      "en": "A Bronze/Silver/Gold pipeline, a Polars rules engine and an XGBoost model to flag mobile money fraud: an independent technical demonstrator, with a live interactive demo."
+    },
+    "tags": ["Python", "XGBoost", "Polars", "Streamlit", "DuckDB"],
+    "image": "images/project-financialguard.svg",
+    "imageAlt": {
+      "fr": "Tableau de bord FinancialGuard : indicateurs de fraude mobile money et funnel Bronze/Silver/Gold",
+      "en": "FinancialGuard dashboard: mobile money fraud KPIs and the Bronze/Silver/Gold funnel"
+    },
+    "carousel": ["images/project-financialguard.svg"],
+    "details": {
+      "client": { "fr": "Projet personnel, démonstrateur technique", "en": "Personal project, technical demonstrator" },
+      "period": "2026",
+      "role": { "fr": "Data et AI Engineer, conception solo", "en": "Data and AI Engineer, solo build" },
+      "note": {
+        "fr": "Démonstrateur technique indépendant sur données synthétiques (PaySim), non commandité, ni validé, ni exploité par une banque. Aucune décision bancaire réelle n'est produite.",
+        "en": "Independent technical demonstrator on synthetic data (PaySim), not commissioned, validated or operated by any bank. No real banking decision is produced."
+      },
+      "bullets": {
+        "fr": [
+          "Architecture Bronze → Silver → Gold avec moteur de contrôle qualité vectorisé (Polars) : 9 règles de conformité (schéma, domaine, identité, solde, doublons) classant chaque transaction en admissible ou en quarantaine",
+          "Modèle XGBoost natif (Booster API) entraîné avec budget de temps dynamique et sous-échantillonnage stratifié préservant le taux de fraude, comparé à une régression logistique de référence",
+          "Seuil de décision calé sur un coût métier (faux négatif vs faux positif) plutôt que sur un seuil fixe à 0,5, avec early stopping et rééquilibrage des classes",
+          "Tableau de bord Streamlit multi-pages : vue exécutive, gouvernance des données, exploration des alertes, simulation de lot, performance du modèle, architecture et limites",
+          "Pipeline exécuté sur 6 362 604 transactions Silver (PaySim) : PR-AUC 1,000 vs 0,999 pour la baseline, avec mise en garde explicite : ces scores quasi parfaits sont un artefact connu de PaySim, non transférable à un système bancaire réel"
+        ],
+        "en": [
+          "Bronze → Silver → Gold architecture with a vectorised data-quality engine (Polars): 9 compliance rules (schema, domain, identity, balance, duplicates) classifying each transaction as admissible or quarantined",
+          "Native XGBoost model (Booster API) trained with a dynamic time budget and stratified sub-sampling that preserves the fraud rate, benchmarked against a logistic-regression baseline",
+          "Decision threshold set on business cost (false negative vs false positive) rather than a fixed 0.5 cutoff, with early stopping and class rebalancing",
+          "Multi-page Streamlit dashboard: executive view, data governance, alert exploration, batch simulation, model performance, architecture and limitations",
+          "Pipeline run on 6,362,604 Silver transactions (PaySim): PR-AUC 1.000 vs 0.999 for the baseline, with an explicit caveat: these near-perfect scores are a known PaySim artefact, not transferable to a real banking system"
+        ]
+      },
+      "objectives": {
+        "fr": [
+          "Démontrer une chaîne de détection de fraude bout en bout, du contrat de données à la décision, sur des volumes réalistes (plus de 6 millions de transactions)",
+          "Illustrer une architecture de gouvernance de la donnée (Bronze/Silver/Gold) avec traçabilité des rejets et de la quarantaine",
+          "Piloter la décision de scoring par le coût métier plutôt que par un seuil arbitraire, avec une documentation explicite des limites"
+        ],
+        "en": [
+          "Demonstrate an end-to-end fraud-detection chain, from data contract to decision, at realistic volumes (over 6 million transactions)",
+          "Illustrate a data-governance architecture (Bronze/Silver/Gold) with full traceability of rejects and quarantine",
+          "Drive the scoring decision by business cost rather than an arbitrary threshold, with explicit documentation of the limitations"
+        ]
+      },
+      "methodology": {
+        "fr": [
+          "Ingestion PaySim (6,36M transactions synthétiques) en partitions Parquet Bronze journalières",
+          "Contrôles qualité vectorisés Polars (9 règles documentées, sévérité ERROR/WARNING) séparant les flux admissibles (Silver) des rejets (quarantaine)",
+          "Ingénierie de variables temporelles et de solde, puis entraînement XGBoost natif avec budget de temps dynamique et sous-échantillonnage stratifié si nécessaire",
+          "Calibration du seuil de décision sur un coût métier explicite, agrégats Gold interrogeables via DuckDB et restitués dans Streamlit / Plotly"
+        ],
+        "en": [
+          "PaySim ingestion (6.36M synthetic transactions) into daily-partitioned Bronze Parquet files",
+          "Vectorised Polars data-quality checks (9 documented rules, ERROR/WARNING severity) separating admissible flows (Silver) from rejects (quarantine)",
+          "Temporal and balance feature engineering, then native XGBoost training with a dynamic time budget and stratified sub-sampling when needed",
+          "Decision-threshold calibration on an explicit business cost, with Gold aggregates queryable via DuckDB and surfaced in Streamlit / Plotly"
+        ]
+      },
+      "techStack": [
+        { "name": "Python", "slug": "python" },
+        { "name": "Streamlit", "slug": "streamlit" },
+        { "name": "Pandas", "slug": "pandas" },
+        { "name": "Polars", "slug": "polars" },
+        { "name": "scikit-learn", "slug": "scikitlearn" },
+        { "name": "XGBoost" },
+        { "name": "Plotly", "slug": "plotly" },
+        { "name": "DuckDB", "slug": "duckdb" },
+        { "name": "Docker", "slug": "docker" },
+        { "name": "GitHub Actions", "slug": "githubactions" }
+      ],
+      "skills": [
+        { "fr": "Détection de fraude", "en": "Fraud detection" },
+        { "fr": "Ingénierie de données (Bronze/Silver/Gold)", "en": "Data engineering (Bronze/Silver/Gold)" },
+        { "fr": "Machine Learning (XGBoost)", "en": "Machine learning (XGBoost)" },
+        { "fr": "Data Quality Engineering", "en": "Data quality engineering" },
+        { "fr": "MLOps reproductible", "en": "Reproducible MLOps" },
+        { "fr": "Dashboards décisionnels", "en": "Decision dashboards" }
+      ],
+      "demo": {
+        "url": "https://financialguard.streamlit.app/",
+        "embed": true,
+        "label": { "fr": "FinancialGuard, vue exécutive", "en": "FinancialGuard, executive view" }
+      }
+    }
+  },
+  {
+    "slug": "creditflow-ai",
+    "title": { "fr": "CreditFlow-AI, scoring crédit explicable", "en": "CreditFlow-AI, Explainable Credit Scoring" },
+    "summary": {
+      "fr": "Pipeline scikit-learn / XGBoost calibré, seuil de coût métier et explications SHAP pour le scoring de risque de crédit : démonstrateur technique indépendant, avec démo interactive.",
+      "en": "A calibrated scikit-learn / XGBoost pipeline, a business-cost threshold and SHAP explanations for credit-risk scoring: an independent technical demonstrator, with a live interactive demo."
+    },
+    "tags": ["Python", "XGBoost", "SHAP", "Streamlit", "scikit-learn"],
+    "image": "images/project-creditflow.svg",
+    "imageAlt": {
+      "fr": "Simulateur CreditFlow-AI : score de risque de crédit et facteurs d'explication SHAP",
+      "en": "CreditFlow-AI simulator: credit risk score and SHAP explanation factors"
+    },
+    "carousel": ["images/project-creditflow.svg"],
+    "details": {
+      "client": { "fr": "Projet personnel, démonstrateur technique", "en": "Personal project, technical demonstrator" },
+      "period": "2026",
+      "role": { "fr": "Data et AI Engineer, conception solo", "en": "Data and AI Engineer, solo build" },
+      "note": {
+        "fr": "Démonstrateur technique indépendant sur données publiques (LendingClub, crédit particulier US), non commandité, ni validé, ni exploité par une banque. Aucune décision de crédit réelle n'est produite.",
+        "en": "Independent technical demonstrator on public data (LendingClub, US consumer credit), not commissioned, validated or operated by any bank. No real credit decision is produced."
+      },
+      "bullets": {
+        "fr": [
+          "Pipeline scikit-learn / XGBoost avec split chronologique anti-fuite et préprocessing versionné, comparé à une régression logistique de référence",
+          "Calibration probabiliste et seuil de décision piloté par un coût métier (5× faux négatif + 1× faux positif) plutôt qu'un seuil fixe à 0,5",
+          "Explicabilité SHAP : importance globale des variables et explication locale (waterfall) pour chaque dossier simulé",
+          "Journal d'audit : historique de session, export CSV, schéma d'architecture et versions de modèle pour la gouvernance",
+          "Résultats sur test verrouillé de 282 970 prêts (LendingClub) : ROC-AUC 0,708 et rappel du mauvais risque 80,6 % pour XGBoost, contre 0,702 et 79,4 % pour la baseline"
+        ],
+        "en": [
+          "scikit-learn / XGBoost pipeline with an anti-leakage chronological split and versioned preprocessing, benchmarked against a logistic-regression baseline",
+          "Probability calibration and a business-cost decision threshold (5× false negative + 1× false positive) instead of a fixed 0.5 cutoff",
+          "SHAP explainability: global feature importance and local waterfall explanations for each simulated loan file",
+          "Audit trail: session history, CSV export, architecture diagram and model versions for governance",
+          "Results on a locked test set of 282,970 loans (LendingClub): ROC-AUC 0.708 and bad-risk recall 80.6% for XGBoost, vs 0.702 and 79.4% for the baseline"
+        ]
+      },
+      "objectives": {
+        "fr": [
+          "Démontrer un pipeline de scoring de crédit reproductible, calibré et gouverné, en attendant l'accès à des données PME autorisées",
+          "Illustrer une explicabilité de bout en bout (globale et locale) exploitable par un comité de crédit",
+          "Documenter les limites, les variables exclues et les conditions requises avant tout usage réel (équité, gouvernance)"
+        ],
+        "en": [
+          "Demonstrate a reproducible, calibrated and governed credit-scoring pipeline, pending access to authorised SME data",
+          "Illustrate end-to-end explainability (global and local) usable by a credit committee",
+          "Document the limitations, excluded variables and conditions required before any real use (fairness, governance)"
+        ]
+      },
+      "methodology": {
+        "fr": [
+          "Sélection anti-fuite des variables et contrat de données sur les prêts LendingClub (≈2,26M dossiers, 2007–2018)",
+          "Split chronologique par date d'émission pour éviter toute fuite temporelle, puis préprocessing scikit-learn versionné",
+          "Entraînement d'une régression logistique de référence et d'un XGBoost sélectionné par recherche d'hyperparamètres restreinte et validation croisée répétée (métrique : PR-AUC)",
+          "Calibration des probabilités, seuil de décision par coût métier, puis explications SHAP (TreeExplainer) globales et locales"
+        ],
+        "en": [
+          "Anti-leakage feature selection and data contract on LendingClub loans (~2.26M records, 2007–2018)",
+          "Chronological split by issue date to avoid temporal leakage, followed by versioned scikit-learn preprocessing",
+          "Trained a logistic-regression baseline and an XGBoost model selected through a restricted hyperparameter search with repeated cross-validation (metric: PR-AUC)",
+          "Probability calibration, business-cost decision threshold, then global and local SHAP (TreeExplainer) explanations"
+        ]
+      },
+      "techStack": [
+        { "name": "Python", "slug": "python" },
+        { "name": "Streamlit", "slug": "streamlit" },
+        { "name": "Pandas", "slug": "pandas" },
+        { "name": "scikit-learn", "slug": "scikitlearn" },
+        { "name": "XGBoost" },
+        { "name": "SHAP" },
+        { "name": "Plotly", "slug": "plotly" },
+        { "name": "DuckDB", "slug": "duckdb" },
+        { "name": "Docker", "slug": "docker" }
+      ],
+      "skills": [
+        { "fr": "Scoring de crédit", "en": "Credit scoring" },
+        { "fr": "Machine Learning explicable (XGBoost + SHAP)", "en": "Explainable machine learning (XGBoost + SHAP)" },
+        { "fr": "Calibration probabiliste", "en": "Probability calibration" },
+        { "fr": "Gouvernance et équité des modèles", "en": "Model governance and fairness" },
+        { "fr": "MLOps reproductible", "en": "Reproducible MLOps" },
+        { "fr": "Dashboards décisionnels", "en": "Decision dashboards" }
+      ],
+      "demo": {
+        "url": "https://creditflow-ai.streamlit.app/",
+        "embed": true,
+        "label": { "fr": "CreditFlow-AI, simulateur de score", "en": "CreditFlow-AI, score simulator" }
       }
     }
   }

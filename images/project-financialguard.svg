@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="FinancialGuard">
+  <defs>
+    <linearGradient id="fg-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#101418"/>
+      <stop offset="100%" stop-color="#0B0E11"/>
+    </linearGradient>
+    <linearGradient id="fg-accent" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8FB4CC"/>
+      <stop offset="100%" stop-color="#3F6379"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#fg-bg)"/>
+
+  <!-- grille de fond -->
+  <g stroke="#8FB4CC" stroke-opacity="0.08">
+    <path d="M0 100H1200M0 200H1200M0 300H1200M0 400H1200M0 500H1200M0 600H1200M0 700H1200"/>
+    <path d="M100 0V800M250 0V800M400 0V800M550 0V800M700 0V800M850 0V800M1000 0V800M1150 0V800"/>
+  </g>
+
+  <!-- flux de transactions : lignes ondulantes convergeant vers le bouclier -->
+  <g fill="none" stroke-width="2" opacity="0.55">
+    <path d="M-20 180 C 260 180, 340 380, 600 400" stroke="#8FB4CC"/>
+    <path d="M-20 300 C 260 300, 340 400, 600 400" stroke="#8FB4CC"/>
+    <path d="M-20 520 C 260 520, 340 420, 600 400" stroke="#8FB4CC"/>
+    <path d="M-20 650 C 260 650, 340 440, 600 400" stroke="#8FB4CC"/>
+  </g>
+  <g fill="#E8EBED">
+    <circle cx="140" cy="180" r="4"/>
+    <circle cx="210" cy="300" r="4"/>
+    <circle cx="180" cy="520" r="4"/>
+    <circle cx="220" cy="650" r="4"/>
+  </g>
+
+  <!-- bouclier central -->
+  <g transform="translate(600,400)">
+    <path d="M0 -160 L120 -110 V10 C120 100 60 155 0 180 C-60 155 -120 100 -120 10 V-110 Z"
+          fill="#12161A" stroke="url(#fg-accent)" stroke-width="3"/>
+    <path d="M0 -110 L20 -55 L78 -55 L30 -18 L48 42 L0 5 L-48 42 L-30 -18 L-78 -55 L-20 -55 Z"
+          fill="#8FB4CC" opacity="0.9"/>
+    <circle cx="0" cy="0" r="150" fill="none" stroke="#8FB4CC" stroke-opacity="0.18" stroke-width="1"/>
+    <circle cx="0" cy="0" r="185" fill="none" stroke="#8FB4CC" stroke-opacity="0.1" stroke-width="1"/>
+  </g>
+
+  <!-- mini graphique + funnel Bronze/Silver/Gold -->
+  <g transform="translate(820,520)" font-family="JetBrains Mono, monospace">
+    <rect x="0" y="0" width="300" height="150" rx="6" fill="#12161A" stroke="#E8EBED" stroke-opacity="0.12"/>
+    <text x="18" y="26" font-size="10" letter-spacing="1.5" fill="#8A949C">BRONZE → SILVER → GOLD</text>
+    <rect x="18" y="42" width="264" height="10" rx="3" fill="#8FB4CC" opacity="0.9"/>
+    <rect x="18" y="60" width="210" height="10" rx="3" fill="#8FB4CC" opacity="0.65"/>
+    <rect x="18" y="78" width="150" height="10" rx="3" fill="#8FB4CC" opacity="0.4"/>
+    <text x="18" y="112" font-size="22" fill="#E8EBED">6.36M</text>
+    <text x="18" y="132" font-size="9" letter-spacing="1" fill="#8A949C">TRANSACTIONS ANALYSÉES</text>
+  </g>
+
+  <text x="600" y="740" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-size="26"
+        fill="#E8EBED" letter-spacing="-0.5">FinancialGuard</text>
+  <text x="600" y="766" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11"
+        fill="#8A949C" letter-spacing="1.5">DÉTECTION DE FRAUDE MOBILE MONEY</text>
+</svg>

@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════
-   Landry Befolo — portfolio
+   Landry Befolo, portfolio
    Rendu piloté par data/site.json et data/projects.json.
    Aucune étape de build : tout se fait côté client.
    ═══════════════════════════════════════════════════════════ */
@@ -121,6 +121,85 @@
 
   function arrowSVG() {
     return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  }
+
+  /* ─────────── Détail projet : blocs étendus ─────────── */
+  /* Un logo manquant ou une icône introuvable sur le CDN retombe sur un
+     monogramme déjà présent sous l'image : pas de flash de contenu cassé. */
+  function techChip(name, slug) {
+    var initials = String(name).trim().slice(0, 2).toUpperCase();
+    var logo = slug
+      ? '<img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/' + esc(slug) + '.svg" '
+        + 'alt="" loading="lazy" decoding="async" onerror="this.style.display=&quot;none&quot;">'
+      : '';
+    return '<span class="tech-chip"><i class="tech-logo"><span class="tech-mono">' + esc(initials) + '</span>'
+      + logo + '</i><b>' + esc(name) + '</b></span>';
+  }
+
+  function techHTML(list) {
+    if (!list || !list.length) return '';
+    return '<div class="detail-tech reveal"><h3 class="detail-section-title">'
+      + (locale === 'en' ? 'Tech stack' : 'Stack technique') + '</h3>'
+      + '<div class="detail-tech-grid">' + list.map(function (item) {
+          var name = t(item && item.name !== undefined ? item.name : item);
+          var slug = item && item.slug;
+          return techChip(name, slug);
+        }).join('') + '</div></div>';
+  }
+
+  function skillsHTML(list) {
+    if (!list || !list.length) return '';
+    return '<div class="detail-skills reveal"><h3 class="detail-section-title">'
+      + (locale === 'en' ? 'Skills applied' : 'Compétences mobilisées') + '</h3>'
+      + '<div class="detail-skills-grid">'
+      + list.map(function (s) { return '<span>' + esc(t(s)) + '</span>'; }).join('')
+      + '</div></div>';
+  }
+
+  function listPanel(heading, items) {
+    if (!items || !items.length) return '';
+    return '<div class="detail-panel"><h3 class="detail-section-title">' + esc(heading) + '</h3>'
+      + '<ul>' + items.map(function (i) { return '<li>' + esc(i) + '</li>'; }).join('') + '</ul></div>';
+  }
+
+  function columnsHTML(d) {
+    var objectives = t(d.objectives) || [];
+    var methodology = t(d.methodology) || [];
+    if (!objectives.length && !methodology.length) return '';
+    return '<div class="detail-columns">'
+      + listPanel(locale === 'en' ? 'Objectives' : 'Objectifs', objectives)
+      + listPanel(locale === 'en' ? 'Methodology' : 'Méthodologie', methodology)
+      + '</div>';
+  }
+
+  /* Le paramètre embed=true est celui que Streamlit Cloud reconnaît pour
+     s'afficher sans son propre bandeau, en toile de fond dans un cadre tiers. */
+  /* Une page démo « longue » (un site public, pas un dashboard compact)
+     est cadrée plus bas et coiffée d'un fondu : on signale que la vue est
+     volontairement tronquée plutôt que de laisser un cadre interminable
+     ou une coupure brute façon rendu cassé. */
+  function demoHTML(d) {
+    if (!d.demo || !d.demo.url) return '';
+    var openLabel = locale === 'en' ? 'Open in a new tab' : 'Ouvrir dans un nouvel onglet';
+    var title = t(d.demo.label) || (locale === 'en' ? 'Live demo' : 'Démo en direct');
+    var embedSrc = d.demo.embed
+      ? d.demo.url + (d.demo.url.indexOf('?') > -1 ? '&' : '?') + 'embed=true'
+      : d.demo.url;
+    var tall = !!d.demo.tall;
+    var fadeLabel = locale === 'en' ? 'Preview truncated, open the full site' : 'Aperçu tronqué, voir le site complet';
+    return '<div class="detail-demo reveal"><h3 class="detail-section-title">'
+      + (locale === 'en' ? 'Interactive demo' : 'Démo interactive') + '</h3>'
+      + '<div class="detail-demo-bar"><span>' + esc(title) + '</span>'
+      + '<a class="link" href="' + esc(d.demo.url) + '" target="_blank" rel="noopener noreferrer">'
+      + esc(openLabel) + externalSVG() + '</a></div>'
+      + '<div class="detail-demo-frame-wrap' + (tall ? ' is-tall' : '') + '">'
+      +   '<iframe class="detail-demo-frame" src="' + esc(embedSrc) + '" loading="lazy" title="' + esc(title) + '" '
+      +   'referrerpolicy="strict-origin-when-cross-origin"></iframe>'
+      +   (tall
+            ? '<a class="detail-demo-fade" href="' + esc(d.demo.url) + '" target="_blank" rel="noopener noreferrer">'
+              + '<span>' + esc(fadeLabel) + '</span>' + externalSVG() + '</a>'
+            : '')
+      + '</div></div>';
   }
 
   function setMeta(selector, attr, value) {
@@ -309,7 +388,7 @@
   function badgeHTML(item, name) {
     var initials = String(item.issuer || name || '?').trim().slice(0, 2).toUpperCase();
     if (!item.image) return '<span>' + esc(initials) + '</span>';
-    return '<img src="' + esc(item.image) + '" alt="' + esc(name) + ' — ' + esc(item.issuer) + '" '
+    return '<img src="' + esc(item.image) + '" alt="' + esc(name) + ', ' + esc(item.issuer) + '" '
       + 'width="86" height="86" loading="lazy" decoding="async" '
       + 'onerror="this.parentNode.innerHTML=&quot;<span>' + esc(initials) + '</span>&quot;">';
   }
@@ -377,7 +456,7 @@
     list.innerHTML = projects.map(function (p) {
       var d = p.details || {};
       return '<a class="project-row" href="project.html?id=' + encodeURIComponent(p.slug) + '">'
-        + '<span class="project-meta"><b>' + esc(d.client) + '</b>' + esc(d.period)
+        + '<span class="project-meta"><b>' + esc(t(d.client)) + '</b>' + esc(t(d.period))
         +   '<br>' + esc(t(d.role)) + '</span>'
         + '<span class="project-body"><h3>' + esc(t(p.title)) + '</h3>'
         +   '<p>' + esc(t(p.summary)) + '</p>' + toolsHTML(p.tags) + '</span>'
@@ -399,7 +478,7 @@
 
     list.innerHTML = (parcours.items || []).map(function (item) {
       return '<div class="timeline-item">'
-        + '<span class="timeline-period">' + esc(item.period) + '</span>'
+        + '<span class="timeline-period">' + esc(t(item.period)) + '</span>'
         + '<div><h3>' + esc(t(item.title)) + '</h3>'
         +   '<p>' + esc(t(item.description)) + '</p></div>'
         + '</div>';
@@ -437,7 +516,7 @@
       +   '<span class="foot-id"><b>' + esc((site.nav || {}).brand || '') + '</b>'
       +     '<span>' + esc(t(contact.role)) + '</span></span>'
       + '</div>'
-      + '<p class="foot-meta">© ' + new Date().getFullYear() + ' — '
+      + '<p class="foot-meta">© ' + new Date().getFullYear() + ' · '
       +   esc(t((site.meta || {}).location) || '') + '</p>';
   }
 
@@ -463,10 +542,11 @@
       + '<a class="detail-back" href="index.html#projets">' + backArrow() + esc(t(section.back)) + '</a>'
       + '<h1>' + esc(t(project.title)) + '</h1>'
       + '<p class="detail-lede">' + esc(t(project.summary)) + '</p>'
+      + (d.note ? '<p class="detail-note">' + esc(t(d.note)) + '</p>' : '')
       + '<dl class="detail-facts">'
-      +   '<div><dt>' + (locale === 'en' ? 'Client' : 'Client') + '</dt><dd>' + esc(d.client) + '</dd></div>'
+      +   '<div><dt>' + (locale === 'en' ? 'Client' : 'Client') + '</dt><dd>' + esc(t(d.client)) + '</dd></div>'
       +   '<div><dt>' + (locale === 'en' ? 'Role' : 'Rôle') + '</dt><dd>' + esc(t(d.role)) + '</dd></div>'
-      +   '<div><dt>' + (locale === 'en' ? 'Period' : 'Période') + '</dt><dd>' + esc(d.period) + '</dd></div>'
+      +   '<div><dt>' + (locale === 'en' ? 'Period' : 'Période') + '</dt><dd>' + esc(t(d.period)) + '</dd></div>'
       + '</dl>'
       + '<div class="detail-body">'
       +   '<ul class="detail-bullets">' + bullets + '</ul>'
@@ -478,23 +558,26 @@
       +   '</div><div class="swiper-button-next"></div><div class="swiper-button-prev"></div>'
       +   '<div class="swiper-pagination"></div></div></div>'
       + '</div>'
-      + toolsHTML(project.tags)
+      + columnsHTML(d)
+      + techHTML(d.techStack)
+      + skillsHTML(d.skills)
+      + demoHTML(d)
       + '</div>';
 
     var brand = (site.nav || {}).brand || '';
     var base = (site.meta || {}).url || '';
     var pageUrl = base + 'project.html?id=' + project.slug;
 
-    document.title = t(project.title) + ' — ' + brand;
+    document.title = t(project.title) + ' · ' + brand;
     setMeta('meta[name="description"]', 'content', t(project.summary));
     /* Chaque étude de cas est sa propre URL canonique : sans le
        paramètre, les trois pages seraient déclarées dupliquées. */
     setMeta('link[rel="canonical"]', 'href', pageUrl);
     setMeta('meta[property="og:url"]', 'content', pageUrl);
-    setMeta('meta[property="og:title"]', 'content', t(project.title) + ' — ' + brand);
+    setMeta('meta[property="og:title"]', 'content', t(project.title) + ' · ' + brand);
     setMeta('meta[property="og:description"]', 'content', t(project.summary));
     setMeta('meta[property="og:image"]', 'content', base + project.image);
-    setMeta('meta[name="twitter:title"]', 'content', t(project.title) + ' — ' + brand);
+    setMeta('meta[name="twitter:title"]', 'content', t(project.title) + ' · ' + brand);
     setMeta('meta[name="twitter:description"]', 'content', t(project.summary));
     setMeta('meta[name="twitter:image"]', 'content', base + project.image);
     injectProjectSchema(project);
@@ -520,7 +603,7 @@
       description: t(project.summary),
       inLanguage: locale,
       image: base + project.image,
-      dateCreated: d.period,
+      dateCreated: t(d.period),
       creator: { '@type': 'Person', name: (site.nav || {}).brand },
       about: (project.tags || []).join(', ')
     });

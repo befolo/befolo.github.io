@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════
-   Hero — courbes de niveau (le terrain) + orbite satellite
+   Hero, courbes de niveau (le terrain) + orbite satellite
    avec trace au sol (l'instrument qui l'observe).
 
    Canvas 2D natif, aucune dépendance. Les couleurs sont lues
@@ -255,7 +255,7 @@
     frame();
   }
 
-  /* API publique — app.js appelle init() après avoir monté le
+  /* API publique. app.js appelle init() après avoir monté le
      hero, et refresh() quand le thème change. */
   global.heroViz = {
     init: function (el) {

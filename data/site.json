@@ -8,16 +8,16 @@
       "en": "Landry Befolo Geospatial, Data, Cloud and AI Engineer"
     },
     "description": {
-      "fr": "Ingénieur géospatial basé à Yaoundé. Je conçois la chaîne complète de la donnée spatiale — modélisation PostGIS, pipelines Python, diffusion GeoServer — pour les collectivités du Cameroun.",
-      "en": "Geospatial engineer based in Yaoundé. I build the full spatial data chain — PostGIS modelling, Python pipelines, GeoServer delivery — for Cameroonian local authorities."
+      "fr": "Ingénieur géospatial basé à Yaoundé. Je conçois la chaîne complète de la donnée spatiale (modélisation PostGIS, pipelines Python, diffusion GeoServer) pour les collectivités du Cameroun.",
+      "en": "Geospatial engineer based in Yaoundé. I build the full spatial data chain (PostGIS modelling, Python pipelines, GeoServer delivery) for Cameroonian local authorities."
     },
     "keywords": {
       "fr": "Landry Befolo, ingénieur géospatial, SIG, PostGIS, data engineering, cloud, IA, cartographie, Cameroun, Yaoundé, GeoServer, QGIS, Python, SQL",
       "en": "Landry Befolo, geospatial engineer, GIS, PostGIS, data engineering, cloud, AI, cartography, Cameroon, Yaoundé, GeoServer, QGIS, Python, SQL"
     },
     "jobTitle": {
-      "fr": "Ingénieur Géospatial, Data & Cloud",
-      "en": "Geospatial, Data & Cloud Engineer"
+      "fr": "Ingénieur Géospatial, Data et Cloud",
+      "en": "Geospatial, Data and Cloud Engineer"
     }
   },
   "nav": {
@@ -73,8 +73,8 @@
   },
   "hero": {
     "availability": {
-      "fr": "Disponible — Yaoundé, Cameroun",
-      "en": "Available — Yaoundé, Cameroon"
+      "fr": "Disponible à Yaoundé, Cameroun",
+      "en": "Available in Yaoundé, Cameroon"
     },
     "titlePrefix": {
       "fr": "Ingénieur",
@@ -99,8 +99,8 @@
       "en": "From spatial data to territorial decisions."
     },
     "lede": {
-      "fr": "Je conçois la chaîne complète de la donnée spatiale — modélisation, pipelines, diffusion — pour les collectivités du Cameroun.",
-      "en": "I build the full spatial data chain — modelling, pipelines, delivery — for Cameroonian local authorities."
+      "fr": "Je conçois la chaîne complète de la donnée spatiale (modélisation, pipelines, diffusion) pour les collectivités du Cameroun.",
+      "en": "I build the full spatial data chain (modelling, pipelines, delivery) for Cameroonian local authorities."
     },
     "ctaPrimary": {
       "fr": "Voir les projets",
@@ -127,8 +127,8 @@
           "en": "Experience"
         },
         "value": {
-          "fr": "6 ans",
-          "en": "6 years"
+          "fr": "3 ans",
+          "en": "3 years"
         }
       },
       {
@@ -154,19 +154,19 @@
       "en": "Portrait of Landry Befolo, geospatial engineer in Yaoundé"
     },
     "caption": {
-      "fr": "Landry Befolo — Yaoundé",
-      "en": "Landry Befolo — Yaoundé"
+      "fr": "Landry Befolo, Yaoundé",
+      "en": "Landry Befolo, Yaoundé"
     },
     "paragraphs": {
       "fr": [
-        "Ingénieur de conception en cartographie et géomatique, je travaille depuis six ans sur la donnée territoriale des collectivités camerounaises.",
+        "Ingénieur de conception en cartographie et géomatique, je conçois depuis 2024 des systèmes de données territoriales pour les collectivités camerounaises, chez AFREETECH.",
         "Mon travail commence rarement par une carte. Il commence par un référentiel incomplet, des couches qui ne se parlent pas, un service financier qui n'arrive pas à croiser le cadastre avec le terrain. Je structure la base, j'automatise ce qui doit l'être, et je livre l'outil qui rend la décision possible.",
-        "C'est ce qui m'a conduit progressivement du SIG vers la donnée au sens large — modélisation, pipelines, plateformes cloud et analyse."
+        "C'est ce qui m'a conduit progressivement du SIG vers la donnée au sens large : modélisation, pipelines, plateformes cloud et analyse."
       ],
       "en": [
-        "A design engineer in cartography and geomatics, I have spent six years working on territorial data for Cameroonian local authorities.",
+        "A design engineer in cartography and geomatics, I have been building territorial data systems for Cameroonian local authorities since 2024, at AFREETECH.",
         "My work rarely starts with a map. It starts with an incomplete reference layer, datasets that don't talk to each other, a finance department unable to cross-check the cadastre against the field. I structure the database, automate what should be automated, and deliver the tool that makes the decision possible.",
-        "That is what gradually moved me from GIS toward data in the broader sense — modelling, pipelines, cloud platforms and analysis."
+        "That is what gradually moved me from GIS toward data in the broader sense: modelling, pipelines, cloud platforms and analysis."
       ]
     },
     "facts": [
@@ -176,8 +176,8 @@
           "en": "Education"
         },
         "value": {
-          "fr": "Ingénieur de conception en cartographie & géomatique — EGEM, Meiganga (2022–2023). Baccalauréat scientifique série D — Collège Jean Paul II, Mbalmayo (2017).",
-          "en": "Design engineer in cartography & geomatics — EGEM, Meiganga (2022–2023). Science baccalaureate, series D — Collège Jean Paul II, Mbalmayo (2017)."
+          "fr": "Ingénieur de conception en cartographie et géomatique, EGEM, Meiganga (2018–2023). Baccalauréat scientifique série D, Collège Jean Paul II, Mbalmayo (2016–2017).",
+          "en": "Design engineer in cartography and geomatics, EGEM, Meiganga (2018–2023). Science baccalaureate, series D, Collège Jean Paul II, Mbalmayo (2016–2017)."
         }
       },
       {
@@ -186,8 +186,8 @@
           "en": "Certifications"
         },
         "value": {
-          "fr": "Oracle Data Platform Associate (2025) · Scrum Foundation Professional Certificate (2025) · Google Data Analytics et Google Project Management, en cours.",
-          "en": "Oracle Data Platform Associate (2025) · Scrum Foundation Professional Certificate (2025) · Google Data Analytics and Google Project Management, ongoing."
+          "fr": "Oracle Data Platform Associate (2025) · Scrum Fundamentals Certified (SFC™, 2025) · Google Data Analytics et Google Project Management, en cours.",
+          "en": "Oracle Data Platform Associate (2025) · Scrum Fundamentals Certified (SFC™, 2025) · Google Data Analytics and Google Project Management, ongoing."
         }
       },
       {
@@ -196,8 +196,8 @@
           "en": "Languages"
         },
         "value": {
-          "fr": "Français — langue maternelle, rédaction et synthèse. Anglais — professionnel, niveau technique avancé.",
-          "en": "French — native, writing and synthesis. English — professional, advanced technical level."
+          "fr": "Français : langue maternelle, rédaction et synthèse. Anglais : professionnel, niveau technique avancé.",
+          "en": "French: native, writing and synthesis. English: professional, advanced technical level."
         }
       },
       {
@@ -206,8 +206,8 @@
           "en": "Field"
         },
         "value": {
-          "fr": "Yaoundé · Douala — collectivités territoriales et opérateurs publics.",
-          "en": "Yaoundé · Douala — local authorities and public operators."
+          "fr": "Yaoundé · Douala : collectivités territoriales et opérateurs publics.",
+          "en": "Yaoundé · Douala: local authorities and public operators."
         }
       }
     ],
@@ -261,7 +261,7 @@
           "PostgreSQL",
           "Python",
           "Pipelines",
-          "Modélisation"
+          { "fr": "Modélisation", "en": "Modelling" }
         ]
       },
       {
@@ -289,13 +289,15 @@
           "en": "AI"
         },
         "description": {
-          "fr": "Agents IA construits avec l'Agent Development Kit de Google, et analyse prédictive appliquée au spatial : détection d'anomalies et priorisation terrain.",
-          "en": "AI agents built with Google's Agent Development Kit, and predictive analysis applied to spatial data: anomaly detection and field prioritisation."
+          "fr": "Scoring et détection de fraude explicables (XGBoost, SHAP), agents IA construits avec l'Agent Development Kit de Google, et analyse prédictive appliquée au spatial.",
+          "en": "Explainable scoring and fraud detection (XGBoost, SHAP), AI agents built with Google's Agent Development Kit, and predictive analysis applied to spatial data."
         },
         "tools": [
+          "Scikit-Learn",
+          "XGBoost",
+          "SHAP",
           "Agent Development Kit",
-          "Analyse prédictive",
-          "Détection d'anomalies"
+          "LangGraph"
         ]
       },
       {
@@ -333,7 +335,7 @@
       "fr": "Vérifier",
       "en": "Verify"
     },
-    "profileUrl": "https://www.credly.com/users/freidy-landry-befolo-akoumou",
+    "profileUrl": "https://www.credly.com/users/freidy-landry-befolo-akoumou/badges",
     "profileLabel": {
       "fr": "Voir tous les badges sur Credly",
       "en": "See all badges on Credly"
@@ -411,8 +413,8 @@
       },
       {
         "name": {
-          "fr": "Oracle Data Platform Associate",
-          "en": "Oracle Data Platform Associate"
+          "fr": "Oracle Data Platform 2025 Certified Foundations Associate",
+          "en": "Oracle Data Platform 2025 Certified Foundations Associate"
         },
         "issuer": "Oracle",
         "year": "2025",
@@ -421,10 +423,10 @@
       },
       {
         "name": {
-          "fr": "Scrum Foundation Professional Certificate",
-          "en": "Scrum Foundation Professional Certificate"
+          "fr": "Scrum Fundamentals Certified (SFC™)",
+          "en": "Scrum Fundamentals Certified (SFC™)"
         },
-        "issuer": "CertiProf",
+        "issuer": "ScrumStudy",
         "year": "2025",
         "image": "",
         "url": ""
@@ -441,8 +443,8 @@
       "en": "An urban dashboard, live demo"
     },
     "intro": {
-      "fr": "Suivi du recouvrement, état des réseaux, performance opérationnelle — le type de livrable que je remets aux directions financières.",
-      "en": "Collection tracking, network status, operational performance — the kind of deliverable I hand to finance departments."
+      "fr": "Suivi du recouvrement, état des réseaux, performance opérationnelle : le type de livrable que je remets aux directions financières.",
+      "en": "Collection tracking, network status, operational performance: the kind of deliverable I hand to finance departments."
     },
     "kpis": [
       {
@@ -489,15 +491,15 @@
           "en": "Budget committed"
         },
         "note": {
-          "fr": "FCFA — simulé",
-          "en": "FCFA — simulated"
+          "fr": "FCFA (simulé)",
+          "en": "FCFA (simulated)"
         }
       }
     ],
     "chart": {
       "title": {
-        "fr": "Recettes par quartier — Yaoundé (M FCFA)",
-        "en": "Revenue by district — Yaoundé (M FCFA)"
+        "fr": "Recettes par quartier, Yaoundé (M FCFA)",
+        "en": "Revenue by district, Yaoundé (M FCFA)"
       },
       "labels": [
         "Bastos",
@@ -576,8 +578,8 @@
       "en": "Work"
     },
     "heading": {
-      "fr": "Trois systèmes en production",
-      "en": "Three systems in production"
+      "fr": "Systèmes territoriaux en production, démonstrateurs IA sur mesure",
+      "en": "Territorial systems in production, purpose-built AI demonstrators"
     },
     "readMore": {
       "fr": "Lire l'étude de cas",
@@ -594,41 +596,41 @@
       "en": "Path"
     },
     "heading": {
-      "fr": "Six ans sur la donnée territoriale",
-      "en": "Six years on territorial data"
+      "fr": "De la géologie à la donnée territoriale",
+      "en": "From geology to territorial data"
     },
     "items": [
       {
-        "period": "2023 — 2025",
+        "period": { "fr": "2024 – présent", "en": "2024 – present" },
         "title": {
-          "fr": "Chef de projet SIG — CUY",
-          "en": "GIS project lead — CUY"
+          "fr": "Data Engineer et Architecte SIG, Lead Technique et Scrum Master (AFREETECH)",
+          "en": "Data Engineer and GIS Architect, Technical Lead and Scrum Master (AFREETECH)"
         },
         "description": {
-          "fr": "Refonte du référentiel fiscal : croisement cadastre/terrain, suivi des recettes, indicateurs pour la direction financière.",
-          "en": "Rebuilt the fiscal reference layer: cadastre/field cross-checks, revenue tracking, indicators for the finance department."
+          "fr": "Recruté comme développeur SIG, promu architecte de données et Scrum Master. Modélisation PostgreSQL/PostGIS, sécurité RBAC/ACL, pipelines ETL et APIs temps réel pour des institutions nationales (CAMWATER, SIC, CUD, CUY, CDEC, IIA, MAGZI).",
+          "en": "Recruited as a GIS developer, promoted to data architect and Scrum Master. PostgreSQL/PostGIS modelling, RBAC/ACL security, ETL pipelines and real-time APIs for national institutions (CAMWATER, SIC, CUD, CUY, CDEC, IIA, MAGZI)."
         }
       },
       {
-        "period": "2021 — 2023",
+        "period": { "fr": "Fév. – Mai 2024", "en": "Feb – May 2024" },
         "title": {
-          "fr": "Responsable données — Infrastructures Douala",
-          "en": "Data lead — Douala Infrastructure"
+          "fr": "Stagiaire, Modélisation de données géologiques et SIG (Cameroon Mining Company)",
+          "en": "Intern, Geological Data Modelling and GIS (Cameroon Mining Company)"
         },
         "description": {
-          "fr": "Modèle PostGIS interopérable pour routes, réseaux et équipements. Publication GeoServer sécurisée.",
-          "en": "Interoperable PostGIS model for roads, networks and facilities. Secured GeoServer publishing."
+          "fr": "Assainissement de données de forage, modélisation géologique 3D implicite sous Leapfrog Geo, cartographie structurale pour l'aide à la décision d'investissement minier.",
+          "en": "Cleaned drilling data, built implicit 3D geological models in Leapfrog Geo, and produced structural maps to support mining-investment decisions."
         }
       },
       {
-        "period": "2019 — 2021",
+        "period": "2018 – 2023",
         "title": {
-          "fr": "Cartographie thématique — MAGRIT",
-          "en": "Thematic mapping — MAGRIT"
+          "fr": "Ingénieur de conception en cartographie et géomatique (EGEM, Université de Ngaoundéré)",
+          "en": "Design engineer in cartography and geomatics (EGEM, University of Ngaoundéré)"
         },
         "description": {
-          "fr": "Analyses démographiques, cartes choroplèthes et indicateurs multi-échelles pour la planification urbaine.",
-          "en": "Demographic analysis, choropleth maps and multi-scale indicators for urban planning."
+          "fr": "Mémoire sur la télédétection et la gravimétrie appliquées à l'exploration aurifère (Batouri), et projet intégrateur de géolocalisation temps réel sous ESP32.",
+          "en": "Thesis on remote sensing and gravimetry applied to gold exploration (Batouri), plus a capstone real-time geolocation project built on ESP32."
         }
       }
     ]
@@ -646,7 +648,7 @@
     "phone": "+237 655 776 021",
     "social": {
       "github": "https://github.com/befolo",
-      "linkedin": ""
+      "linkedin": "https://linkedin.com/in/landry-befolo"
     }
   }
 }

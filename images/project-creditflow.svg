@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="CreditFlow-AI">
+  <defs>
+    <linearGradient id="cf-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#101418"/>
+      <stop offset="100%" stop-color="#0B0E11"/>
+    </linearGradient>
+    <linearGradient id="cf-accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3F6379"/>
+      <stop offset="100%" stop-color="#8FB4CC"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#cf-bg)"/>
+
+  <g stroke="#8FB4CC" stroke-opacity="0.08">
+    <path d="M0 100H1200M0 200H1200M0 300H1200M0 400H1200M0 500H1200M0 600H1200M0 700H1200"/>
+    <path d="M100 0V800M250 0V800M400 0V800M550 0V800M700 0V800M850 0V800M1000 0V800M1150 0V800"/>
+  </g>
+
+  <!-- jauge de score de crédit -->
+  <g transform="translate(600,430)">
+    <path d="M-220 0 A220 220 0 0 1 220 0" fill="none" stroke="#E8EBED" stroke-opacity="0.12" stroke-width="26"/>
+    <path d="M-220 0 A220 220 0 0 1 40 -217" fill="none" stroke="url(#cf-accent)" stroke-width="26" stroke-linecap="round"/>
+    <g stroke="#E8EBED" stroke-opacity="0.35" stroke-width="1.5">
+      <line x1="-220" y1="0" x2="-198" y2="0"/>
+      <line x1="-190" y1="-127" x2="-171" y2="-114"/>
+      <line x1="0" y1="-220" x2="0" y2="-198"/>
+      <line x1="190" y1="-127" x2="171" y2="-114"/>
+      <line x1="220" y1="0" x2="198" y2="0"/>
+    </g>
+    <line x1="0" y1="0" x2="55" y2="-165" stroke="#E8EBED" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="0" cy="0" r="10" fill="#E8EBED"/>
+    <text x="0" y="60" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-size="46" fill="#E8EBED">72</text>
+    <text x="0" y="90" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="1.5" fill="#8A949C">SCORE DE RISQUE / 100</text>
+  </g>
+
+  <!-- barres d'explicabilité (SHAP) -->
+  <g transform="translate(180,300)" font-family="JetBrains Mono, monospace">
+    <text x="0" y="-14" font-size="10" letter-spacing="1.5" fill="#8A949C">FACTEURS SHAP</text>
+    <g fill="#8FB4CC">
+      <rect x="0" y="0" width="150" height="10" rx="3" opacity="0.9"/>
+      <rect x="0" y="20" width="110" height="10" rx="3" opacity="0.7"/>
+      <rect x="0" y="40" width="80" height="10" rx="3" opacity="0.5"/>
+      <rect x="0" y="60" width="50" height="10" rx="3" opacity="0.35"/>
+    </g>
+  </g>
+
+  <!-- carte modèle -->
+  <g transform="translate(830,260)" font-family="JetBrains Mono, monospace">
+    <rect x="0" y="0" width="230" height="110" rx="6" fill="#12161A" stroke="#E8EBED" stroke-opacity="0.12"/>
+    <text x="16" y="26" font-size="10" letter-spacing="1.5" fill="#8A949C">XGBOOST · CALIBRÉ</text>
+    <text x="16" y="60" font-size="24" fill="#E8EBED">0.708</text>
+    <text x="16" y="82" font-size="9" letter-spacing="1" fill="#8A949C">ROC-AUC (TEST)</text>
+  </g>
+
+  <text x="600" y="740" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-size="26"
+        fill="#E8EBED" letter-spacing="-0.5">CreditFlow-AI</text>
+  <text x="600" y="766" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11"
+        fill="#8A949C" letter-spacing="1.5">SCORING CRÉDIT EXPLICABLE</text>
+</svg>
