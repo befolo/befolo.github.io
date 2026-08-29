@@ -4,8 +4,8 @@
     "image": "images/hero.webp",
     "location": "Yaoundé, Cameroun",
     "title": {
-      "fr": "Landry Befolo — Ingénieur Géospatial, Data, Cloud & IA",
-      "en": "Landry Befolo — Geospatial, Data, Cloud & AI Engineer"
+      "fr": "Landry Befolo Ingénieur Géospatial, Data, Cloud et IA",
+      "en": "Landry Befolo Geospatial, Data, Cloud and AI Engineer"
     },
     "description": {
       "fr": "Ingénieur géospatial basé à Yaoundé. Je conçois la chaîne complète de la donnée spatiale — modélisation PostGIS, pipelines Python, diffusion GeoServer — pour les collectivités du Cameroun.",
