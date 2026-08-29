@@ -1,4 +1,4 @@
-# Portfolio — Landry Befolo
+# Portfolio 
 
 Site statique servi par GitHub Pages. Positionnement : **Ingénieur Géospatial, Data, Cloud & IA**.
 Le contenu métier est entièrement séparé du code : tout se modifie depuis `data/*.json`, sans toucher au HTML ni au JS.
